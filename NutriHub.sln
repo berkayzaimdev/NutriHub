@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0C752731-8BA9-4138-B43A-6C1F403174E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.WebAPI", "Presentation\NutriHub.WebAPI\NutriHub.WebAPI.csproj", "{E71DE063-C0BB-4D99-A284-D6CD32D3E7F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5375AE80-7D3A-4522-89B6-639512991245}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{72FF10B1-DA20-47AF-AD8A-CD1C9E945084}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.Domain", "Core\NutriHub.Domain\NutriHub.Domain.csproj", "{4501F4BA-12B0-4A01-A793-D78A5538D4F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.Persistence", "Infrastructure\NutriHub.Persistence\NutriHub.Persistence.csproj", "{A60942CE-343A-4656-94C3-D95B101208A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.Application", "Core\NutriHub.Application\NutriHub.Application.csproj", "{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E71DE063-C0BB-4D99-A284-D6CD32D3E7F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71DE063-C0BB-4D99-A284-D6CD32D3E7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71DE063-C0BB-4D99-A284-D6CD32D3E7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71DE063-C0BB-4D99-A284-D6CD32D3E7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4501F4BA-12B0-4A01-A793-D78A5538D4F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4501F4BA-12B0-4A01-A793-D78A5538D4F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4501F4BA-12B0-4A01-A793-D78A5538D4F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4501F4BA-12B0-4A01-A793-D78A5538D4F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A60942CE-343A-4656-94C3-D95B101208A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A60942CE-343A-4656-94C3-D95B101208A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A60942CE-343A-4656-94C3-D95B101208A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A60942CE-343A-4656-94C3-D95B101208A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E71DE063-C0BB-4D99-A284-D6CD32D3E7F2} = {0C752731-8BA9-4138-B43A-6C1F403174E5}
+		{4501F4BA-12B0-4A01-A793-D78A5538D4F6} = {5375AE80-7D3A-4522-89B6-639512991245}
+		{A60942CE-343A-4656-94C3-D95B101208A0} = {72FF10B1-DA20-47AF-AD8A-CD1C9E945084}
+		{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4} = {5375AE80-7D3A-4522-89B6-639512991245}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CBAE262-9718-4A5C-B693-39D177419E68}
+	EndGlobalSection
+EndGlobal

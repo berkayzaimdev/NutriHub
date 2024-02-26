@@ -5,6 +5,10 @@ using NutriHub.Persistence.Repositories;
 using NutriHub.Application.Services;
 using NutriHub.Application.Interfaces.ProductInterfaces;
 using NutriHub.Persistence.Repositories.ProductRepositories;
+using NutriHub.Application.Interfaces.CategoryInterfaces;
+using NutriHub.Persistence.Repositories.CategoryRepositories;
+using NutriHub.Application.Interfaces.SubcategoryInterfaces;
+using NutriHub.Persistence.Repositories.SubcategoryRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +20,8 @@ builder.Services.AddScoped<NutriHubContext>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
+builder.Services.AddScoped(typeof(ISubcategoryRepository), typeof(SubcategoryRepository));
 
 builder.Services.AddApplicationService(builder.Configuration);
 

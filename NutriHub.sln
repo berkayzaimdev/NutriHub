@@ -5,17 +5,23 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0C752731-8BA9-4138-B43A-6C1F403174E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.WebAPI", "Presentation\NutriHub.WebAPI\NutriHub.WebAPI.csproj", "{E71DE063-C0BB-4D99-A284-D6CD32D3E7F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriHub.WebAPI", "Presentation\NutriHub.WebAPI\NutriHub.WebAPI.csproj", "{E71DE063-C0BB-4D99-A284-D6CD32D3E7F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5375AE80-7D3A-4522-89B6-639512991245}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{72FF10B1-DA20-47AF-AD8A-CD1C9E945084}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.Domain", "Core\NutriHub.Domain\NutriHub.Domain.csproj", "{4501F4BA-12B0-4A01-A793-D78A5538D4F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriHub.Domain", "Core\NutriHub.Domain\NutriHub.Domain.csproj", "{4501F4BA-12B0-4A01-A793-D78A5538D4F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.Persistence", "Infrastructure\NutriHub.Persistence\NutriHub.Persistence.csproj", "{A60942CE-343A-4656-94C3-D95B101208A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriHub.Persistence", "Infrastructure\NutriHub.Persistence\NutriHub.Persistence.csproj", "{A60942CE-343A-4656-94C3-D95B101208A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.Application", "Core\NutriHub.Application\NutriHub.Application.csproj", "{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriHub.Application", "Core\NutriHub.Application\NutriHub.Application.csproj", "{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontends", "Frontends", "{FEB0C97E-3108-41B1-BF78-2A63DFFDA691}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.Dto", "Frontends\NutriHub.Dto\NutriHub.Dto.csproj", "{02C0F48B-A852-43EE-8099-9B6D6B04C441}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.WebUI", "Frontends\NutriHub.WebUI\NutriHub.WebUI.csproj", "{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,14 @@ Global
 		{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02C0F48B-A852-43EE-8099-9B6D6B04C441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02C0F48B-A852-43EE-8099-9B6D6B04C441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02C0F48B-A852-43EE-8099-9B6D6B04C441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02C0F48B-A852-43EE-8099-9B6D6B04C441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +62,8 @@ Global
 		{4501F4BA-12B0-4A01-A793-D78A5538D4F6} = {5375AE80-7D3A-4522-89B6-639512991245}
 		{A60942CE-343A-4656-94C3-D95B101208A0} = {72FF10B1-DA20-47AF-AD8A-CD1C9E945084}
 		{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4} = {5375AE80-7D3A-4522-89B6-639512991245}
+		{02C0F48B-A852-43EE-8099-9B6D6B04C441} = {FEB0C97E-3108-41B1-BF78-2A63DFFDA691}
+		{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C} = {FEB0C97E-3108-41B1-BF78-2A63DFFDA691}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2CBAE262-9718-4A5C-B693-39D177419E68}

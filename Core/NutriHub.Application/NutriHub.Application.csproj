@@ -6,4 +6,32 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\CQRS\Commands\BrandCommands\" />
+    <Folder Include="Features\CQRS\Commands\CategoryCommands\" />
+    <Folder Include="Features\CQRS\Commands\CommentCommands\" />
+    <Folder Include="Features\CQRS\Commands\SubcategoryCommands\" />
+    <Folder Include="Features\CQRS\Handlers\CategoryHandlers\" />
+    <Folder Include="Features\CQRS\Handlers\BrandHandlers\" />
+    <Folder Include="Features\CQRS\Handlers\CommentHandlers\" />
+    <Folder Include="Features\CQRS\Handlers\SubcategoryHandlers\" />
+    <Folder Include="Features\CQRS\Queries\BrandQueries\" />
+    <Folder Include="Features\CQRS\Queries\CategoryQueries\" />
+    <Folder Include="Features\CQRS\Queries\CommentQueries\" />
+    <Folder Include="Features\CQRS\Queries\SubcategoryQueries\" />
+    <Folder Include="Features\CQRS\Results\BrandResults\" />
+    <Folder Include="Features\CQRS\Results\CategoryResults\" />
+    <Folder Include="Features\CQRS\Results\CommentResults\" />
+    <Folder Include="Features\CQRS\Results\SubcategoryResults\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NutriHub.Domain\NutriHub.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

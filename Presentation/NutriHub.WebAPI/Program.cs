@@ -1,15 +1,26 @@
+using Microsoft.Extensions.DependencyInjection;
+using NutriHub.Application.Interfaces;
+using NutriHub.Persistence.Context;
+using NutriHub.Persistence.Repositories;
+using NutriHub.Application.Services;
+using NutriHub.Application.Interfaces.ProductInterfaces;
+using NutriHub.Persistence.Repositories.ProductRepositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<NutriHubContext>();
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+
+builder.Services.AddApplicationService(builder.Configuration);
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

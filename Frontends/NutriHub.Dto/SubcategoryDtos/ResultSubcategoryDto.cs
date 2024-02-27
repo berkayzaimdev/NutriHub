@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NutriHub.Dto.ProductDtos
+namespace NutriHub.Dto.SubcategoryDtos
 {
-    public class ResultProductDto
+    public class ResultSubcategoryDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageUrl { get; set; }
-        public int BrandId { get; set; }
-        public string BrandName { get; set; }
     }
 }

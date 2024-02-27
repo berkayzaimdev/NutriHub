@@ -1,12 +1,13 @@
-﻿using System;
+﻿using NutriHub.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NutriHub.Dto.ProductDtos
+namespace NutriHub.Application.ViewModels.ProductViewModels
 {
-    public class ResultProductDto
+    public class ProductWithBrandVM
     {
         public int Id { get; set; }
         public string Name { get; set; }

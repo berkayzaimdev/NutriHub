@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Dto.ProductDtos
 {
-    public class ResultProductDto
+    public class ResultProductWithBrandDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

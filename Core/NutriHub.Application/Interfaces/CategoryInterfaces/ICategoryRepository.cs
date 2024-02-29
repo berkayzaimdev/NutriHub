@@ -10,5 +10,6 @@ namespace NutriHub.Application.Interfaces.CategoryInterfaces
     public interface ICategoryRepository
     {
         Task<Category> GetCategoryById(int id);
+        Task<List<Category>> GetAllCategoriesWithSubcategoriesAsync();
     }
 }

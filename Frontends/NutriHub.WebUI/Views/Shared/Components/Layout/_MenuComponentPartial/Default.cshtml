@@ -1,4 +1,6 @@
-﻿<section id="menu">
+﻿@model List<ResultCategoryWithSubcategoriesDto>
+
+<section id="menu">
     <div class="container">
         <div class="menu-area">
             <div class="navbar navbar-default" role="navigation">
@@ -12,13 +14,22 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="~/dailyShop/~/dailyShop/index.html">Home</a></li>
-                        <li>
-                            <a href="/Product/c-test-1">Digital <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/Product/sc-test-1-2">Camera</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="~/dailyShop/index.html">Home</a></li>
+                        @foreach(var item in Model)
+                        {
+                            <li>
+                                <a href="/Product/c-@item.Id">@item.Name</a>
+                                @if(item.Subcategories.Count>0)
+                                {
+                                    <ul class="dropdown-menu">
+                                        @foreach(var subItem in item.Subcategories)
+                                        {
+                                            <li><a href="/Product/sc-@subItem.Id">@subItem.Name</a></li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }                 
                         <li>
                             <a href="~/dailyShop/blog-archive.html">Blog <span class="caret"></span></a>
                             <ul class="dropdown-menu">

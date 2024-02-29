@@ -18,10 +18,11 @@ namespace NutriHub.Persistence.Repositories.SubcategoryRepositories
         {
             _context = context;
         }
-        public async Task<Subcategory> GetSubcategoryById(int id)
+        public async Task<Subcategory> GetSubcategoryWithProductsByIdAsync(int id)
         {
             return await _context.Subcategories
                 .Include(x => x.Products)
+                .ThenInclude(x => x.Brand)
                 .SingleOrDefaultAsync(s => s.Id == id);
         }
     }

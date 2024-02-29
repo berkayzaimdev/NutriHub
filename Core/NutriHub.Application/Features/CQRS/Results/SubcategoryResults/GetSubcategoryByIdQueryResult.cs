@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NutriHub.Application.Features.CQRS.Results.ProductResults
+namespace NutriHub.Application.Features.CQRS.Results.SubcategoryResults
 {
-    public class GetProductsByCategoryIdAndSubcategoryIdQueryResult
+    public class GetSubcategoryByIdQueryResult
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageUrl { get; set; }
     }
 }

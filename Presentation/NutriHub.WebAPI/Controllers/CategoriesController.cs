@@ -31,5 +31,12 @@ namespace NutriHub.WebAPI.Controllers
             var values = await _mediator.Send(new GetCategoryByIdWithProductsAndSubcategoriesQuery(id));
             return Ok(values);
         }
+
+        [HttpGet("GetAllCategoriesWithSubcategories")]
+        public async Task<IActionResult> GetAllCategoriesWithSubcategoriesList()
+        {
+            var values = await _mediator.Send(new GetAllCategoriesWithSubcategoriesQuery());
+            return Ok(values);
+        }
     }
 }

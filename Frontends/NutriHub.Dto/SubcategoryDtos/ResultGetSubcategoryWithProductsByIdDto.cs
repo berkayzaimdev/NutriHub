@@ -1,17 +1,17 @@
 ﻿using NutriHub.Dto.ProductDtos;
-using NutriHub.Dto.SubcategoryDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NutriHub.Dto.CategoryDtos
+namespace NutriHub.Dto.SubcategoryDtos
 {
-    public class ResultCategoryWithProductsAndSubcategoriesDto
+    public class ResultGetSubcategoryWithProductsByIdDto
     {
         public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public IEnumerable<ResultProductWithBrandDto> Products { get; set; }
-        public IEnumerable<ResultSubcategoryDto> Subcategories { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace NutriHub.WebUI.ViewComponents.ProductViewComponents
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(List<ResultProductDto> model)
+        public async Task<IViewComponentResult> InvokeAsync(List<ResultProductWithBrandDto> model)
         {
             return View("/Views/Shared/Components/Product/_ProductsListComponentPartial/Default.cshtml", model);
         }

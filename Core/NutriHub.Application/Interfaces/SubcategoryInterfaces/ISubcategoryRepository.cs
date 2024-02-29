@@ -9,6 +9,6 @@ namespace NutriHub.Application.Interfaces.SubcategoryInterfaces
 {
     public interface ISubcategoryRepository
     {
-        Task<Subcategory> GetSubcategoryById(int id);
+        Task<Subcategory> GetSubcategoryWithProductsByIdAsync(int id);
     }
 }

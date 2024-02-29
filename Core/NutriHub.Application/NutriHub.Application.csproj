@@ -13,13 +13,10 @@
     <Folder Include="Features\CQRS\Commands\SubcategoryCommands\" />
     <Folder Include="Features\CQRS\Handlers\BrandHandlers\" />
     <Folder Include="Features\CQRS\Handlers\CommentHandlers\" />
-    <Folder Include="Features\CQRS\Handlers\SubcategoryHandlers\" />
     <Folder Include="Features\CQRS\Queries\BrandQueries\" />
     <Folder Include="Features\CQRS\Queries\CommentQueries\" />
-    <Folder Include="Features\CQRS\Queries\SubcategoryQueries\" />
     <Folder Include="Features\CQRS\Results\BrandResults\" />
     <Folder Include="Features\CQRS\Results\CommentResults\" />
-    <Folder Include="Features\CQRS\Results\SubcategoryResults\" />
   </ItemGroup>
 
   <ItemGroup>

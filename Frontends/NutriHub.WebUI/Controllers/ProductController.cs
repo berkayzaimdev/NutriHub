@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using NutriHub.Dto.CategoryDtos;
 using NutriHub.Dto.ProductDtos;
+using NutriHub.Dto.SubcategoryDtos;
 
 namespace NutriHub.WebUI.Controllers
 {
@@ -14,7 +15,7 @@ namespace NutriHub.WebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        [HttpGet("Product/c-{categoryName}-{categoryId}")]
+        [HttpGet("Product/c-{categoryId}")]
         public async Task<IActionResult> GetProductsByCategory(int categoryId)
         {
             var client = _httpClientFactory.CreateClient();
@@ -23,21 +24,21 @@ namespace NutriHub.WebUI.Controllers
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<ResultCategoryWithProductsAndSubcategoriesDto>(jsonData);
-                return View("Index",values);
+                return View(values);
             }
             return View();
         }
 
-        [HttpGet("Product/sc-{categoryName}-{categoryId}-{subCategoryId}")]
-        public async Task<IActionResult> GetProductsByCategoryAndSubCategory(int categoryId, int subCategoryId)
+        [HttpGet("Product/sc-{subCategoryId}")]
+        public async Task<IActionResult> GetProductsByCategoryAndSubCategory(int subCategoryId)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7049/api/Products/{categoryId}/{subCategoryId}");
+            var responseMessage = await client.GetAsync($"https://localhost:7049/api/Subcategories/GetSubcategoryWithProductsById/{subCategoryId}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultProductDto>>(jsonData);
-                return View("Index", values);
+                var values = JsonConvert.DeserializeObject<ResultGetSubcategoryWithProductsByIdDto>(jsonData);
+                return View("GetProductsBySubcategory", values);
             }
             return View();
         }

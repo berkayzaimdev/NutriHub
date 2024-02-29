@@ -27,5 +27,11 @@ namespace NutriHub.Persistence.Repositories.CategoryRepositories
                 .Include(x => x.Subcategories)
                 .SingleOrDefaultAsync(s => s.Id == id);
         }
+        public async Task<List<Category>> GetAllCategoriesWithSubcategoriesAsync()
+        {
+            return await _context.Categories
+                .Include(x => x.Subcategories)
+                .ToListAsync();
+        }
     }
 }

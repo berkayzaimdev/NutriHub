@@ -32,19 +32,5 @@ namespace NutriHub.WebAPI.Controllers
             await _mediator.Send(command);
             return Ok("Product başarılı bir şekilde oluşturuldu.");
         }
-
-        //[HttpGet("c-{categoryId}")]
-        //public async Task<IActionResult> GetProductsByCategoryIdList(int categoryId)
-        //{
-        //    var values = await _mediator.Send(new GetProductsByCategoryIdQuery(categoryId));
-        //    return Ok(values);
-        //}
-
-        //[HttpGet("sc-{subCategoryId}")]
-        //public async Task<IActionResult> GetProductsByCategoryIdAndSubcategoryIdList(int subCategoryId)
-        //{
-        //    var values = await _mediator.Send(new GetProductsBySubcategoryIdQuery(subCategoryId));
-        //    return Ok(values);
-        //}
     }
 }

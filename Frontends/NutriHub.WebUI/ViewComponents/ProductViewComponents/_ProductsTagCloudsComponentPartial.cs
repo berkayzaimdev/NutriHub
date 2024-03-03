@@ -14,7 +14,7 @@ namespace NutriHub.WebUI.ViewComponents.ProductViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View("/Views/Shared/Components/Product/_ProductsTagCloudsComponentPartial/Default.cshtml");
+            return View();
         }
     }
 }

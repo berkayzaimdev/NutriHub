@@ -19,9 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriHub.Application", "Cor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontends", "Frontends", "{FEB0C97E-3108-41B1-BF78-2A63DFFDA691}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.Dto", "Frontends\NutriHub.Dto\NutriHub.Dto.csproj", "{02C0F48B-A852-43EE-8099-9B6D6B04C441}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriHub.Dto", "Frontends\NutriHub.Dto\NutriHub.Dto.csproj", "{02C0F48B-A852-43EE-8099-9B6D6B04C441}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.WebUI", "Frontends\NutriHub.WebUI\NutriHub.WebUI.csproj", "{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriHub.WebUI", "Frontends\NutriHub.WebUI\NutriHub.WebUI.csproj", "{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{616DADEC-E42D-453B-925C-35662AEB91B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.Business", "Service\NutriHub.Business\NutriHub.Business.csproj", "{FF5B1377-AD25-4F5E-A80D-4C3418CE5280}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,10 @@ Global
 		{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF5B1377-AD25-4F5E-A80D-4C3418CE5280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5B1377-AD25-4F5E-A80D-4C3418CE5280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5B1377-AD25-4F5E-A80D-4C3418CE5280}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5B1377-AD25-4F5E-A80D-4C3418CE5280}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +72,7 @@ Global
 		{F989CE3B-E2B6-4FDF-8419-6C1AD659D0C4} = {5375AE80-7D3A-4522-89B6-639512991245}
 		{02C0F48B-A852-43EE-8099-9B6D6B04C441} = {FEB0C97E-3108-41B1-BF78-2A63DFFDA691}
 		{1911CB1D-12AF-4023-AEF0-A7DCEA8A522C} = {FEB0C97E-3108-41B1-BF78-2A63DFFDA691}
+		{FF5B1377-AD25-4F5E-A80D-4C3418CE5280} = {616DADEC-E42D-453B-925C-35662AEB91B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2CBAE262-9718-4A5C-B693-39D177419E68}

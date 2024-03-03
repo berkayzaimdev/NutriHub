@@ -6,7 +6,7 @@ namespace NutriHub.WebUI.ViewComponents.LayoutViewComponents
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View("/Views/Shared/Components/Layout/_HeaderComponentPartial/Default.cshtml");
+            return View();
         }
     }
 }

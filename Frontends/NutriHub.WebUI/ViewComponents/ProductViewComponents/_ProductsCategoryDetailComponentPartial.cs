@@ -26,7 +26,7 @@ namespace NutriHub.WebUI.ViewComponents.ProductViewComponents
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var value = JsonConvert.DeserializeObject<ResultCategoryByIdDto>(jsonData);
-                return View("/Views/Shared/Components/Product/_ProductsCategoryDetailComponentPartial/Default.cshtml", value);
+                return View(value);
             }
             return View();
         }

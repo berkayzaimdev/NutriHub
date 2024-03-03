@@ -14,7 +14,7 @@ namespace NutriHub.WebUI.ViewComponents.ProductViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(List<ResultSubcategoryDto> model)
         {
-            return View("/Views/Shared/Components/Product/_ProductsSubcategoriesComponentPartial/Default.cshtml", model);
+            return View(model);
         }
     }
 }

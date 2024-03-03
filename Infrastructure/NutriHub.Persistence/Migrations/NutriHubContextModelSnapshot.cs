@@ -22,6 +22,83 @@ namespace NutriHub.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("NutriHub.Domain.Entities.AppRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("NutriHub.Domain.Entities.AppUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AppRoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppRoleId");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("NutriHub.Domain.Entities.Blog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CoverImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Blogs");
+                });
+
             modelBuilder.Entity("NutriHub.Domain.Entities.Brand", b =>
                 {
                     b.Property<int>("Id")
@@ -159,6 +236,28 @@ namespace NutriHub.Persistence.Migrations
                     b.ToTable("Subcategories");
                 });
 
+            modelBuilder.Entity("NutriHub.Domain.Entities.AppUser", b =>
+                {
+                    b.HasOne("NutriHub.Domain.Entities.AppRole", "AppRole")
+                        .WithMany("Users")
+                        .HasForeignKey("AppRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppRole");
+                });
+
+            modelBuilder.Entity("NutriHub.Domain.Entities.Blog", b =>
+                {
+                    b.HasOne("NutriHub.Domain.Entities.AppUser", "User")
+                        .WithMany("Blogs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("NutriHub.Domain.Entities.Product", b =>
                 {
                     b.HasOne("NutriHub.Domain.Entities.Brand", "Brand")
@@ -195,6 +294,16 @@ namespace NutriHub.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("NutriHub.Domain.Entities.AppRole", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("NutriHub.Domain.Entities.AppUser", b =>
+                {
+                    b.Navigation("Blogs");
                 });
 
             modelBuilder.Entity("NutriHub.Domain.Entities.Brand", b =>

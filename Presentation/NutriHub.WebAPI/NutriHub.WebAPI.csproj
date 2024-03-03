@@ -8,12 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.2.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <Compile Remove="Controller\**" />
+    <Content Remove="Controller\**" />
+    <EmbeddedResource Remove="Controller\**" />
+    <None Remove="Controller\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controller\" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>

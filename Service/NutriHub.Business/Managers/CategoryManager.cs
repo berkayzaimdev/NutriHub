@@ -8,16 +8,16 @@ namespace NutriHub.Business.Managers
 {
     public class CategoryManager : ICategoryService
     {
-        private readonly IHttpClientFactory _httpClientFactoryy;
+        private readonly IHttpClientFactory _httpClientFactory;
 
         public CategoryManager(IHttpClientFactory httpClientFactoryy)
         {
-            _httpClientFactoryy = httpClientFactoryy;
+            _httpClientFactory = httpClientFactoryy;
         }
 
         public async Task<ResultCategoryWithProductsAndSubcategoriesDto> GetProductsByCategory(int id)
         {
-            var client = _httpClientFactoryy.CreateClient();
+            var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"https://localhost:7049/api/Categories/GetCategoryByIdWithProductsAndSubcategories/{id}");
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var value = JsonConvert.DeserializeObject<ResultCategoryWithProductsAndSubcategoriesDto>(jsonData);

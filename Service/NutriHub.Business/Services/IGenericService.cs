@@ -11,10 +11,10 @@ namespace NutriHub.Business.Services
         where TCreateDto : class
         where TUpdateDto : class
     {
+        Task<List<TDto>> GetAsync();
         Task CreateAsync(TCreateDto createDto);
         Task UpdateAsync(TUpdateDto updateDto);
-        Task<List<TDto>> GetAsync();
-        Task RemoveAsync();
+        Task RemoveAsync(int id);
         void SetEndpoint(string endpoint);
     }
 }

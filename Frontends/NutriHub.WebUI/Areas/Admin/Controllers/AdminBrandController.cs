@@ -16,8 +16,9 @@ namespace NutriHub.WebUI.Areas.Admin.Controllers
         }
 
         [Route("Index")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var values = await _service.GetAsync();
             return View();
         }
 

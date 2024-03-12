@@ -18,6 +18,14 @@ namespace NutriHub.Business.Managers
         public async Task CreateAsync(CreateBrandDto createDto)
         {
             await base.CreateAsync(createDto);
+        }        
+        public async Task UpdateAsync(UpdateBrandDto updateDto)
+        {
+            await base.UpdateAsync(updateDto);
+        }        
+        public async Task RemoveAsync(int id)
+        {
+            await base.RemoveAsync(id);
         }
     }
 }

@@ -25,7 +25,8 @@ namespace NutriHub.WebUI.Controllers
             return View(value);
         }
 
-        [HttpGet("Product/sc-{subCategoryId}")]
+        [Route("Product/sc-{subCategoryId}")]
+        [HttpGet]
         public async Task<IActionResult> GetProductsByCategoryAndSubCategory(int subCategoryId)
         {
             var client = _httpClientFactory.CreateClient();

@@ -9,6 +9,9 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryManager));
 
+builder.Services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
+builder.Services.AddScoped(typeof(IBrandService), typeof(BrandManager));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

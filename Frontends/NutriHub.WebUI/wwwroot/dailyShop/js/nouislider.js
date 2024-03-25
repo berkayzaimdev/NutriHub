@@ -434,7 +434,7 @@
 	};
 
 /*	Every input option is tested and parsed. This'll prevent
-	endless validation in internal methods. These tests are
+	endless validation in public methods. These tests are
 	structured with an item for every option available. An
 	option can be marked as required by setting the 'r' flag.
 	The testing function is provided with three arguments:
@@ -1674,7 +1674,7 @@ function closure ( target, options ){
 		var count, values = asArray( input ), i;
 
 		// The RTL settings is implemented by reversing the front-end,
-		// internal mechanisms are the same.
+		// public mechanisms are the same.
 		if ( options.dir && options.handles > 1 ) {
 			values.reverse();
 		}

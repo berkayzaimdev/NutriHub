@@ -1719,7 +1719,7 @@
         meridiemParse: defaultLocaleMeridiemParse
     };
 
-    // internal storage for locale config files
+    // public storage for locale config files
     var locales = {};
     var globalLocale;
 

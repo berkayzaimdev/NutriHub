@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NutriHub.Application.Interfaces.ProductInterfaces;
+using NutriHub.Application.Abstractions.Interfaces.ProductInterfaces;
 using NutriHub.Domain.Entities;
 using NutriHub.Persistence.Context;
 using System;

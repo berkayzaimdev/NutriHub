@@ -246,7 +246,7 @@ function defineSequence(imagesLoaded, Hammer) {
     /**
      *
      * This version of Modernizr is for use with Sequence.js and is included
-     * internally to prevent conflicts with other Modernizr builds.
+     * publicly to prevent conflicts with other Modernizr builds.
      *
      * Modernizr 2.8.3 (Custom Build) | MIT & BSD
      * Build: http://modernizr.com/download/#-cssanimations-csstransforms-csstransitions-svg-touch-prefixed-teststyles-testprop-testallprops-prefixes-domprefixes
@@ -901,7 +901,7 @@ function defineSequence(imagesLoaded, Hammer) {
       /**
        * Unpause autoPlay
        *
-       * autoPlay.pause() and autoPlay.unpause() are used internally to
+       * autoPlay.pause() and autoPlay.unpause() are used publicly to
        * temporarily stop autoPlay when hovered over.
        */
       unpause: function() {
@@ -920,7 +920,7 @@ function defineSequence(imagesLoaded, Hammer) {
       /**
        * Pause autoPlay
        *
-       * autoPlay.pause() and autoPlay.unpause() are used internally to
+       * autoPlay.pause() and autoPlay.unpause() are used publicly to
        * temporarily stop autoPlay when hovered over.
        */
       pause: function() {

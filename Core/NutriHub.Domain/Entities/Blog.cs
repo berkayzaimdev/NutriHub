@@ -12,7 +12,7 @@ namespace NutriHub.Domain.Entities
         public string Title { get; set; }
         public string CoverImageUrl { get; set; }
         public string Description { get; set; }
-        public int UserId { get; set; }
-        public AppUser User { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }

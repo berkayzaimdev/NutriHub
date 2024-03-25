@@ -94,7 +94,7 @@
 	$.SmartMenus = function(elm, options) {
 		this.$root = $(elm);
 		this.opts = options;
-		this.rootId = ''; // internal
+		this.rootId = ''; // public
 		this.accessIdPrefix = '';
 		this.$subArrow = null;
 		this.activatedItems = []; // stores last activated A's for each level

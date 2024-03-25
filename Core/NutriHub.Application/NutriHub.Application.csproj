@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
@@ -16,12 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\CQRS\Handlers\BrandHandlers\" />
-    <Folder Include="Features\CQRS\Handlers\CommentHandlers\" />
-    <Folder Include="Features\CQRS\Queries\BrandQueries\" />
-    <Folder Include="Features\CQRS\Queries\CommentQueries\" />
-    <Folder Include="Features\CQRS\Results\BrandResults\" />
-    <Folder Include="Features\CQRS\Results\CommentResults\" />
+    <Folder Include="Features\Queries\BrandQueries\" />
+    <Folder Include="Features\Queries\CommentQueries\" />
+    <Folder Include="Features\Results\BrandResults\" />
+    <Folder Include="Features\Results\CommentResults\" />
   </ItemGroup>
 
 </Project>

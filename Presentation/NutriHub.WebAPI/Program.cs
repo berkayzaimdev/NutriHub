@@ -1,16 +1,16 @@
 using Microsoft.Extensions.DependencyInjection;
-using NutriHub.Application.Interfaces;
 using NutriHub.Persistence.Context;
 using NutriHub.Persistence.Repositories;
 using NutriHub.Application.Services;
-using NutriHub.Application.Interfaces.ProductInterfaces;
 using NutriHub.Persistence.Repositories.ProductRepositories;
-using NutriHub.Application.Interfaces.CategoryInterfaces;
 using NutriHub.Persistence.Repositories.CategoryRepositories;
-using NutriHub.Application.Interfaces.SubcategoryInterfaces;
 using NutriHub.Persistence.Repositories.SubcategoryRepositories;
 using NutriHub.Business.Services;
 using NutriHub.Business.Managers;
+using NutriHub.Application.Abstractions.Interfaces;
+using NutriHub.Application.Abstractions.Interfaces.CategoryInterfaces;
+using NutriHub.Application.Abstractions.Interfaces.ProductInterfaces;
+using NutriHub.Application.Abstractions.Interfaces.SubcategoryInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

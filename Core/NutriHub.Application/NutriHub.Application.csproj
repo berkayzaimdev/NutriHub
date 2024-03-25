@@ -7,33 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Features\CQRS\Handlers\BrandHandlers\**" />
-    <Compile Remove="Features\CQRS\Handlers\CommentHandlers\**" />
-    <Compile Remove="Features\CQRS\Queries\BrandQueries\**" />
-    <Compile Remove="Features\CQRS\Queries\CommentQueries\**" />
-    <Compile Remove="Features\CQRS\Results\BrandResults\**" />
-    <Compile Remove="Features\CQRS\Results\CommentResults\**" />
-    <EmbeddedResource Remove="Features\CQRS\Handlers\BrandHandlers\**" />
-    <EmbeddedResource Remove="Features\CQRS\Handlers\CommentHandlers\**" />
-    <EmbeddedResource Remove="Features\CQRS\Queries\BrandQueries\**" />
-    <EmbeddedResource Remove="Features\CQRS\Queries\CommentQueries\**" />
-    <EmbeddedResource Remove="Features\CQRS\Results\BrandResults\**" />
-    <EmbeddedResource Remove="Features\CQRS\Results\CommentResults\**" />
-    <None Remove="Features\CQRS\Handlers\BrandHandlers\**" />
-    <None Remove="Features\CQRS\Handlers\CommentHandlers\**" />
-    <None Remove="Features\CQRS\Queries\BrandQueries\**" />
-    <None Remove="Features\CQRS\Queries\CommentQueries\**" />
-    <None Remove="Features\CQRS\Results\BrandResults\**" />
-    <None Remove="Features\CQRS\Results\CommentResults\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NutriHub.Domain\NutriHub.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\CQRS\Handlers\BrandHandlers\" />
+    <Folder Include="Features\CQRS\Handlers\CommentHandlers\" />
+    <Folder Include="Features\CQRS\Queries\BrandQueries\" />
+    <Folder Include="Features\CQRS\Queries\CommentQueries\" />
+    <Folder Include="Features\CQRS\Results\BrandResults\" />
+    <Folder Include="Features\CQRS\Results\CommentResults\" />
   </ItemGroup>
 
 </Project>

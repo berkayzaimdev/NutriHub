@@ -17,7 +17,7 @@ namespace NutriHub.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -51,37 +51,37 @@ namespace NutriHub.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a1b673bc-f2d7-46ad-8a5c-8b660a43de9e",
+                            Id = "69df2adb-3bc4-47f4-b9f9-325a1c973830",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "39f576e2-9369-41de-aa13-5debcff48fa0",
+                            Id = "9f34eee2-c999-4bb3-9a93-a3460e4465fe",
                             Name = "Bronze Üye",
                             NormalizedName = "BRONZE"
                         },
                         new
                         {
-                            Id = "55c63a6e-7f4f-444f-b489-6c8f29099b4f",
+                            Id = "45a7f501-5012-4e09-b6ad-5c00fab034fb",
                             Name = "Silver Üye",
                             NormalizedName = "SILVER"
                         },
                         new
                         {
-                            Id = "18ef8a80-c9e6-4105-8423-7f5c61455e4c",
+                            Id = "91beca92-7c6a-4caf-9d3c-acf50d63a4ab",
                             Name = "Gold Üye",
                             NormalizedName = "GOLD"
                         },
                         new
                         {
-                            Id = "8e977966-040c-4349-afdc-6d2e50874568",
+                            Id = "63254af5-c00c-46df-b8cd-c44dd4a844e3",
                             Name = "Platin Üye",
                             NormalizedName = "PLATIN"
                         },
                         new
                         {
-                            Id = "0a319620-ac7c-4a9b-b9dd-43735f19d9c1",
+                            Id = "a2fae61e-77ce-4628-857c-6ac741d5a273",
                             Name = "Yıldız Üye",
                             NormalizedName = "STAR"
                         });

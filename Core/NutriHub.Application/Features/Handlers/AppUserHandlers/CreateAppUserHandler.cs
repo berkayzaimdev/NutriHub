@@ -1,5 +1,8 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using NutriHub.Application.Abstractions.Interfaces;
+using NutriHub.Application.Abstractions.Services;
+using NutriHub.Application.DTOs.User;
 using NutriHub.Application.Features.Commands.AppUserCommands;
 using NutriHub.Domain.Entities;
 using System;
@@ -12,16 +15,19 @@ namespace NutriHub.Application.Features.Handlers.AppUserHandlers
 {
     public class CreateAppUserHandler : IRequestHandler<CreateAppUserCommand>
     {
-        private readonly IRepository<AppUser> _repository;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public CreateAppUserHandler(IRepository<AppUser> repository)
+        public CreateAppUserHandler(IUserService userService, IMapper mapper)
         {
-            _repository = repository;
+            _userService = userService;
+            _mapper = mapper;
         }
 
-        public Task Handle(CreateAppUserCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateAppUserCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var userDto = _mapper.Map<CreateUserDto>(request);
+            await _userService.CreateAsync(userDto);
         }
     }
 }

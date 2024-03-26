@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NutriHub.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class startPoint : Migration
+    public partial class v0 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -290,12 +290,12 @@ namespace NutriHub.Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0a319620-ac7c-4a9b-b9dd-43735f19d9c1", null, "Yıldız Üye", "STAR" },
-                    { "18ef8a80-c9e6-4105-8423-7f5c61455e4c", null, "Gold Üye", "GOLD" },
-                    { "39f576e2-9369-41de-aa13-5debcff48fa0", null, "Bronze Üye", "BRONZE" },
-                    { "55c63a6e-7f4f-444f-b489-6c8f29099b4f", null, "Silver Üye", "SILVER" },
-                    { "8e977966-040c-4349-afdc-6d2e50874568", null, "Platin Üye", "PLATIN" },
-                    { "a1b673bc-f2d7-46ad-8a5c-8b660a43de9e", null, "Admin", "ADMIN" }
+                    { "45a7f501-5012-4e09-b6ad-5c00fab034fb", null, "Silver Üye", "SILVER" },
+                    { "63254af5-c00c-46df-b8cd-c44dd4a844e3", null, "Platin Üye", "PLATIN" },
+                    { "69df2adb-3bc4-47f4-b9f9-325a1c973830", null, "Admin", "ADMIN" },
+                    { "91beca92-7c6a-4caf-9d3c-acf50d63a4ab", null, "Gold Üye", "GOLD" },
+                    { "9f34eee2-c999-4bb3-9a93-a3460e4465fe", null, "Bronze Üye", "BRONZE" },
+                    { "a2fae61e-77ce-4628-857c-6ac741d5a273", null, "Yıldız Üye", "STAR" }
                 });
 
             migrationBuilder.InsertData(

@@ -11,25 +11,28 @@ using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Abstractions.Interfaces.CategoryInterfaces;
 using NutriHub.Application.Abstractions.Interfaces.ProductInterfaces;
 using NutriHub.Application.Abstractions.Interfaces.SubcategoryInterfaces;
+using NutriHub.Persistence.Helpers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using NutriHub.Domain.Entities;
+using NutriHub.WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.ConfigureIdentity();
+
 builder.Services.AddHttpClient();
 
-builder.Services.AddScoped<NutriHubContext>();
-
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
-builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
-builder.Services.AddScoped(typeof(ISubcategoryRepository), typeof(SubcategoryRepository));
-
-builder.Services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
-builder.Services.AddScoped(typeof(IBrandService), typeof(BrandManager));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistiration).Assembly));
+builder.Services.AddPersistenceServices();
 
 builder.Services.AddApplicationService(builder.Configuration);
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 

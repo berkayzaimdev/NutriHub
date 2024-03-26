@@ -12,6 +12,11 @@ namespace NutriHub.Persistence.Context
 {
     public class NutriHubContext : IdentityDbContext<AppUser>
     {
+        public NutriHubContext(DbContextOptions options) : base(options)
+        {
+
+        }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -21,8 +26,8 @@ namespace NutriHub.Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

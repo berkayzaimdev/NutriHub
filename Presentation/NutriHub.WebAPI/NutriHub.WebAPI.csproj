@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
@@ -23,6 +25,10 @@
     <ProjectReference Include="..\..\Core\NutriHub.Application\NutriHub.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\NutriHub.Persistence\NutriHub.Persistence.csproj" />
     <ProjectReference Include="..\..\Service\NutriHub.Business\NutriHub.Business.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ContextFactory\" />
   </ItemGroup>
 
 </Project>

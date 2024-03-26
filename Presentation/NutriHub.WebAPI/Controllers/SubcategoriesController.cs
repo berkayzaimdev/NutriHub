@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NutriHub.Application.Features.CQRS.Queries.CategoryQueries;
-using NutriHub.Application.Features.CQRS.Queries.SubcategoryQueries;
+using NutriHub.Application.Features.Queries.CategoryQueries;
+using NutriHub.Application.Features.Queries.SubcategoryQueries;
 
 namespace NutriHub.WebAPI.Controllers
 {
@@ -17,8 +17,8 @@ namespace NutriHub.WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSubcategoryById(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetSubcategoryById([FromRoute] int id)
         {
             var values = await _mediator.Send(new GetSubcategoryByIdQuery(id));
             return Ok(values);

@@ -20,9 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Queries\BrandQueries\" />
-    <Folder Include="Features\Queries\CommentQueries\" />
     <Folder Include="Features\Results\BrandResults\" />
-    <Folder Include="Features\Results\CommentResults\" />
   </ItemGroup>
 
 </Project>

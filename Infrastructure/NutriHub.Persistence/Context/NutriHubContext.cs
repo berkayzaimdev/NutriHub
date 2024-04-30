@@ -23,6 +23,8 @@ namespace NutriHub.Persistence.Context
         public DbSet<Subcategory> Subcategories { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Favourite> Favourites { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -33,9 +33,9 @@ namespace NutriHub.Persistence.Repositories
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
-        public async Task<List<T>> GetAllAsync()
+        public async Task<IQueryable<T>> GetAllAsync()
         {
-            return await _context.Set<T>().ToListAsync();
+            return await Task.FromResult(_context.Set<T>().AsQueryable());
         }
         public async Task<T> GetById(int id)
         {

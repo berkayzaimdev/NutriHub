@@ -11,7 +11,7 @@ namespace NutriHub.Application.Abstractions.Interfaces
         Task CreateAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
-        Task<List<T>> GetAllAsync();
+        Task<IQueryable<T>> GetAllAsync();
         Task<T> GetById(int id);
     }
 }

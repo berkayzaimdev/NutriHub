@@ -30,9 +30,10 @@ namespace NutriHub.Persistence.Services
             var test = 1;
         }
 
-        public Task DeleteAsync()
+        public async Task DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(user);
         }
     }
 }

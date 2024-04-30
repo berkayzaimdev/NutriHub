@@ -20,17 +20,38 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductsList()
+        public async Task<IActionResult> GetAllAsync()
         {
             var values = await _mediator.Send(new GetProductsQuery());
             return Ok(values);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(int id)   
+        {
+            var value = await _mediator.Send(new GetProductByIdQuery(id));
+            return Ok(value);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(CreateProductCommand command)
+        public async Task<IActionResult> CreateProductAsync(CreateProductCommand command)
         {
             await _mediator.Send(command);
             return Ok("Product başarılı bir şekilde oluşturuldu.");
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateProductAsync(UpdateProductCommand command)
+        {
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteProductAsync(int id)
+        {
+            await _mediator.Send(new RemoveProductCommand(id));
+            return NoContent();
         }
     }
 }

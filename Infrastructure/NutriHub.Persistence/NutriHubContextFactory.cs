@@ -10,7 +10,7 @@ namespace NutriHub.Persistence
         public NutriHubContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<NutriHubContext>();
-            builder.UseSqlServer("Server=DESKTOP-M1UE4EP;" +
+            builder.UseSqlServer("Server=DESKTOP-EC025DF;" +
                 "initial Catalog=NutriHub;" +
                 "integrated Security=true;" +
                 "TrustServerCertificate=true;");

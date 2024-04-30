@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NutriHub.Persistence.Context;
 
@@ -11,9 +12,11 @@ using NutriHub.Persistence.Context;
 namespace NutriHub.Persistence.Migrations
 {
     [DbContext(typeof(NutriHubContext))]
-    partial class NutriHubContextModelSnapshot : ModelSnapshot
+    [Migration("20240429231207_mig_add_favourites_cartitems")]
+    partial class mig_add_favourites_cartitems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

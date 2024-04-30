@@ -10,6 +10,6 @@ namespace NutriHub.Application.Abstractions.Services
     public interface IUserService
     {
         Task CreateAsync(CreateUserDto createUserDto);
-        Task DeleteAsync();
+        Task DeleteAsync(string id);
     }
 }

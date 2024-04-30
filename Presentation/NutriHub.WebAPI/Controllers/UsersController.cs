@@ -17,9 +17,15 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody]CreateAppUserCommand command)
+        public async Task<IActionResult> Create(CreateAppUserCommand command)
         {
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete()
+        {
             return NoContent();
         }
     }

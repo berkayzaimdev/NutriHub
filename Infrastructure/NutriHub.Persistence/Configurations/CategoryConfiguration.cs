@@ -14,8 +14,18 @@ namespace NutriHub.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.HasData(
-                new Category { Id = 1, Name = "Protein Tozu", Description = "Sporcuların protein ihtiyacını karşılamak için kullanılan toz formundaki ürünler." },
-                new Category { Id = 2, Name = "Kreatin", Description = "Kas kütlesini artırmaya ve performansı artırmaya yardımcı olan bir takviye maddesi." }
+                new Category { 
+                    Id = 1, 
+                    Name = "Protein Tozu", 
+                    Description = "Sporcuların protein ihtiyacını karşılamak için kullanılan toz formundaki ürünler.",
+                    ImageUrl = "..."
+                },
+                new Category { 
+                    Id = 2, 
+                    Name = "Kreatin", 
+                    Description = "Kas kütlesini artırmaya ve performansı artırmaya yardımcı olan bir takviye maddesi.",
+                    ImageUrl = "..."
+                }
             );
         }
     }

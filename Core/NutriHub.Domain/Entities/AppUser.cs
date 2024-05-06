@@ -12,9 +12,10 @@ namespace NutriHub.Domain.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
-        public List<Blog> Blogs { get; set; }
-        public List<Comment> Comments { get; set; }
-        public List<Favourite> Favourites { get; set; }
-        public List<CartItem> CartItems { get; set; }
+
+        public IEnumerable<Blog> Blogs { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<Favourite> Favourites { get; set; }
+        public IEnumerable<CartItem> CartItems { get; set; }
     }
 }

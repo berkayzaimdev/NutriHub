@@ -51,37 +51,37 @@ namespace NutriHub.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9f177bc9-b6dd-495d-babe-da68e1b1e8d8",
+                            Id = "e576e0b7-9d0a-4336-87ac-6f47404fb8ff",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "838b0ae8-095a-47f6-ac73-2db4b9b5dc99",
+                            Id = "0d76ac51-66c3-4cbb-b0e2-1c34c20d0432",
                             Name = "Bronze Üye",
                             NormalizedName = "BRONZE"
                         },
                         new
                         {
-                            Id = "8bd0e612-c14c-48b7-9528-7c55adac8bf2",
+                            Id = "953d9696-3489-45a7-8edc-816b7809f633",
                             Name = "Silver Üye",
                             NormalizedName = "SILVER"
                         },
                         new
                         {
-                            Id = "079858dd-b489-4aa3-8c51-8dbfb2b30e82",
+                            Id = "01e30476-eb64-427b-b298-7b17c27daa35",
                             Name = "Gold Üye",
                             NormalizedName = "GOLD"
                         },
                         new
                         {
-                            Id = "f6a01a4f-9bba-4b05-936e-6ed28c93ebf2",
+                            Id = "915dd236-d368-47b6-8b0d-5026fbc73ca6",
                             Name = "Platin Üye",
                             NormalizedName = "PLATIN"
                         },
                         new
                         {
-                            Id = "09bc92a7-8be6-4187-8c68-1368d54f2d4b",
+                            Id = "1ec1ee2a-16d2-4859-84da-51b4c86b6ad2",
                             Name = "Yıldız Üye",
                             NormalizedName = "STAR"
                         });
@@ -290,6 +290,10 @@ namespace NutriHub.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MainImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -313,6 +317,10 @@ namespace NutriHub.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -326,18 +334,21 @@ namespace NutriHub.Persistence.Migrations
                         {
                             Id = 1,
                             Description = "Protein Ocean, deniz kaynaklı proteinlerle formüle edilen yenilikçi takviyeler sunan bir markadır. Sağlıklı yaşam ve sporcular için özel olarak tasarlanmış ürünleriyle bilinir.",
+                            ImageUrl = "...",
                             Name = "Protein Ocean"
                         },
                         new
                         {
                             Id = 2,
                             Description = "NutriHub, doğal ve organik içeriklere sahip besin takviyeleri sunan bir markadır. Sağlıklı yaşamı desteklemek ve beslenme ihtiyaçlarını karşılamak için çeşitli ürünler sunar.",
+                            ImageUrl = "...",
                             Name = "NutriHub"
                         },
                         new
                         {
                             Id = 3,
                             Description = "Hardline, sporcuların en zorlu antrenmanlarda dahi performanslarını artırmak için tasarlanmış yüksek kaliteli takviyeler sunan bir markadır. Güvenilir ve etkili ürünleriyle tanınır.",
+                            ImageUrl = "...",
                             Name = "Hardline"
                         });
                 });
@@ -378,6 +389,10 @@ namespace NutriHub.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -391,12 +406,14 @@ namespace NutriHub.Persistence.Migrations
                         {
                             Id = 1,
                             Description = "Sporcuların protein ihtiyacını karşılamak için kullanılan toz formundaki ürünler.",
+                            ImageUrl = "...",
                             Name = "Protein Tozu"
                         },
                         new
                         {
                             Id = 2,
                             Description = "Kas kütlesini artırmaya ve performansı artırmaya yardımcı olan bir takviye maddesi.",
+                            ImageUrl = "...",
                             Name = "Kreatin"
                         });
                 });
@@ -429,9 +446,14 @@ namespace NutriHub.Persistence.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Comments");
                 });
@@ -547,6 +569,10 @@ namespace NutriHub.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -563,6 +589,7 @@ namespace NutriHub.Persistence.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Description = "Sporcuların protein ihtiyacını hızlı ve etkili bir şekilde karşılayan whey protein tozları, kas gelişimini destekler ve antrenman sonrası iyileşmeyi hızlandırır.",
+                            ImageUrl = "...",
                             Name = "Whey Protein"
                         },
                         new
@@ -570,6 +597,7 @@ namespace NutriHub.Persistence.Migrations
                             Id = 2,
                             CategoryId = 2,
                             Description = "Kreatin monohidrat, enerji üretimini artırarak spor performansını destekler ve yoğun egzersizlerde kas gücünü artırabilir. Sporcular arasında popüler bir besin takviyesidir.",
+                            ImageUrl = "...",
                             Name = "Kreatin Monohidrat"
                         },
                         new
@@ -577,6 +605,7 @@ namespace NutriHub.Persistence.Migrations
                             Id = 3,
                             CategoryId = 1,
                             Description = "Kazein protein, yavaş sindirilen bir protein türüdür ve uzun süreli protein salımı sağlar. Bu özelliği ile genellikle gece yatmadan önce tüketilir ve gece boyunca kasların beslenmesini sağlar.",
+                            ImageUrl = "...",
                             Name = "Kazein Protein"
                         },
                         new
@@ -584,6 +613,7 @@ namespace NutriHub.Persistence.Migrations
                             Id = 4,
                             CategoryId = 1,
                             Description = "Amino asitler, vücudun temel yapı taşlarıdır ve kas onarımı ve büyümesi için gereklidir. Antrenman öncesi veya sonrası amino asit takviyesi almak, kas proteini sentezini artırabilir ve iyileşmeyi hızlandırabilir.",
+                            ImageUrl = "...",
                             Name = "Amino Asitler"
                         },
                         new
@@ -591,6 +621,7 @@ namespace NutriHub.Persistence.Migrations
                             Id = 5,
                             CategoryId = 2,
                             Description = "Kreatin HCL (hidroklorid), kreatin monohidratın bir türevidir ve daha yüksek çözünürlük ve emilim sağlayabilir. Kreatin HCL, yoğun egzersizlerde performansı artırmak ve kas gücünü desteklemek için tercih edilen bir besin takviyesidir.",
+                            ImageUrl = "...",
                             Name = "Kreatin HCL"
                         });
                 });
@@ -684,7 +715,15 @@ namespace NutriHub.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("NutriHub.Domain.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("AppUser");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("NutriHub.Domain.Entities.Favourite", b =>

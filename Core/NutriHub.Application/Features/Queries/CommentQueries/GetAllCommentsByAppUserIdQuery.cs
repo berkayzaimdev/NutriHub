@@ -10,9 +10,9 @@ namespace NutriHub.Application.Features.Queries.CommentQueries
 {
     public class GetAllCommentsByAppUserIdQuery : IRequest<List<GetAllCommentsByAppUserIdQueryResult>>
     {
-        public int AppUserId { get; set; }
+        public string AppUserId { get; set; }
 
-        public GetAllCommentsByAppUserIdQuery(int appUserId)
+        public GetAllCommentsByAppUserIdQuery(string appUserId)
         {
             AppUserId = appUserId;
         }

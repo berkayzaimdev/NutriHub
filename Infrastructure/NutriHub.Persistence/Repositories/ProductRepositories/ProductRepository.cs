@@ -28,5 +28,11 @@ namespace NutriHub.Persistence.Repositories.ProductRepositories
         {
             return await _context.Products.Where(p => p.CategoryId == categoryId && p.SubcategoryId == subCategoryId).ToListAsync();
         }
+
+        public async Task<Product> GetProductDetailsByIdAsync(int id) => await _context.Products
+                .Include(x => x.Brand)
+                .Include(x => x.Category)
+                .Include(x => x.Subcategory)
+                .FirstOrDefaultAsync(x => x.Id == id);
     }
 }

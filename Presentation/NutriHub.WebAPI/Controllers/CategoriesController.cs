@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Features.Commands.CategoryCommands;
 using NutriHub.Application.Features.Commands.ProductCommands;
 using NutriHub.Application.Features.Queries.CategoryQueries;
 using NutriHub.Application.Features.Queries.ProductQueries;
+using NutriHub.Application.Features.Results.CategoryResults;
 
 namespace NutriHub.WebAPI.Controllers
 {
@@ -18,24 +20,52 @@ namespace NutriHub.WebAPI.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllCategoriesAsync()
+        {
+            var values = await _mediator.Send(new GetAllCategoriesQueryResult());
+            return Ok(values);
+        }
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetByCategoryIdAsync(int id)
         {
             var values = await _mediator.Send(new GetCategoryByIdQuery(id));
             return Ok(values);
         }
 
-        [HttpGet("GetCategoryByIdWithProductsAndSubcategories/{id}")]
-        public async Task<IActionResult> GetByIdWithProductsAndSubcategories(int id)
+        [HttpPost]
+        public async Task<IActionResult> CreateCategoryAsync(CreateCategoryCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCategoryAsync(UpdateCategoryCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveCategoryAsync(RemoveCategoryCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpGet("GetCategoryDetail/{id}")]
+        public async Task<IActionResult> GetCategoryDetailAsync(int id)
         {
             var values = await _mediator.Send(new GetCategoryByIdWithProductsAndSubcategoriesQuery(id));
             return Ok(values);
         }
 
-        [HttpGet("GetAllCategoriesWithSubcategories")]
-        public async Task<IActionResult> GetAllWithSubcategoriesList()
+        [HttpGet("GetCategoriesMenu")]
+        public async Task<IActionResult> GetCategoriesMenuAsync()
         {
-            var values = await _mediator.Send(new GetAllCategoriesWithSubcategoriesQuery());
+            var values = await _mediator.Send(new GetCategoriesMenuQuery());
             return Ok(values);
         }
     }

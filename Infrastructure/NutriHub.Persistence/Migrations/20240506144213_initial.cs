@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NutriHub.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class v0 : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,7 +62,8 @@ namespace NutriHub.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,28 +77,12 @@ namespace NutriHub.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Like = table.Column<int>(type: "int", nullable: false),
-                    Dislike = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -214,6 +199,7 @@ namespace NutriHub.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CoverImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MainImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -236,6 +222,7 @@ namespace NutriHub.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -285,48 +272,131 @@ namespace NutriHub.Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CartItems_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Like = table.Column<int>(type: "int", nullable: false),
+                    Dislike = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Favourites",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Favourites", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Favourites_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Favourites_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "45a7f501-5012-4e09-b6ad-5c00fab034fb", null, "Silver Üye", "SILVER" },
-                    { "63254af5-c00c-46df-b8cd-c44dd4a844e3", null, "Platin Üye", "PLATIN" },
-                    { "69df2adb-3bc4-47f4-b9f9-325a1c973830", null, "Admin", "ADMIN" },
-                    { "91beca92-7c6a-4caf-9d3c-acf50d63a4ab", null, "Gold Üye", "GOLD" },
-                    { "9f34eee2-c999-4bb3-9a93-a3460e4465fe", null, "Bronze Üye", "BRONZE" },
-                    { "a2fae61e-77ce-4628-857c-6ac741d5a273", null, "Yıldız Üye", "STAR" }
+                    { "01e30476-eb64-427b-b298-7b17c27daa35", null, "Gold Üye", "GOLD" },
+                    { "0d76ac51-66c3-4cbb-b0e2-1c34c20d0432", null, "Bronze Üye", "BRONZE" },
+                    { "1ec1ee2a-16d2-4859-84da-51b4c86b6ad2", null, "Yıldız Üye", "STAR" },
+                    { "915dd236-d368-47b6-8b0d-5026fbc73ca6", null, "Platin Üye", "PLATIN" },
+                    { "953d9696-3489-45a7-8edc-816b7809f633", null, "Silver Üye", "SILVER" },
+                    { "e576e0b7-9d0a-4336-87ac-6f47404fb8ff", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Brands",
-                columns: new[] { "Id", "Description", "Name" },
+                columns: new[] { "Id", "Description", "ImageUrl", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Protein Ocean, deniz kaynaklı proteinlerle formüle edilen yenilikçi takviyeler sunan bir markadır. Sağlıklı yaşam ve sporcular için özel olarak tasarlanmış ürünleriyle bilinir.", "Protein Ocean" },
-                    { 2, "NutriHub, doğal ve organik içeriklere sahip besin takviyeleri sunan bir markadır. Sağlıklı yaşamı desteklemek ve beslenme ihtiyaçlarını karşılamak için çeşitli ürünler sunar.", "NutriHub" },
-                    { 3, "Hardline, sporcuların en zorlu antrenmanlarda dahi performanslarını artırmak için tasarlanmış yüksek kaliteli takviyeler sunan bir markadır. Güvenilir ve etkili ürünleriyle tanınır.", "Hardline" }
+                    { 1, "Protein Ocean, deniz kaynaklı proteinlerle formüle edilen yenilikçi takviyeler sunan bir markadır. Sağlıklı yaşam ve sporcular için özel olarak tasarlanmış ürünleriyle bilinir.", "...", "Protein Ocean" },
+                    { 2, "NutriHub, doğal ve organik içeriklere sahip besin takviyeleri sunan bir markadır. Sağlıklı yaşamı desteklemek ve beslenme ihtiyaçlarını karşılamak için çeşitli ürünler sunar.", "...", "NutriHub" },
+                    { 3, "Hardline, sporcuların en zorlu antrenmanlarda dahi performanslarını artırmak için tasarlanmış yüksek kaliteli takviyeler sunan bir markadır. Güvenilir ve etkili ürünleriyle tanınır.", "...", "Hardline" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "Description", "Name" },
+                columns: new[] { "Id", "Description", "ImageUrl", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Sporcuların protein ihtiyacını karşılamak için kullanılan toz formundaki ürünler.", "Protein Tozu" },
-                    { 2, "Kas kütlesini artırmaya ve performansı artırmaya yardımcı olan bir takviye maddesi.", "Kreatin" }
+                    { 1, "Sporcuların protein ihtiyacını karşılamak için kullanılan toz formundaki ürünler.", "...", "Protein Tozu" },
+                    { 2, "Kas kütlesini artırmaya ve performansı artırmaya yardımcı olan bir takviye maddesi.", "...", "Kreatin" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Subcategories",
-                columns: new[] { "Id", "CategoryId", "Description", "Name" },
+                columns: new[] { "Id", "CategoryId", "Description", "ImageUrl", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, "Sporcuların protein ihtiyacını hızlı ve etkili bir şekilde karşılayan whey protein tozları, kas gelişimini destekler ve antrenman sonrası iyileşmeyi hızlandırır.", "Whey Protein" },
-                    { 2, 2, "Kreatin monohidrat, enerji üretimini artırarak spor performansını destekler ve yoğun egzersizlerde kas gücünü artırabilir. Sporcular arasında popüler bir besin takviyesidir.", "Kreatin Monohidrat" },
-                    { 3, 1, "Kazein protein, yavaş sindirilen bir protein türüdür ve uzun süreli protein salımı sağlar. Bu özelliği ile genellikle gece yatmadan önce tüketilir ve gece boyunca kasların beslenmesini sağlar.", "Kazein Protein" },
-                    { 4, 1, "Amino asitler, vücudun temel yapı taşlarıdır ve kas onarımı ve büyümesi için gereklidir. Antrenman öncesi veya sonrası amino asit takviyesi almak, kas proteini sentezini artırabilir ve iyileşmeyi hızlandırabilir.", "Amino Asitler" },
-                    { 5, 2, "Kreatin HCL (hidroklorid), kreatin monohidratın bir türevidir ve daha yüksek çözünürlük ve emilim sağlayabilir. Kreatin HCL, yoğun egzersizlerde performansı artırmak ve kas gücünü desteklemek için tercih edilen bir besin takviyesidir.", "Kreatin HCL" }
+                    { 1, 1, "Sporcuların protein ihtiyacını hızlı ve etkili bir şekilde karşılayan whey protein tozları, kas gelişimini destekler ve antrenman sonrası iyileşmeyi hızlandırır.", "...", "Whey Protein" },
+                    { 2, 2, "Kreatin monohidrat, enerji üretimini artırarak spor performansını destekler ve yoğun egzersizlerde kas gücünü artırabilir. Sporcular arasında popüler bir besin takviyesidir.", "...", "Kreatin Monohidrat" },
+                    { 3, 1, "Kazein protein, yavaş sindirilen bir protein türüdür ve uzun süreli protein salımı sağlar. Bu özelliği ile genellikle gece yatmadan önce tüketilir ve gece boyunca kasların beslenmesini sağlar.", "...", "Kazein Protein" },
+                    { 4, 1, "Amino asitler, vücudun temel yapı taşlarıdır ve kas onarımı ve büyümesi için gereklidir. Antrenman öncesi veya sonrası amino asit takviyesi almak, kas proteini sentezini artırabilir ve iyileşmeyi hızlandırabilir.", "...", "Amino Asitler" },
+                    { 5, 2, "Kreatin HCL (hidroklorid), kreatin monohidratın bir türevidir ve daha yüksek çözünürlük ve emilim sağlayabilir. Kreatin HCL, yoğun egzersizlerde performansı artırmak ve kas gücünü desteklemek için tercih edilen bir besin takviyesidir.", "...", "Kreatin HCL" }
                 });
 
             migrationBuilder.InsertData(
@@ -384,6 +454,36 @@ namespace NutriHub.Persistence.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartItems_AppUserId",
+                table: "CartItems",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_ProductId",
+                table: "CartItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_AppUserId",
+                table: "Comments",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_ProductId",
+                table: "Comments",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Favourites_AppUserId",
+                table: "Favourites",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Favourites_ProductId",
+                table: "Favourites",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
                 table: "Products",
                 column: "BrandId");
@@ -426,16 +526,22 @@ namespace NutriHub.Persistence.Migrations
                 name: "Blogs");
 
             migrationBuilder.DropTable(
+                name: "CartItems");
+
+            migrationBuilder.DropTable(
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Favourites");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Brands");

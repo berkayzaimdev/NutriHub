@@ -20,14 +20,14 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllProductsAsync()
         {
             var values = await _mediator.Send(new GetProductsQuery());
             return Ok(values);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id)   
+        public async Task<IActionResult> GetProductByIdAsync(int id)   
         {
             var value = await _mediator.Send(new GetProductByIdQuery(id));
             return Ok(value);
@@ -52,6 +52,20 @@ namespace NutriHub.WebAPI.Controllers
         {
             await _mediator.Send(new RemoveProductCommand(id));
             return NoContent();
+        }
+
+        [HttpGet("GetAllProductCardsAsync")]
+        public async Task<IActionResult> GetAllProductCardsAsync()
+        {
+            var value = await _mediator.Send(new GetAllProductCardsQuery());
+            return Ok(value);
+        }
+
+        [HttpGet("GetProductDetailsById/{id}")]
+        public async Task<IActionResult> GetProductDetailsByIdAsync(int id)
+        {
+            var value = await _mediator.Send(new GetProductDetailsByIdQuery(id));
+            return Ok(value);
         }
     }
 }

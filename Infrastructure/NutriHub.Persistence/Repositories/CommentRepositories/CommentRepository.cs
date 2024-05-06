@@ -19,17 +19,18 @@ namespace NutriHub.Persistence.Repositories.CommentRepositories
             _repository = repository;
         }
 
-        public async Task<List<Comment>> GetAllCommentsByAppUserIdAsync(string appUserId)
+        public async Task<IEnumerable<Comment>> GetAllCommentsByAppUserIdAsync(string appUserId)
         {
             var values = await _repository.GetAllAsync();
-            values = values.Include(x => x.AppUser).Include(x => x.Produ)
-            values = values.Include().Where(x => x.AppUserId == appUserId);
+            values = values.Where(x => x.AppUserId == appUserId);
             return values;
         }
 
-        public Task<List<Comment>> GetAllCommentsByProductIdAsync(string productId)
+        public async Task<IEnumerable<Comment>> GetAllCommentsByProductIdAsync(int productId)
         {
-            throw new NotImplementedException();
+            var values = await _repository.GetAllAsync();
+            values = values.Where(x => x.ProductId == productId);
+            return values;
         }
     }
 }

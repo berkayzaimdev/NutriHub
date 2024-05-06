@@ -11,7 +11,9 @@ namespace NutriHub.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Product> Products { get; set; }
-        public List<Subcategory> Subcategories { get; set; }
+        public string ImageUrl { get; set; }
+
+        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<Subcategory> Subcategories { get; set; }
     }
 }

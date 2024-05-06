@@ -8,6 +8,7 @@ namespace NutriHub.Application.Features.Results.SubcategoryResults
 {
     public class GetSubcategoryByIdQueryResult
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

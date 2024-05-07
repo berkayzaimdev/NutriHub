@@ -10,6 +10,6 @@ namespace NutriHub.Application.Abstractions.Interfaces.CommentInterfaces
     public interface ICommentRepository 
     {
         Task<IEnumerable<Comment>> GetAllCommentsByProductIdAsync(int productId);
-        Task<IEnumerable<Comment>> GetAllCommentsByAppUserIdAsync(string appUserId);
+        Task<IEnumerable<Comment>> GetAllCommentsByUserIdAsync(string UserId);
     }
 }

@@ -1,7 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NutriHub.Application.Features.Commands.AppUserCommands;
+using NutriHub.Application.Features.Commands.UserCommands;
 
 namespace NutriHub.WebAPI.Controllers
 {
@@ -16,11 +17,25 @@ namespace NutriHub.WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateAppUserCommand command)
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> IsAuthenticated()
+        {
+            return Ok(User.Identity.IsAuthenticated);
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterAsync(RegisterCommand command)
         {
             await _mediator.Send(command);
             return NoContent();
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginAsync(LoginCommand command)
+        {
+            var token = await _mediator.Send(command);
+            return Ok(token);
         }
 
         [HttpDelete("{id}")]

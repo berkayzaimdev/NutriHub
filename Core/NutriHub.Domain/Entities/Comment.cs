@@ -14,11 +14,12 @@ namespace NutriHub.Domain.Entities
         public DateTime ModifiedDate { get; set; }
         public int Like { get; set; } = 0;
         public int Dislike { get; set; } = 0;
+        public decimal Rating { get; set; }
 
         public int ProductId { get; set; }
         public Product Product { get; set; }
 
-        public string AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public string UserId { get; set; }
+        public User User { get; set; }
     }
 }

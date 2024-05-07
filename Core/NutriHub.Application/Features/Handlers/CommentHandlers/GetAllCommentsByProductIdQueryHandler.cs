@@ -10,12 +10,30 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Handlers.CommentHandlers
 {
-    public class GetAllCommentsByProductIdQueryHandler : IRequestHandler<GetAllCommentsByProductIdQuery, List<GetAllCommentsByProductIdQueryResult>>
+    public class GetAllCommentsByProductIdQueryHandler : IRequestHandler<GetAllCommentsByProductIdQuery, IEnumerable<GetAllCommentsByProductIdQueryResult>>
     {
-        private readonly ICommentRepository _commentRepository;
-        public Task<List<GetAllCommentsByProductIdQueryResult>> Handle(GetAllCommentsByProductIdQuery request, CancellationToken cancellationToken)
+        private readonly ICommentRepository _repository;
+
+        public GetAllCommentsByProductIdQueryHandler(ICommentRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+
+        public async Task<IEnumerable<GetAllCommentsByProductIdQueryResult>> Handle(GetAllCommentsByProductIdQuery request, CancellationToken cancellationToken)
+        {
+            var values = await _repository.GetAllCommentsByProductIdAsync(request.ProductId);
+            return values.Select(x => new GetAllCommentsByProductIdQueryResult
+            {
+                CommentId = x.Id,
+
+                UserId = x.User.Id,
+                UserName = x.User.UserName,
+
+                CreatedDate = x.CreatedDate,
+                Description = x.Description,
+                Like = x.Like,
+                Dislike = x.Dislike,
+            });
         }
     }
 }

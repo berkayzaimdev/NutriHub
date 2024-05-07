@@ -11,5 +11,6 @@ namespace NutriHub.Application.Abstractions.Interfaces.ProductInterfaces
     {
         Task<List<Product>> GetProductsByCategoryId(int categoryId);
         Task<List<Product>> GetProductsByCategoryIdAndSubcategoryId(int categoryId, int subCategoryId);
+        Task<Product> GetProductDetailsByIdAsync(int id);
     }
 }

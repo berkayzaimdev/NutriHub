@@ -15,9 +15,13 @@ namespace NutriHub.Domain.Entities
 
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
+
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+
         public int SubcategoryId { get; set; }
         public Subcategory Subcategory { get; set; }
+
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }

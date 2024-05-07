@@ -27,7 +27,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("GetSubcategoryWithProductsById/{id}")]
         public async Task<IActionResult> GetSubcategoryWithProductsById(int id)
         {
-            var values = await _mediator.Send(new GetSubcategoryWithProductsByIdQuery(id));
+            var values = await _mediator.Send(new GetSubcategoryDetailQuery(id));
             return Ok(values);
         }
     }

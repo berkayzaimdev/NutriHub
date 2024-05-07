@@ -19,10 +19,10 @@ namespace NutriHub.WebAPI.Controllers
 
 
 
-        [HttpGet("GetAllCommentsByAppUserId/{id}")]
-        public async Task<IActionResult> GetAllCommentsByAppUserId(string id)
+        [HttpGet("GetAllCommentsByUserId/{id}")]
+        public async Task<IActionResult> GetAllCommentsByUserId(string id)
         {
-            var values = await _mediator.Send(new GetAllCommentsByAppUserIdQuery(id));
+            var values = await _mediator.Send(new GetAllCommentsByUserIdQuery(id));
             return Ok(values);
         }
 

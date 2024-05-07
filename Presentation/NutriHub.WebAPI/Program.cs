@@ -1,6 +1,7 @@
-using NutriHub.Application.Services;
-using NutriHub.Persistence.Helpers;
+using MediatR;
+using NutriHub.Application.Features;
 using NutriHub.WebAPI.Extensions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,14 +10,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureSqlContext(builder.Configuration);
+
 builder.Services.ConfigureIdentity();
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistiration).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetAssembly(typeof(MediatorAssembly))));
+
+builder.Services.ConfigureJWT(builder.Configuration);
+
 builder.Services.AddPersistenceServices();
 
-builder.Services.AddApplicationService(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
@@ -29,7 +33,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthentication(); // önce oturum açma
+app.UseAuthorization();  // sonra yetkilendirme
 
 app.MapControllers();
 

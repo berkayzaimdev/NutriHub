@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Results.CommentResults
 {
-    public class GetAllCommentsByAppUserIdQueryResult
+    public class GetAllCommentsByUserIdQueryResult
     {
         public int CommentId { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public int Like { get; set; }
         public int Dislike { get; set; }
-        public string AppUserId { get; set; }
-        public string AppUserName { get; set; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
     }
 }

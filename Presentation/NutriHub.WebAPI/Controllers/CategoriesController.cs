@@ -23,7 +23,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllCategoriesAsync()
         {
-            var values = await _mediator.Send(new GetAllCategoriesQueryResult());
+            var values = await _mediator.Send(new GetAllCategoriesQuery());
             return Ok(values);
         }
 
@@ -58,7 +58,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("GetCategoryDetail/{id}")]
         public async Task<IActionResult> GetCategoryDetailAsync(int id)
         {
-            var values = await _mediator.Send(new GetCategoryByIdWithProductsAndSubcategoriesQuery(id));
+            var values = await _mediator.Send(new GetCategoryDetailQuery(id));
             return Ok(values);
         }
 

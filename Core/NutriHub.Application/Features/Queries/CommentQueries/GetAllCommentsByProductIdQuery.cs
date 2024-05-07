@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Queries.CommentQueries
 {
-    public class GetAllCommentsByProductIdQuery : IRequest<List<GetAllCommentsByProductIdQueryResult>>
+    public class GetAllCommentsByProductIdQuery : IRequest<IEnumerable<GetAllCommentsByProductIdQueryResult>>
     {
         public int ProductId { get; set; }
 

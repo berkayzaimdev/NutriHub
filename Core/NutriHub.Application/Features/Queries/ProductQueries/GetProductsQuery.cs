@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Queries.ProductQueries
 {
-    public class GetProductsQuery : IRequest<List<GetProductsQueryResult>>
+    public class GetAllProductsQuery : IRequest<IEnumerable<GetAllProductsQueryResult>>
     {
     }
 }

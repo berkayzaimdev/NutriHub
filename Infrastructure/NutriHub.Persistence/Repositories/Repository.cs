@@ -23,16 +23,20 @@ namespace NutriHub.Persistence.Repositories
             await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
         }
+
         public async Task UpdateAsync(T entity)
         {
             _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();
         }
-        public async Task DeleteAsync(T entity)
+
+        public async Task DeleteAsync(object id)
         {
+            var entity = await _context.Set<T>().FindAsync(id);
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
+
         public async Task<IQueryable<T>> GetAllAsync()
         {
             return await Task.FromResult(_context.Set<T>().AsQueryable());

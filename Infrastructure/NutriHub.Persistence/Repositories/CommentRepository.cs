@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NutriHub.Application.Abstractions.Interfaces;
-using NutriHub.Application.Abstractions.Interfaces.CommentInterfaces;
 using NutriHub.Domain.Entities;
 using System;
 using System.Collections.Generic;

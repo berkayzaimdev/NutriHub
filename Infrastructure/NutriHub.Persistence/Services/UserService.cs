@@ -23,11 +23,11 @@ namespace NutriHub.Persistence.Services
             _mapper = mapper;
         }
 
-        public async Task CreateAsync(CreateUserDto createUserDto)
+        public async Task<User> CreateAsync(CreateUserDto createUserDto)
         {
             var user = _mapper.Map<User>(createUserDto);
             var result = await _userManager.CreateAsync(user, createUserDto.Password);
-            var test = 1;
+            return user;
         }
 
         public async Task DeleteAsync(string id)

@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\NutriHub.Application\NutriHub.Application.csproj" />
     <ProjectReference Include="..\..\Service\NutriHub.Business\NutriHub.Business.csproj" />
     <ProjectReference Include="..\NutriHub.Dto\NutriHub.Dto.csproj" />
   </ItemGroup>

@@ -23,6 +23,8 @@ builder.Services.AddPersistenceServices();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
+builder.Services.ConfigureSwagger();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

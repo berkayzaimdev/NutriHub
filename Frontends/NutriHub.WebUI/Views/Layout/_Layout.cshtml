@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
 
-    @await Component.InvokeAsync("_HeadComponentPartial")
+@*     @await Component.InvokeAsync("_HeadComponentPartial") *@
 
 </head>
 <body>
 
-    @await Component.InvokeAsync("_HeaderComponentPartial")
+@*     @await Component.InvokeAsync("_HeaderComponentPartial")
 
-    @await Component.InvokeAsync("_MenuComponentPartial")
+    @await Component.InvokeAsync("_MenuComponentPartial") *@
 
     @RenderBody()
-
+@* 
     @await Component.InvokeAsync("_FooterComponentPartial")
 
-    @await Component.InvokeAsync("_ScriptComponentPartial")
+    @await Component.InvokeAsync("_ScriptComponentPartial") *@
 </body>
 </html>

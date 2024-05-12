@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using NutriHub.Application.Abstractions.Interfaces;
-using NutriHub.Application.Abstractions.Interfaces.CategoryInterfaces;
 using NutriHub.Application.DTOs.SubcategoryDtos;
 using NutriHub.Application.Features.Queries.CategoryQueries;
 using NutriHub.Application.Features.Results.CategoryResults;

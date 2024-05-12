@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using NutriHub.Application.Abstractions.Interfaces.CommentInterfaces;
+using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Features.Queries.CommentQueries;
 using NutriHub.Application.Features.Results.CommentResults;
 using System;

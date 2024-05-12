@@ -1,4 +1,5 @@
 ﻿using NutriHub.Application.DTOs.User;
+using NutriHub.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace NutriHub.Application.Abstractions.Services
 {
     public interface IUserService
     {
-        Task CreateAsync(CreateUserDto createUserDto);
+        Task<User> CreateAsync(CreateUserDto createUserDto);
         Task DeleteAsync(string id);
     }
 }

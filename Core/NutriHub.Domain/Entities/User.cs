@@ -17,5 +17,6 @@ namespace NutriHub.Domain.Entities
         public IEnumerable<Comment> Comments { get; set; }
         public IEnumerable<Favourite> Favourites { get; set; }
         public IEnumerable<CartItem> CartItems { get; set; }
+        public IEnumerable<Address> Addresses { get; set; }
     }
 }

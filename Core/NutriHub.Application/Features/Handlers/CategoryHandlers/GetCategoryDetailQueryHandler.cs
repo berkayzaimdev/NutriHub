@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using NutriHub.Application.Abstractions.Interfaces.CategoryInterfaces;
+using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Features.Queries.CategoryQueries;
 using NutriHub.Application.Features.Results.CategoryResults;
 using NutriHub.Application.ViewModels.ProductViewModels;

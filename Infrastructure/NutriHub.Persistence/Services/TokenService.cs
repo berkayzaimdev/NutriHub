@@ -44,6 +44,7 @@ namespace NutriHub.Persistence.Services
         {
             var claims = new List<Claim>()
             {
+                new Claim(ClaimTypes.NameIdentifier, _user.Id),
                 new Claim(JwtRegisteredClaimNames.Email, _user.Email),
                 new Claim(JwtRegisteredClaimNames.GivenName, _user.UserName)
             };
@@ -55,7 +56,7 @@ namespace NutriHub.Persistence.Services
         {
             return new() {
                 Subject = new ClaimsIdentity(_claims),
-                Expires = DateTime.Now.AddMinutes(5),
+                Expires = DateTime.Now.AddHours(20),
                 SigningCredentials = _creds,
                 Issuer = _configuration["JwtSettings:validIssuer"],
                 Audience = _configuration["JwtSettings:validAudience"]

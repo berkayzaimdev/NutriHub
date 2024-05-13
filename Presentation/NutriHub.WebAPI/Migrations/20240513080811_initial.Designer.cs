@@ -12,8 +12,8 @@ using NutriHub.Persistence.EFCore.Context;
 namespace NutriHub.WebAPI.Migrations
 {
     [DbContext(typeof(NutriHubContext))]
-    [Migration("20240512222001_add-price")]
-    partial class addprice
+    [Migration("20240513080811_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,37 +54,37 @@ namespace NutriHub.WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0b46c6f9-4a9d-45ca-82e7-5a12137317f4",
+                            Id = "14a76c01-0417-4418-a763-245693e00efa",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "50ddc9cc-0358-463e-8995-392561357315",
+                            Id = "da6771ef-9d11-43ef-8506-74c2355bffaa",
                             Name = "Bronze Üye",
                             NormalizedName = "BRONZE"
                         },
                         new
                         {
-                            Id = "2bf57d1a-f643-4dae-abfd-11b31da8480b",
+                            Id = "7fb8deeb-8d76-4ad9-81c3-cdc640175d85",
                             Name = "Silver Üye",
                             NormalizedName = "SILVER"
                         },
                         new
                         {
-                            Id = "08878856-65f0-471a-847d-24dd713d795c",
+                            Id = "8b977e2e-9bd2-4ec3-8361-ca5ed476c844",
                             Name = "Gold Üye",
                             NormalizedName = "GOLD"
                         },
                         new
                         {
-                            Id = "af7a593a-62f7-4e00-8b71-e928f87302e7",
+                            Id = "143b4941-eca9-471b-8e00-67fdff6d1be3",
                             Name = "Platin Üye",
                             NormalizedName = "PLATIN"
                         },
                         new
                         {
-                            Id = "af1f43e4-9547-4830-942d-6a481301e4a4",
+                            Id = "52d0d615-deaf-4c29-9218-fa8ce6d29093",
                             Name = "Yıldız Üye",
                             NormalizedName = "STAR"
                         });
@@ -244,7 +244,7 @@ namespace NutriHub.WebAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("NutriHub.Domain.Entities.Blog", b =>
@@ -441,6 +441,26 @@ namespace NutriHub.WebAPI.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("NutriHub.Domain.Entities.Coupon", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Coupons");
+                });
+
             modelBuilder.Entity("NutriHub.Domain.Entities.Favourite", b =>
                 {
                     b.Property<int>("Id")
@@ -463,6 +483,84 @@ namespace NutriHub.WebAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Favourites");
+                });
+
+            modelBuilder.Entity("NutriHub.Domain.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CouponDiscount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeliveredDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MembershipDiscount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ProductDiscounts")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ShippingAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("NutriHub.Domain.Entities.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("NutriHub.Domain.Entities.Product", b =>
@@ -494,6 +592,9 @@ namespace NutriHub.WebAPI.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
                     b.Property<int>("SubcategoryId")
                         .HasColumnType("int");
 
@@ -517,6 +618,7 @@ namespace NutriHub.WebAPI.Migrations
                             ImageUrl = "...",
                             Name = "1000 gr",
                             Price = 178m,
+                            Stock = 0,
                             SubcategoryId = 1
                         },
                         new
@@ -528,6 +630,7 @@ namespace NutriHub.WebAPI.Migrations
                             ImageUrl = "...",
                             Name = "3000 gr",
                             Price = 300m,
+                            Stock = 0,
                             SubcategoryId = 3
                         },
                         new
@@ -539,6 +642,7 @@ namespace NutriHub.WebAPI.Migrations
                             ImageUrl = "...",
                             Name = "500 gr",
                             Price = 55m,
+                            Stock = 0,
                             SubcategoryId = 2
                         });
                 });
@@ -822,6 +926,44 @@ namespace NutriHub.WebAPI.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("NutriHub.Domain.Entities.Order", b =>
+                {
+                    b.HasOne("NutriHub.Domain.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NutriHub.Domain.Entities.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NutriHub.Domain.Entities.OrderItem", b =>
+                {
+                    b.HasOne("NutriHub.Domain.Entities.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NutriHub.Domain.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("NutriHub.Domain.Entities.Product", b =>
                 {
                     b.HasOne("NutriHub.Domain.Entities.Brand", "Brand")
@@ -872,6 +1014,11 @@ namespace NutriHub.WebAPI.Migrations
                     b.Navigation("Subcategories");
                 });
 
+            modelBuilder.Entity("NutriHub.Domain.Entities.Order", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
             modelBuilder.Entity("NutriHub.Domain.Entities.Product", b =>
                 {
                     b.Navigation("Comments");
@@ -893,6 +1040,8 @@ namespace NutriHub.WebAPI.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Favourites");
+
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

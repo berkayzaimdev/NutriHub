@@ -12,16 +12,16 @@ namespace NutriHub.Application.Features.Favourites.Handlers
 {
     public class RemoveFromFavouriteCommandHandler : IRequestHandler<RemoveFromFavouriteCommand>
     {
-        private readonly IRepository<Favourite> _repository;
+        private readonly IFavouriteRepository _repository;
 
-        public RemoveFromFavouriteCommandHandler(IRepository<Favourite> repository)
+        public RemoveFromFavouriteCommandHandler(IFavouriteRepository repository)
         {
             _repository = repository;
         }
 
         public async Task Handle(RemoveFromFavouriteCommand request, CancellationToken cancellationToken)
         {
-            await _repository.DeleteAsync(request.Id);
+            await _repository.DeleteFromFavouriteAsync(request.ProductId, request.UserId);
         }
     }
 }

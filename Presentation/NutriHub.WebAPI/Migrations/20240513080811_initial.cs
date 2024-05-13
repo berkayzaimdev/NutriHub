@@ -86,6 +86,20 @@ namespace NutriHub.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Coupons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Coupons", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -107,7 +121,7 @@ namespace NutriHub.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Address",
+                name: "Addresses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -124,9 +138,9 @@ namespace NutriHub.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Address", x => x.Id);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Address_AspNetUsers_UserId",
+                        name: "FK_Addresses_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -264,6 +278,40 @@ namespace NutriHub.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PaymentMethod = table.Column<int>(type: "int", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CouponDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MembershipDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ProductDiscounts = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ShippingAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeliveredDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -272,6 +320,8 @@ namespace NutriHub.WebAPI.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     SubcategoryId = table.Column<int>(type: "int", nullable: false)
@@ -306,6 +356,7 @@ namespace NutriHub.WebAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -383,17 +434,44 @@ namespace NutriHub.WebAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3c5a1da3-73f7-491a-807b-1f0d7cdee37e", null, "Admin", "ADMIN" },
-                    { "75679413-3260-4f06-9bfd-483f8d81b8be", null, "Gold Üye", "GOLD" },
-                    { "89f4d488-4e25-45c4-95bd-997b1ed6286f", null, "Bronze Üye", "BRONZE" },
-                    { "908db12a-fda3-469a-8819-9acc01f49910", null, "Yıldız Üye", "STAR" },
-                    { "b2877ce0-460b-499e-86aa-cebf6717ece8", null, "Silver Üye", "SILVER" },
-                    { "dd0f6dbd-c13d-42e6-a4ea-431916c6af57", null, "Platin Üye", "PLATIN" }
+                    { "143b4941-eca9-471b-8e00-67fdff6d1be3", null, "Platin Üye", "PLATIN" },
+                    { "14a76c01-0417-4418-a763-245693e00efa", null, "Admin", "ADMIN" },
+                    { "52d0d615-deaf-4c29-9218-fa8ce6d29093", null, "Yıldız Üye", "STAR" },
+                    { "7fb8deeb-8d76-4ad9-81c3-cdc640175d85", null, "Silver Üye", "SILVER" },
+                    { "8b977e2e-9bd2-4ec3-8361-ca5ed476c844", null, "Gold Üye", "GOLD" },
+                    { "da6771ef-9d11-43ef-8506-74c2355bffaa", null, "Bronze Üye", "BRONZE" }
                 });
 
             migrationBuilder.InsertData(
@@ -429,17 +507,17 @@ namespace NutriHub.WebAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "BrandId", "CategoryId", "Description", "ImageUrl", "Name", "SubcategoryId" },
+                columns: new[] { "Id", "BrandId", "CategoryId", "Description", "ImageUrl", "Name", "Price", "Stock", "SubcategoryId" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, "Whey Protein kana hızlı karışan proteindir", "...", "1000 gr", 1 },
-                    { 2, 2, 1, "Kazein protein gece sindirilen proteindir", "...", "3000 gr", 3 },
-                    { 3, 3, 2, "Kreatin antrenmanda yüksek güç artışı sağlar", "...", "500 gr", 2 }
+                    { 1, 1, 1, "Whey Protein kana hızlı karışan proteindir", "...", "1000 gr", 178m, 0, 1 },
+                    { 2, 2, 1, "Kazein protein gece sindirilen proteindir", "...", "3000 gr", 300m, 0, 3 },
+                    { 3, 3, 2, "Kreatin antrenmanda yüksek güç artışı sağlar", "...", "500 gr", 55m, 0, 2 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_UserId",
-                table: "Address",
+                name: "IX_Addresses_UserId",
+                table: "Addresses",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -517,6 +595,26 @@ namespace NutriHub.WebAPI.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_ProductId",
+                table: "OrderItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_AddressId",
+                table: "Orders",
+                column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
                 table: "Products",
                 column: "BrandId");
@@ -540,9 +638,6 @@ namespace NutriHub.WebAPI.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Address");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -568,22 +663,34 @@ namespace NutriHub.WebAPI.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
+                name: "Coupons");
+
+            migrationBuilder.DropTable(
                 name: "Favourites");
+
+            migrationBuilder.DropTable(
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "Subcategories");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Categories");

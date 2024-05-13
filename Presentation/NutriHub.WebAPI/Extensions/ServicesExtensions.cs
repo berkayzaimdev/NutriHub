@@ -42,6 +42,9 @@ namespace NutriHub.WebAPI.Extensions
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<ICartItemRepository, CartItemRepository>();
+            services.AddScoped<IFavouriteRepository, FavouriteRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();

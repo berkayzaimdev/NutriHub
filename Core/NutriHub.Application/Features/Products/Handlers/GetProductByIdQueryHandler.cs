@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NutriHub.Application.Features.Handlers.ProductHandlers
+namespace NutriHub.Application.Features.Products.Handlers
 {
     public class GetProductByIdQueryHandler
     {

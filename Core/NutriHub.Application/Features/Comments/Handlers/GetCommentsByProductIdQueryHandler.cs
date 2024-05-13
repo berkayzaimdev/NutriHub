@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Comments.Handlers
 {
-    public class GetAllCommentsByUserIdQueryHandler : IRequestHandler<GetAllCommentsByUserIdQuery, IEnumerable<GetAllCommentsByUserIdQueryResult>>
+    public class GetCommentsByProductIdQueryHandler : IRequestHandler<GetCommentsByProductIdQuery, IEnumerable<GetCommentsByProductIdQueryResult>>
     {
         private readonly ICommentRepository _repository;
 
-        public GetAllCommentsByUserIdQueryHandler(ICommentRepository repository)
+        public GetCommentsByProductIdQueryHandler(ICommentRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<IEnumerable<GetAllCommentsByUserIdQueryResult>> Handle(GetAllCommentsByUserIdQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<GetCommentsByProductIdQueryResult>> Handle(GetCommentsByProductIdQuery request, CancellationToken cancellationToken)
         {
-            var values = await _repository.GetAllCommentsByUserIdAsync(request.UserId);
-            return values.Select(x => new GetAllCommentsByUserIdQueryResult
+            var values = await _repository.GetAllCommentsByProductIdAsync(request.ProductId);
+            return values.Select(x => new GetCommentsByProductIdQueryResult
             {
                 CommentId = x.Id,
 

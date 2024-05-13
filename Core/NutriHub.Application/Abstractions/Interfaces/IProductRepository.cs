@@ -1,4 +1,5 @@
-﻿using NutriHub.Domain.Entities;
+﻿using NutriHub.Application.ViewModels.ProductViewModels;
+using NutriHub.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Abstractions.Interfaces
 {
-    public interface IProductRepository
+    public interface IProductRepository : IRepository<Product>
     {
-        Task<List<Product>> GetProductsByCategoryId(int categoryId);
-        Task<List<Product>> GetProductsByCategoryIdAndSubcategoryId(int categoryId, int subCategoryId);
-        Task<Product> GetProductDetailsByIdAsync(int id);
+        Task<(Product, bool)> GetProductDetailByIdAsync(int productId, string? userId);
+        Task<IEnumerable<ProductCardViewModel>> GetProductCardsAsync(string? userId);
     }
 }

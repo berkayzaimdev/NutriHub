@@ -1,34 +1,49 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NutriHub.Application.Abstractions.Interfaces;
+using NutriHub.Application.ViewModels.ProductViewModels;
 using NutriHub.Domain.Entities;
 using NutriHub.Persistence.EFCore.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NutriHub.Persistence.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
-        private readonly NutriHubContext _context;
+        private readonly IFavouriteRepository _favouriteRepository;
 
-        public ProductRepository(NutriHubContext context)
+        public ProductRepository(NutriHubContext context, IFavouriteRepository favouriteRepository) : base(context)
         {
-            _context = context;
+            _favouriteRepository = favouriteRepository;
         }
 
-        public async Task<List<Product>> GetProductsByCategoryId(int categoryId) => await _context.Products.Where(p => p.CategoryId == categoryId).ToListAsync();
-
-
-        public async Task<List<Product>> GetProductsByCategoryIdAndSubcategoryId(int categoryId, int subCategoryId) => await _context.Products.Where(p => p.CategoryId == categoryId && p.SubcategoryId == subCategoryId).ToListAsync();
-
-
-        public async Task<Product> GetProductDetailsByIdAsync(int id) => await _context.Products
+        public async Task<(Product, bool)> GetProductDetailByIdAsync(int productId, string? userId)
+        {
+            var products = await GetAllAsync();
+            var isFavourited = await _favouriteRepository.IsFavouritedAsync(productId, userId);
+            return (products
                 .Include(x => x.Brand)
                 .Include(x => x.Category)
                 .Include(x => x.Subcategory)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .Include(x => x.Comments)
+                .FirstOrDefault(x => x.Id == productId),
+            isFavourited);
+        }
+
+        public async Task<IEnumerable<ProductCardViewModel>> GetProductCardsAsync(string? userId)
+        {
+            var products = await GetAllAsync();
+
+            var productsWithDetail = await products
+                .Include(x => x.Brand)
+                .Include(x => x.Comments)
+                .ToListAsync();
+
+            var productCardTasks = productsWithDetail.Select(async product => new ProductCardViewModel
+            {
+                Product = product,
+                IsFavourited = await _favouriteRepository.IsFavouritedAsync(product.Id, userId)
+            });
+
+            return await Task.WhenAll(productCardTasks);
+        }
     }
 }

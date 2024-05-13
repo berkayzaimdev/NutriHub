@@ -9,11 +9,13 @@ namespace NutriHub.Application.Features.Favourites.Commands
 {
     public class RemoveFromFavouriteCommand : IRequest
     {
-        public int Id { get; set; }
+        public int ProductId { get; set; }
+        public string UserId { get; set; }
 
-        public RemoveFromFavouriteCommand(int ıd)
+        public RemoveFromFavouriteCommand(int productId, string userId)
         {
-            Id = ıd;
+            ProductId = productId;
+            UserId = userId;
         }
     }
 }

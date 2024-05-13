@@ -52,7 +52,7 @@ namespace NutriHub.Persistence.EFCore.Configurations
             builder.HasOne(p => p.Subcategory)
            .WithMany(s => s.Products)
            .HasForeignKey(p => p.SubcategoryId)
-           .OnDelete(DeleteBehavior.Restrict); // Cascade davranışını kaldırıyoruz.
+           .OnDelete(DeleteBehavior.NoAction); // Cascade davranışını kaldırıyoruz.
         }
     }
 }

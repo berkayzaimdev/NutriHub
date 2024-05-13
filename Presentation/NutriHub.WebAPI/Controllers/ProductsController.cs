@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Products.Commands;
 using NutriHub.Application.Features.Products.Queries;
 
@@ -51,17 +52,19 @@ namespace NutriHub.WebAPI.Controllers
             return NoContent();
         }
 
-        [HttpGet("GetAllProductCardsAsync")]
-        public async Task<IActionResult> GetAllProductCardsAsync()
+        [HttpGet("get-product-cards")]
+        public async Task<IActionResult> GetProductCardsAsync()
         {
-            var value = await _mediator.Send(new GetAllProductCardsQuery());
+            var userId = User.GetUserId();
+            var value = await _mediator.Send(new GetProductCardsQuery(userId));
             return Ok(value);
         }
 
-        [HttpGet("GetProductDetailsById/{id}")]
-        public async Task<IActionResult> GetProductDetailsByIdAsync(int id)
+        [HttpGet("get-product-details/{productId}")]
+        public async Task<IActionResult> GetProductDetailsByIdAsync(int productId)
         {
-            var value = await _mediator.Send(new GetProductDetailQuery(id));
+            var userId = User.GetUserId();
+            var value = await _mediator.Send(new GetProductDetailQuery(productId, userId));
             return Ok(value);
         }
     }

@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Comments.Queries;
 
 namespace NutriHub.WebAPI.Controllers
@@ -16,18 +18,19 @@ namespace NutriHub.WebAPI.Controllers
         }
 
 
-
-        [HttpGet("GetAllCommentsByUserId/{id}")]
-        public async Task<IActionResult> GetAllCommentsByUserId(string id)
+        [Authorize]
+        [HttpGet("get-comments-by-user-id")]
+        public async Task<IActionResult> GetCommentsByUserIdAsync()
         {
-            var values = await _mediator.Send(new GetAllCommentsByUserIdQuery(id));
+            var userId = User.GetUserId();
+            var values = await _mediator.Send(new GetCommentsByUserIdQuery(userId));
             return Ok(values);
         }
 
-        [HttpGet("GetAllCommentsByProductId/{id}")]
-        public async Task<IActionResult> GetAllCommentsByProductId(int id)
+        [HttpGet("get-comments-by-product-id/{id}")]
+        public async Task<IActionResult> GetCommentsByProductIdAsync(int id)
         {
-            var values = await _mediator.Send(new GetAllCommentsByProductIdQuery(id));
+            var values = await _mediator.Send(new GetCommentsByProductIdQuery(id));
             return Ok(values);
         }
     }

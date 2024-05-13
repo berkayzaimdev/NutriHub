@@ -2,13 +2,8 @@
 using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Features.Products.Commands;
 using NutriHub.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NutriHub.Application.Features.Handlers.ProductHandlers
+namespace NutriHub.Application.Features.Products.Handlers
 {
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand>
     {

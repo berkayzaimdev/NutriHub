@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Products.Queries
 {
-    public class GetAllProductsQuery : IRequest<IEnumerable<GetAllProductsQueryResult>>
+    public class GetProductCardsQuery : IRequest<IEnumerable<GetProductCardsQueryResult>>
     {
+        public string UserId { get; set; }
+
+        public GetProductCardsQuery(string userId)
+        {
+            UserId = userId;
+        }
     }
 }

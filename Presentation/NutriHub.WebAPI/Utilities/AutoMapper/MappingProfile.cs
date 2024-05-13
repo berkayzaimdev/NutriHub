@@ -5,6 +5,7 @@ using NutriHub.Application.Features.Addresses.Commands;
 using NutriHub.Application.Features.Addresses.Results;
 using NutriHub.Application.Features.Brands.Commands;
 using NutriHub.Application.Features.Brands.Results;
+using NutriHub.Application.Features.Products.Results;
 using NutriHub.Application.Features.Users.Commands;
 using NutriHub.Domain.Entities;
 

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using NutriHub.Application.Features.Results.ProductResults;
+using NutriHub.Application.Features.Products.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +10,13 @@ namespace NutriHub.Application.Features.Products.Queries
 {
     public class GetProductDetailQuery : IRequest<GetProductDetailQueryResult>
     {
-        public int Id { get; set; }
+        public int ProductId { get; set; }
+        public string UserId { get; set; }
 
-        public GetProductDetailQuery(int id)
+        public GetProductDetailQuery(int productId, string userId)
         {
-            Id = id;
+            ProductId = productId;
+            UserId = userId;
         }
     }
 }

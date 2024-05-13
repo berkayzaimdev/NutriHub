@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NutriHub.Application.Features.Results.ProductResults
+namespace NutriHub.Application.Features.Products.Results
 {
     public class GetProductByIdQueryResult
     {

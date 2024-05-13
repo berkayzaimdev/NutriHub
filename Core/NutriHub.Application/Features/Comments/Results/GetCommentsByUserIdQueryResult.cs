@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Comments.Results
 {
-    public class GetAllCommentsByProductIdQueryResult
+    public class GetCommentsByUserIdQueryResult
     {
         public int CommentId { get; set; }
         public string Description { get; set; }

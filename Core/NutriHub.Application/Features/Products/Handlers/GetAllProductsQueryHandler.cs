@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Features.Products.Queries;
-using NutriHub.Application.Features.Results.ProductResults;
+using NutriHub.Application.Features.Products.Results;
 using NutriHub.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NutriHub.Application.Features.Handlers.ProductHandlers
+namespace NutriHub.Application.Features.Products.Handlers
 {
     public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, IEnumerable<GetAllProductsQueryResult>>
     {

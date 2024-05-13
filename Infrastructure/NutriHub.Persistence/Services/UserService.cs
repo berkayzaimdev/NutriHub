@@ -2,13 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using NutriHub.Application.Abstractions.Services;
 using NutriHub.Application.DTOs.User;
-using NutriHub.Application.Features.Commands.UserCommands;
 using NutriHub.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NutriHub.Persistence.Services
 {

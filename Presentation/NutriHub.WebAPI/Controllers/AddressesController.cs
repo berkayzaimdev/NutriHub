@@ -2,11 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
-using NutriHub.Application.Features.Commands.AddressCommands;
-using NutriHub.Application.Features.Queries.AddressQueries;
-using NutriHub.Domain.Entities;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using NutriHub.Application.Features.Addresses.Commands;
+using NutriHub.Application.Features.Addresses.Queries;
 
 namespace NutriHub.WebAPI.Controllers
 {

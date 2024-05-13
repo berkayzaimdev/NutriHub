@@ -1,11 +1,7 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NutriHub.Application.Features.Commands.CategoryCommands;
-using NutriHub.Application.Features.Commands.ProductCommands;
-using NutriHub.Application.Features.Queries.CategoryQueries;
-using NutriHub.Application.Features.Queries.ProductQueries;
-using NutriHub.Application.Features.Results.CategoryResults;
+using NutriHub.Application.Features.Categories.Commands;
+using NutriHub.Application.Features.Categories.Queries;
 
 namespace NutriHub.WebAPI.Controllers
 {

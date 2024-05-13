@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text;
-using NutriHub.Application.Features.Commands.UserCommands;
+using NutriHub.Application.Features.Users.Commands;
 
 namespace NutriHub.WebUI.Controllers
 {

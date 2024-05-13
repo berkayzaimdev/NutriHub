@@ -1,10 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
-using NutriHub.Application.Features.Commands.CartCommands;
-using NutriHub.Application.Features.Queries.CartQueries;
+using NutriHub.Application.Features.Carts.Commands;
+using NutriHub.Application.Features.Carts.Queries;
 
 namespace NutriHub.WebAPI.Controllers
 {

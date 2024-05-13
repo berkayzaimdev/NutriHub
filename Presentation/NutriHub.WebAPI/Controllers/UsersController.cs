@@ -1,8 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NutriHub.Application.Features.Commands.UserCommands;
+using NutriHub.Application.Features.Users.Commands;
 
 namespace NutriHub.WebAPI.Controllers
 {

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using NutriHub.Application.DTOs.SubcategoryDtos;
 using NutriHub.Application.DTOs.User;
-using NutriHub.Application.Features.Commands.AddressCommands;
-using NutriHub.Application.Features.Commands.BrandCommands;
-using NutriHub.Application.Features.Commands.UserCommands;
-using NutriHub.Application.Features.Results.AddressResults;
-using NutriHub.Application.Features.Results.BrandResults;
+using NutriHub.Application.Features.Addresses.Commands;
+using NutriHub.Application.Features.Addresses.Results;
+using NutriHub.Application.Features.Brands.Commands;
+using NutriHub.Application.Features.Brands.Results;
+using NutriHub.Application.Features.Users.Commands;
 using NutriHub.Domain.Entities;
 
 namespace NutriHub.WebAPI.Utilities.AutoMapper

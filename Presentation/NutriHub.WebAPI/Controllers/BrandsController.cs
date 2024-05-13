@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NutriHub.Application.Features.Commands.BrandCommands;
+using NutriHub.Application.Features.Brands.Commands;
 using NutriHub.Application.Features.Queries.BrandQueries;
 
 namespace NutriHub.WebAPI.Controllers

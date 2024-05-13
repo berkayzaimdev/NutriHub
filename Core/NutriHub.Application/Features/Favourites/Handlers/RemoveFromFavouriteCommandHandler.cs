@@ -19,9 +19,9 @@ namespace NutriHub.Application.Features.Favourites.Handlers
             _repository = repository;
         }
 
-        public Task Handle(RemoveFromFavouriteCommand request, CancellationToken cancellationToken)
+        public async Task Handle(RemoveFromFavouriteCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _repository.DeleteAsync(request.Id);
         }
     }
 }

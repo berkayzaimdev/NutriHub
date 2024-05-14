@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Features.Brands.Commands;
+using NutriHub.Application.Features.Brands.Queries;
 using NutriHub.Application.Features.Queries.BrandQueries;
 
 namespace NutriHub.WebAPI.Controllers
@@ -38,9 +39,16 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllBrandsAsync()
+        public async Task<IActionResult> GetBrandsAsync()
         {
-            var values = await _mediator.Send(new GetAllBrandsQuery());
+            var values = await _mediator.Send(new GetBrandsQuery());
+            return Ok(values);
+        }
+
+        [HttpGet("brands-menu")]
+        public async Task<IActionResult> GetBrandsMenuAsync()
+        {
+            var values = await _mediator.Send(new GetBrandsMenuQuery());
             return Ok(values);
         }
     }

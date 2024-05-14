@@ -19,7 +19,7 @@ namespace NutriHub.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var values = await _service.GetAsync();
-            return View();
+            return View(values);
         }
 
         [Route("Create")]
@@ -33,7 +33,7 @@ namespace NutriHub.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateBrandDto createBrandDto)
         {
-            _service.CreateAsync(createBrandDto);
+            await _service.CreateAsync(createBrandDto);
             return RedirectToAction("Index", "AdminBrand", new { area = "Admin" });
         }
     }

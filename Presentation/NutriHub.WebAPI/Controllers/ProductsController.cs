@@ -8,7 +8,7 @@ namespace NutriHub.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -55,7 +55,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("get-product-cards")]
         public async Task<IActionResult> GetProductCardsAsync()
         {
-            var userId = User.GetUserId();
+            var userId = UserId;
             var value = await _mediator.Send(new GetProductCardsQuery(userId));
             return Ok(value);
         }
@@ -63,7 +63,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("get-product-details/{productId}")]
         public async Task<IActionResult> GetProductDetailsByIdAsync(int productId)
         {
-            var userId = User.GetUserId();
+            var userId = UserId;
             var value = await _mediator.Send(new GetProductDetailQuery(productId, userId));
             return Ok(value);
         }

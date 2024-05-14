@@ -58,5 +58,14 @@ namespace NutriHub.Persistence.Repositories
                 .ThenInclude(x => x.Brand)
                 .Where(x => x.UserId == userId);
         }
+
+        public async Task<decimal> GetCartAmountByUserIdAsync(string userId)
+        {
+            var values = await GetAllAsync();
+            return await values
+                .Include(x => x.Product)
+                .Where(x => x.UserId == userId)
+                .SumAsync(x => x.Quantity * x.Product.Price);
+        }
     }
 }

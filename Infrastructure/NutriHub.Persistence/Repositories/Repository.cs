@@ -24,9 +24,21 @@ namespace NutriHub.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task CreateAllAsync(IEnumerable<T> entities)
+        {
+            await _context.Set<T>().AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task UpdateAsync(T entity)
         {
             _context.Set<T>().Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAllAsync(IEnumerable<T> entities)
+        {
+            _context.Set<T>().UpdateRange(entities);
             await _context.SaveChangesAsync();
         }
 
@@ -41,9 +53,9 @@ namespace NutriHub.Persistence.Repositories
         {
             return await Task.FromResult(_context.Set<T>().AsQueryable());
         }
-        public async Task<T> GetById(int id)
+        public async Task<T> GetById(object id)
         {
-            return await _context.Set<T>().FindAsync(id);
+            return await _context.Set<T>().FindAsync(id) ?? null;
         }
     }
 }

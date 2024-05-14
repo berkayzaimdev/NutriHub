@@ -11,7 +11,7 @@ namespace NutriHub.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FavouritesController : ControllerBase
+    public class FavouritesController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -23,7 +23,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("get-favourites-by-user-id")]
         public async Task<IActionResult> GetFavouritesByUserIdAsync()
         {
-            var userId = User.GetUserId();
+            var userId = UserId;
             var command = new GetFavouritesQuery(userId);
             var values = await _mediator.Send(command);
             return Ok(values);
@@ -32,7 +32,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpPost("add-to-favourite/{productId}")]
         public async Task<IActionResult> AddToFavouriteAsync(int productId)
         {
-            var userId = User.GetUserId();
+            var userId = UserId;
             var command = new AddToFavouriteCommand(productId, userId);
             await _mediator.Send(command);
             return Ok("Ürün başarılı bir şekilde favorilere eklendi.");
@@ -41,7 +41,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpDelete("remove-from-favourite/{productId}")]
         public async Task<IActionResult> RemoveFromFavouriteAsync(int productId)
         {
-            var userId = User.GetUserId();
+            var userId = UserId;
             var command = new RemoveFromFavouriteCommand(productId, userId);
             await _mediator.Send(command);
             return NoContent();

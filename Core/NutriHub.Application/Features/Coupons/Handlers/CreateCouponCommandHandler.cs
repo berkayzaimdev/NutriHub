@@ -14,7 +14,6 @@ namespace NutriHub.Application.Features.Coupons.Handlers
     public class CreateCouponCommandHandler : IRequestHandler<CreateCouponCommand>
     {
         private readonly IRepository<Coupon> _repository;
-        private readonly IMapper _mapper;
 
         public CreateCouponCommandHandler(IRepository<Coupon> repository)
         {

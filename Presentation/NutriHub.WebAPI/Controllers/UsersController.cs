@@ -16,13 +16,6 @@ namespace NutriHub.WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [Authorize]
-        [HttpGet]
-        public async Task<IActionResult> IsAuthenticated()
-        {
-            return Ok(User.Identity.IsAuthenticated);
-        }
-
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync(RegisterCommand command)
         {

@@ -11,7 +11,13 @@ namespace NutriHub.Application.Extensions
     {
         public static string GetUserId(this ClaimsPrincipal user)
         {
-            return user is null ? string.Empty : user.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            if (user == null)
+            {
+                return string.Empty;
+            }
+
+            var claim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            return claim?.Value ?? string.Empty;
         }
     }
 }

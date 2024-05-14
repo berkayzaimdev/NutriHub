@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Carts.Commands;
 using NutriHub.Application.Features.Carts.Queries;
+using System.Net;
 
 namespace NutriHub.WebAPI.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class CartsController : ControllerBase
+    public class CartsController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -22,16 +23,26 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("get-cart-detail")]
         public async Task<IActionResult> GetCartDetail()
         {
-            var userId = User.GetUserId();
-            var values = await _mediator.Send(new GetCartDetailQuery(userId));
-            return Ok(values);
+            try 
+            {
+                var values = await _mediator.Send(new GetCartDetailQuery(UserId));
+                _Response.SetStatus(HttpStatusCode.OK);
+                _Response.AddData(values);
+            }
+            catch(Exception ex)
+            {
+                _Response.SetStatus(HttpStatusCode.Unauthorized);
+                _Response.AddError(ex.Message);
+                return StatusCode(_Response.Status, _Response.Errors);
+            }
+
+            return StatusCode(_Response.Status, _Response.Data);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddCartItemAsync(int productId, int quantity)
         {
-            var userId = User.GetUserId();
-            await _mediator.Send(new AddCartItemCommand(productId, quantity, userId));
+            await _mediator.Send(new AddCartItemCommand(productId, quantity, UserId));
             return Ok();
         }
 

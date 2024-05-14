@@ -10,21 +10,19 @@ namespace NutriHub.WebAPI.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class AddressesController : ControllerBase
+    public class AddressesController : BaseController
     {
         private readonly IMediator _mediator;
-        private readonly string _userId;
 
         public AddressesController(IMediator mediator)
         {
             _mediator = mediator;
-            _userId = User.GetUserId();
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateAddressAsync(CreateAddressCommand command)
         {
-            command.UserId = _userId;
+            command.UserId = UserId;
             await _mediator.Send(command);
             return Ok("Address başarılı bir şekilde oluşturuldu.");
         }
@@ -46,7 +44,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAddressesByUserIdAsync()
         {
-            var values = await _mediator.Send(new GetAddressesByUserIdQuery(_userId));
+            var values = await _mediator.Send(new GetAddressesByUserIdQuery(UserId));
             return Ok(values);
         }
     }

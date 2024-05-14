@@ -12,9 +12,9 @@ namespace NutriHub.Application.Features.Comments.Queries
     {
         public string UserId { get; set; }
 
-        public GetCommentsByUserIdQuery(string UserId)
+        public GetCommentsByUserIdQuery(string userId)
         {
-            UserId = UserId;
+            UserId = userId;
         }
     }
 }

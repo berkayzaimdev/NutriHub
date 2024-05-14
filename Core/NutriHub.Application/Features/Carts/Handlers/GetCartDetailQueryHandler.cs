@@ -22,6 +22,11 @@ namespace NutriHub.Application.Features.Carts.Handlers
 
         public async Task<GetCartDetailQueryResult> Handle(GetCartDetailQuery request, CancellationToken cancellationToken)
         {
+            if(string.IsNullOrEmpty(request.UserId))
+            {
+                throw new UnauthorizedAccessException();
+            }
+
             var values = await _repository.GetCartItemsByUserIdAsync(request.UserId);
 
             return new GetCartDetailQueryResult

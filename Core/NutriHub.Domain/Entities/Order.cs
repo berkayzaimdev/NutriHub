@@ -14,10 +14,13 @@ namespace NutriHub.Domain.Entities
         public decimal Amount { get; set; }
         public decimal CouponDiscount { get; set; } = 0;
         public decimal MembershipDiscount { get; set; } = 0;
-        public decimal ProductDiscounts { get; set; } = 0;
-        public decimal ShippingAmount { get; set; } = 0;
-        public DateTime CreatedDate { get; set; }
+        public decimal ProductDiscount { get; set; } = 0;
+        public decimal PaymentMethodDiscount { get; set; } = 0;
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime DeliveredDate { get; set; }
+
+        public int CouponId { get; set; }
+        public Coupon Coupon { get; set; }
 
         public int AddressId { get; set; }
         public Address Address { get; set; }

@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Brands.Results
 {
-    public class GetAllBrandsQueryResult
+    public class GetBrandsMenuQueryResult
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string ImageUrl { get; set; }
     }
 }

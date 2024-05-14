@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NutriHub.Application.Features.Queries.BrandQueries
+namespace NutriHub.Application.Features.Brands.Queries
 {
-    public class GetAllBrandsQuery : IRequest<IEnumerable<GetAllBrandsQueryResult>>
+    public class GetBrandsMenuQuery : IRequest<IEnumerable<GetBrandsMenuQueryResult>>
     {
     }
 }

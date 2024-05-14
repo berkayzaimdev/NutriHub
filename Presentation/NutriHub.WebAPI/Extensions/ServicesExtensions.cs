@@ -20,7 +20,7 @@ namespace NutriHub.WebAPI.Extensions
 
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentity<User, IdentityRole>(opts =>
+            services.AddIdentity<User, IdentityRole>(opts =>
             {
                 opts.Password.RequireDigit = false;
                 opts.Password.RequireLowercase = false;
@@ -45,10 +45,11 @@ namespace NutriHub.WebAPI.Extensions
             services.AddScoped<IFavouriteRepository, FavouriteRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            services.AddScoped<ICouponRepository, CouponRepository>();
+            services.AddScoped<IAppliedCouponRepository, AppliedCouponRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();
-            //services.AddScoped<IEmailService, EmailSender>();
             services.AddScoped<IEmailSender<User>, EmailSender>();
         }
 

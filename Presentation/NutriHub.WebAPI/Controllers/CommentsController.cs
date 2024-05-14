@@ -8,7 +8,7 @@ namespace NutriHub.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentsController : ControllerBase
+    public class CommentsController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -22,7 +22,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("get-comments-by-user-id")]
         public async Task<IActionResult> GetCommentsByUserIdAsync()
         {
-            var userId = User.GetUserId();
+            var userId = UserId;
             var values = await _mediator.Send(new GetCommentsByUserIdQuery(userId));
             return Ok(values);
         }

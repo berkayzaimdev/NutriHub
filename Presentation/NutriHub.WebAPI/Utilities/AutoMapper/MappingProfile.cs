@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using NutriHub.Application.DTOs.OrderDtos;
 using NutriHub.Application.DTOs.SubcategoryDtos;
 using NutriHub.Application.DTOs.User;
 using NutriHub.Application.Features.Addresses.Commands;
@@ -8,6 +9,7 @@ using NutriHub.Application.Features.Brands.Results;
 using NutriHub.Application.Features.Categories.Commands;
 using NutriHub.Application.Features.Coupons.Commands;
 using NutriHub.Application.Features.Coupons.Results;
+using NutriHub.Application.Features.Orders.Commands;
 using NutriHub.Application.Features.Products.Commands;
 using NutriHub.Application.Features.Products.Results;
 using NutriHub.Application.Features.Subcategories.Commands;
@@ -28,7 +30,8 @@ namespace NutriHub.WebAPI.Utilities.AutoMapper
             // Brand Mappings
             CreateMap<CreateBrandCommand, Brand>();
             CreateMap<UpdateBrandCommand, Brand>();
-            CreateMap<Brand, GetAllBrandsQueryResult>();
+            CreateMap<Brand, GetBrandsQueryResult>();
+            CreateMap<Brand, GetBrandsMenuQueryResult>();
 
             // Category Mappings
             CreateMap<UpdateCategoryCommand, Category>();
@@ -41,6 +44,8 @@ namespace NutriHub.WebAPI.Utilities.AutoMapper
 
             // Product Mappings
             CreateMap<UpdateProductCommand, Product>();
+
+            CreateMap<CreateOrderDto, CreateOrderCommand>();
 
             // User Mappings
             CreateMap<RegisterCommand, CreateUserDto>();

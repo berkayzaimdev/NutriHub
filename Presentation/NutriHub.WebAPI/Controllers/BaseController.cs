@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
+using NutriHub.Application.Models;
 
 namespace NutriHub.WebAPI.Controllers
 {
     public class BaseController : ControllerBase
     {
-        private string UserId { get; set; }
-
-        public BaseController()
+        protected string UserId 
         {
-            UserId = User.GetUserId();
+            get {
+                return User.GetUserId();
+            }
         }
+
+        protected ResponseBuilder _Response { get; private set; } = new ResponseBuilder();
     }
 }

@@ -9,7 +9,7 @@ namespace NutriHub.Application.Abstractions.Interfaces
 {
     public interface IFavouriteRepository : IRepository<Favourite>
     {
-        Task<bool> IsFavouritedAsync(int productId, string userId);
+        Task<bool> IsFavouritedAsync(int productId, string? userId);
         Task DeleteFromFavouriteAsync(int productId, string userId);
         Task<IEnumerable<Favourite>> GetFavouritesByUserIdAsync(string userId);
     }

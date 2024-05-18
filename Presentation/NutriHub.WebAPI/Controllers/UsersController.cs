@@ -1,13 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Users.Commands;
 
 namespace NutriHub.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -33,6 +34,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete()
         {
+            await _mediator.Send(new RemoveUserCommand(UserId));
             return NoContent();
         }
     }

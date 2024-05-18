@@ -12,5 +12,6 @@ namespace NutriHub.Application.Abstractions.Interfaces
         Task AddToCartAsync(int productId, string userId, int quantity);
         Task<IEnumerable<CartItem>> GetCartItemsByUserIdAsync(string userId);
         Task<decimal> GetCartAmountByUserIdAsync(string userId);
+        Task RemoveCartItemsIfOutOfStockAsync(IEnumerable<int> productIds);
     }
 }

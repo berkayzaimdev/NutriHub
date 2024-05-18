@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NutriHub.Application.Abstractions.Interfaces;
+using NutriHub.Application.Extensions;
 using NutriHub.Persistence.EFCore.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,13 +51,38 @@ namespace NutriHub.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IQueryable<T>> GetAllAsync()
+        public async Task DeleteAsync(T entity)
         {
-            return await Task.FromResult(_context.Set<T>().AsQueryable());
+            _context.Set<T>().Remove(entity);
+            await _context.SaveChangesAsync();
         }
-        public async Task<T> GetById(object id)
+
+        public async Task DeleteAllAsync(object[] ids)
         {
-            return await _context.Set<T>().FindAsync(id) ?? null;
+            var entities = ids.Select(x =>  _context.Set<T>().Find(x));
+            _context.Set<T>().RemoveRange(entities);
+            await _context.SaveChangesAsync();
         }
+
+        public async Task DeleteAllAsync(IEnumerable<T> entities)
+        {
+            _context.Set<T>().RemoveRange(entities);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IQueryable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes)
+        {
+            var query = _context.Set<T>().AsQueryable();
+
+            if (includes != null)
+            {
+                query = query.IncludeMultiple(includes);
+            }
+
+            return await Task.FromResult(query);
+        }
+
+
+        public async Task<T> GetAsync(object id) => await _context.Set<T>().FindAsync(id) ?? throw new NullReferenceException();
     }
 }

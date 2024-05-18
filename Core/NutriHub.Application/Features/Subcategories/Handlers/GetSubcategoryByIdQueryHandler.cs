@@ -17,7 +17,7 @@ namespace NutriHub.Application.Features.Handlers.SubcategoryHandlers
 
         public async Task<GetSubcategoryByIdQueryResult> Handle(GetSubcategoryByIdQuery request, CancellationToken cancellationToken)
         {
-            var value = await _repository.GetById(request.Id);
+            var value = await _repository.GetAsync(request.Id);
             return new GetSubcategoryByIdQueryResult
             {
                 Name = value.Name,

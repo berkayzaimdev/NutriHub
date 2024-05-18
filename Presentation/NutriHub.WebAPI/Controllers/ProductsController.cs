@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Products.Commands;
 using NutriHub.Application.Features.Products.Queries;
+using NutriHub.Application.Models.Requests;
 
 namespace NutriHub.WebAPI.Controllers
 {
@@ -18,9 +19,10 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProductsAsync()
+        public async Task<IActionResult> GetAllProductsAsync(GetProductsQuery query)
         {
-            var values = await _mediator.Send(new GetAllProductsQuery());
+            //var query = new GetProductsQuery(pageNumber, pageSize, orderBy);
+            var values = await _mediator.Send(query);
             return Ok(values);
         }
 

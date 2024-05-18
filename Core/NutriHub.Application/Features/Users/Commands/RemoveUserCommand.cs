@@ -8,5 +8,11 @@ namespace NutriHub.Application.Features.Users.Commands
 {
     public class RemoveUserCommand
     {
+        public string Id { get; set; }
+
+        public RemoveUserCommand(string ıd)
+        {
+            Id = ıd;
+        }
     }
 }

@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriHub.WebUI", "Frontends
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{616DADEC-E42D-453B-925C-35662AEB91B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriHub.Business", "Service\NutriHub.Business\NutriHub.Business.csproj", "{FF5B1377-AD25-4F5E-A80D-4C3418CE5280}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriHub.Business", "Service\NutriHub.Business\NutriHub.Business.csproj", "{FF5B1377-AD25-4F5E-A80D-4C3418CE5280}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Domain.Entities;
 using NutriHub.Persistence.EFCore.Context;
@@ -14,13 +15,21 @@ namespace NutriHub.Persistence.Repositories
 {
     public class CartItemRepository : Repository<CartItem>, ICartItemRepository
     {
+        private readonly IProductRepository _repository;
 
-        public CartItemRepository(NutriHubContext context) : base(context)
+        public CartItemRepository(NutriHubContext context, IProductRepository repository) : base(context)
         {
+            _repository = repository;
         }
 
         public async Task AddToCartAsync(int productId, string userId, int quantity)
         {
+            var product = await _repository.GetAsync(productId);
+            if(product.Stock<quantity)
+            {
+                return; // TODO: exception handling
+            }
+
             var cartItems = await GetAllAsync();
             var value = await cartItems.FirstOrDefaultAsync(x => x.ProductId == productId && x.UserId == userId);
 
@@ -66,6 +75,17 @@ namespace NutriHub.Persistence.Repositories
                 .Include(x => x.Product)
                 .Where(x => x.UserId == userId)
                 .SumAsync(x => x.Quantity * x.Product.Price);
+        }
+
+        public async Task RemoveCartItemsIfOutOfStockAsync(IEnumerable<int> productIds)
+        {
+            var values = await GetAllAsync(x => x.Product);
+
+            var valuesWithProducts = values
+                .Where(x => productIds.Contains(x.ProductId))
+                .Where(x => x.Product.Stock < x.Quantity);
+
+            await DeleteAllAsync(valuesWithProducts);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Products.Results
 {
-    public class GetAllProductsQueryResult
+    public class GetProductsQueryResult
     {
         public int Id { get; set; }
         public string Name { get; set; }

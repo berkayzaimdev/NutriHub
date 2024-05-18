@@ -25,7 +25,7 @@ namespace NutriHub.Persistence.Repositories
 
         public async Task<decimal> GetDiscountRateAsync(int id)
         {
-            var value = await GetById(id);
+            var value = await GetAsync(id);
             return value.Discount;
         }
     }

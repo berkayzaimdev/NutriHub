@@ -19,7 +19,7 @@ namespace NutriHub.Domain.Entities
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime DeliveredDate { get; set; }
 
-        public int CouponId { get; set; }
+        public int? CouponId { get; set; }
         public Coupon Coupon { get; set; }
 
         public int AddressId { get; set; }

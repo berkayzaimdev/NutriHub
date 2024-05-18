@@ -4,11 +4,6 @@ using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Features.Orders.Commands;
 using NutriHub.Application.Helpers;
 using NutriHub.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Orders.Handlers
 {
@@ -18,17 +13,15 @@ namespace NutriHub.Application.Features.Orders.Handlers
         private readonly ICartItemRepository _cartItemRepository;
         private readonly IOrderRepository _orderRepository;
         private readonly IOrderItemRepository _orderItemRepository;
-        private readonly ICouponRepository _couponRepository;
         private readonly IAppliedCouponRepository _appliedCouponRepository;
         private readonly UserManager<User> _userManager;
 
-        public CreateOrderCommandHandler(IProductRepository productRepository, ICartItemRepository cartItemRepository, IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, ICouponRepository couponRepository, IAppliedCouponRepository appliedCouponRepository, UserManager<User> userManager)
+        public CreateOrderCommandHandler(IProductRepository productRepository, ICartItemRepository cartItemRepository, IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IAppliedCouponRepository appliedCouponRepository, UserManager<User> userManager)
         {
             _productRepository = productRepository;
             _cartItemRepository = cartItemRepository;
             _orderRepository = orderRepository;
             _orderItemRepository = orderItemRepository;
-            _couponRepository = couponRepository;
             _appliedCouponRepository = appliedCouponRepository;
             _userManager = userManager;
         }
@@ -78,14 +71,14 @@ namespace NutriHub.Application.Features.Orders.Handlers
                 PaymentMethodDiscount = paymentMethodDiscount,
                 DeliveredDate = DateTime.Now.AddDays(GetAddedDeliveredDay()),
                 AddressId = request.AddressId,
-                CouponId = coupon.CouponId,
+                CouponId = coupon is not null ? coupon.CouponId : null,
                 UserId = request.UserId,
             };
 
             var cartItems = await _cartItemRepository.GetCartItemsByUserIdAsync(request.UserId);
             var dictionary = cartItems.ToDictionary(x => x.ProductId, x => x.Quantity);
             await _productRepository.DecreaseStockByCartItemsAsync(dictionary);
-
+        
             await _orderRepository.CreateAsync(newOrder);
 
             var orderItems = cartItems.Select(ci => new OrderItem
@@ -95,7 +88,11 @@ namespace NutriHub.Application.Features.Orders.Handlers
                 Quantity = ci.Quantity,
             });
 
+
             await _orderItemRepository.CreateAllAsync(orderItems);
+            var tempCartItems = cartItems.ToList();
+            await _cartItemRepository.DeleteAllAsync(cartItems);
+            await _cartItemRepository.RemoveCartItemsIfOutOfStockAsync(tempCartItems.Select(x => x.ProductId));
         }
 
         private async Task<string> GetUserSingleRoleAsync(string userId) 
@@ -107,14 +104,12 @@ namespace NutriHub.Application.Features.Orders.Handlers
 
         private int GetAddedDeliveredDay() 
         {
-            switch(DateTime.Now.DayOfWeek) // 2 gün gecikmeli teslimden dolayı, gün aralığını kontrol ettik
+            return DateTime.Now.DayOfWeek switch // 2 gün gecikmeli teslimden dolayı, gün aralığını kontrol ettik
             {
-                case DayOfWeek.Thursday:
-                    return 4;
-                case DayOfWeek.Friday:
-                    return 3;
-            }
-            return 2;
+                DayOfWeek.Thursday => 4,
+                DayOfWeek.Friday => 3,
+                _ => 2,
+            };
         }
     }
 }

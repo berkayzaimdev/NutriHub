@@ -46,7 +46,8 @@ namespace NutriHub.Persistence.Repositories
             var productCardTasks = productsWithDetail.Select(async product => new ProductCardViewModel
             {
                 Product = product,
-                IsFavourited = await _favouriteRepository.IsFavouritedAsync(product.Id, userId)
+                IsFavourited = false
+                //IsFavourited = Task.FromResult(await _favouriteRepository.IsFavouritedAsync(product.Id, userId)).Result // TODO: will fixed
             });
 
             return await Task.WhenAll(productCardTasks);

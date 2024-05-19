@@ -19,9 +19,9 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProductsAsync(GetProductsQuery query)
+        public async Task<IActionResult> GetProductsAsync([FromQuery] int pageNumber = 1, int pageSize = 10, int orderBy = 1)
         {
-            //var query = new GetProductsQuery(pageNumber, pageSize, orderBy);
+            var query = new GetProductsQuery(pageNumber, pageSize, orderBy);
             var values = await _mediator.Send(query);
             return Ok(values);
         }

@@ -27,13 +27,13 @@ namespace NutriHub.Application.Features.Products.Handlers
                 {
                     Id = x.Product.Id,
                     Name = x.Product.Name,
-                    Description = x.Product.Description,
+                    Price = x.Product.Price,
                     ImageUrl = x.Product.ImageUrl,
                     BrandId = x.Product.Brand.Id,
                     BrandName = x.Product.Brand.Name,
                     IsFavourited = x.IsFavourited,
                     IsInStock = x.Product.Stock>0,
-                    Rating = x.Product.Comments.Average(x => x.Rating)
+                    Rating = x.Product.Comments.Any() ? x.Product.Comments.Average(x => x.Rating) : 0
                 });
         }
     }

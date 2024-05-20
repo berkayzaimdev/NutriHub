@@ -11,5 +11,7 @@ namespace NutriHub.Application.Abstractions.Interfaces
     {
         Task<IEnumerable<Comment>> GetAllCommentsByProductIdAsync(int productId);
         Task<IEnumerable<Comment>> GetAllCommentsByUserIdAsync(string UserId);
+        Task LikeCommentAsync(int commentId);
+        Task DislikeCommentAsync(int commentId);
     }
 }

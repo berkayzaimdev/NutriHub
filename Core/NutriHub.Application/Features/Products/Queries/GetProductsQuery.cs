@@ -11,9 +11,9 @@ namespace NutriHub.Application.Features.Products.Queries
 {
     public class GetProductsQuery : IRequest<PagedResponse<GetProductsQueryResult>>
     {
-        public int PageNumber { get; set; } = 0;
-        public int PageSize { get; set; } = 0;
-        public int OrderBy { get; set; } = 0;
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+        public int OrderBy { get; set; }
 
         public GetProductsQuery(int pageNumber, int pageSize, int orderBy)
         {

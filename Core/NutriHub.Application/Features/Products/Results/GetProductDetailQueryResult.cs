@@ -1,4 +1,5 @@
-﻿using NutriHub.Domain.Entities;
+﻿using NutriHub.Application.DTOs.CommentDtos;
+using NutriHub.Domain.Entities;
 
 namespace NutriHub.Application.Features.Products.Results
 {
@@ -7,13 +8,14 @@ namespace NutriHub.Application.Features.Products.Results
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageUrl { get; set; }
+        public string LargeImageUrl { get; set; }
+        public int Stock { get; set; }
 
         public decimal Rating { get; set; } = 0;
         public int FavouriteCount { get; set; } = 0;
-        public int SelledCount { get; set; } = 0;
-        public bool IsFavourited { get; set; } = false;
+        public int OrderCount { get; set; } = 0;
 
+        public bool IsFavourited { get; set; } = false;
         public bool IsInStock { get; set; } = true;
 
         public int BrandId { get; set; }
@@ -25,6 +27,6 @@ namespace NutriHub.Application.Features.Products.Results
         public int SubcategoryId { get; set; }
         public string SubcategoryName { get; set; }
 
-        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<GetCommentsByProductDto> Comments { get; set; }
     }
 }

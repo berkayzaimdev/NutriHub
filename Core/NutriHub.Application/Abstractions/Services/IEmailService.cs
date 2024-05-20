@@ -9,6 +9,8 @@ namespace NutriHub.Application.Abstractions.Services
 {
     public interface IEmailService
     {
-        Task SendConfirmationMail(string toEmail, string verificationLink);
+        Task SendConfirmationMailAsync(string to, string verificationLink);
+        Task SendRankUpEmailAsync(string to, string newRank);
+        Task SendOrderReceiptEmailAsync(string to, byte[] pdfReceipt);
     }
 }

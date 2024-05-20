@@ -55,15 +55,15 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpGet("get-product-cards")]
-        public async Task<IActionResult> GetProductCardsAsync()
+        public async Task<IActionResult> GetProductCardsAsync([FromQuery] int pageNumber = 1, int pageSize = 10)
         {
             var userId = UserId;
-            var value = await _mediator.Send(new GetProductCardsQuery(userId));
+            var value = await _mediator.Send(new GetProductCardsQuery(UserId, pageNumber, pageSize));
             return Ok(value);
         }
 
-        [HttpGet("get-product-details/{productId}")]
-        public async Task<IActionResult> GetProductDetailsByIdAsync(int productId)
+        [HttpGet("get-product-detail/{productId}")]
+        public async Task<IActionResult> GetProductDetailAsync(int productId)
         {
             var userId = UserId;
             var value = await _mediator.Send(new GetProductDetailQuery(productId, userId));

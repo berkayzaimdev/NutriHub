@@ -1,4 +1,5 @@
-﻿using NutriHub.Domain.Entities;
+﻿using MediatR;
+using NutriHub.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace NutriHub.Application.Abstractions.Interfaces
 {
     public interface IOrderItemRepository : IRepository<OrderItem>
     {
+        Task<int> GetProductOrderCountAsync(int productId);
     }
 }

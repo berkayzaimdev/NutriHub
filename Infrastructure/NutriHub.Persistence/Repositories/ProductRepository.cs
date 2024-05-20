@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NutriHub.Application.Abstractions.Interfaces;
+using NutriHub.Application.Exceptions;
 using NutriHub.Application.ViewModels.ProductViewModels;
 using NutriHub.Domain.Entities;
 using NutriHub.Persistence.EFCore.Context;
@@ -21,17 +22,30 @@ namespace NutriHub.Persistence.Repositories
             return values.Where(x => ids.Contains(x.Id));
         }
 
-        public async Task<(Product, bool)> GetProductDetailByIdAsync(int productId, string? userId)
+        public async Task<(Product, bool)> GetProductDetailAsync(int productId, string? userId)
         {
             var products = await GetAllAsync();
-            var isFavourited = await _favouriteRepository.IsFavouritedAsync(productId, userId);
-            return (products
+
+            if(!products.Any() || products is null) 
+            {
+                throw new ItemNotFoundException("");
+            }
+
+            var product = await products
                 .Include(x => x.Brand)
                 .Include(x => x.Category)
                 .Include(x => x.Subcategory)
-                .Include(x => x.Comments)
-                .FirstOrDefault(x => x.Id == productId),
-            isFavourited);
+                .Include(x => x.Comments).ThenInclude(x => x.User)
+                .SingleOrDefaultAsync(x => x.Id == productId);
+
+            if(product is null)
+            {
+                throw new ItemNotFoundException("");
+            }
+
+            var isFavourited = await _favouriteRepository.IsFavouritedAsync(productId, userId);
+
+            return (product, isFavourited);
         }
 
         public async Task<IEnumerable<ProductCardViewModel>> GetProductCardsAsync(string? userId)
@@ -46,8 +60,7 @@ namespace NutriHub.Persistence.Repositories
             var productCardTasks = productsWithDetail.Select(async product => new ProductCardViewModel
             {
                 Product = product,
-                IsFavourited = false
-                //IsFavourited = Task.FromResult(await _favouriteRepository.IsFavouritedAsync(product.Id, userId)).Result // TODO: will fixed
+                IsFavourited = Task.FromResult(await _favouriteRepository.IsFavouritedAsync(product.Id, userId)).Result // TODO: will fixed
             });
 
             return await Task.WhenAll(productCardTasks);
@@ -59,7 +72,6 @@ namespace NutriHub.Persistence.Repositories
             foreach(var boughtProduct in boughtProducts) 
             {
                 boughtProduct.Stock -= productIdAndQuantities[boughtProduct.Id];
-                // TODO: removing from other users' cart below stock
             }
             await UpdateAllAsync(boughtProducts);
         }

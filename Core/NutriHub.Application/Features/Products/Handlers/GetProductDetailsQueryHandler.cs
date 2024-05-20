@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using NutriHub.Application.Abstractions.Interfaces;
+using NutriHub.Application.DTOs.CommentDtos;
+using NutriHub.Application.Exceptions;
 using NutriHub.Application.Features.Products.Queries;
 using NutriHub.Application.Features.Products.Results;
 using System;
@@ -13,24 +15,38 @@ namespace NutriHub.Application.Features.Products.Handlers
     public class GetProductDetailQueryHandler : IRequestHandler<GetProductDetailQuery, GetProductDetailQueryResult>
     {
         private readonly IProductRepository _repository;
+        private readonly IFavouriteRepository _favouriteRepository;
+        private readonly IOrderItemRepository _orderItemRepository;
 
-        public GetProductDetailQueryHandler(IProductRepository repository)
+        public GetProductDetailQueryHandler(IProductRepository repository, IFavouriteRepository favouriteRepository, IOrderItemRepository orderItemRepository)
         {
             _repository = repository;
+            _favouriteRepository = favouriteRepository;
+            _orderItemRepository = orderItemRepository;
         }
 
         public async Task<GetProductDetailQueryResult> Handle(GetProductDetailQuery request, CancellationToken cancellationToken)
         {
-            var productAndStatus = await _repository.GetProductDetailByIdAsync(request.ProductId, request.UserId);
+            var productAndStatus = await _repository.GetProductDetailAsync(request.ProductId, request.UserId);
+            if (productAndStatus.Item1 is null)
+            {
+                throw new ItemNotFoundException("");
+            }
+
             var value = productAndStatus.Item1;
             return new GetProductDetailQueryResult
             {
                 Id = value.Id,
                 Name = value.Name,
                 Description = value.Description,
-                ImageUrl = value.ImageUrl,
+                LargeImageUrl = value.LargeImageUrl,
+                Stock = value.Stock,
 
                 Rating = value.Comments is not null ? value.Comments.Average(x => x.Rating) : 0,
+
+                FavouriteCount = await _favouriteRepository.GetProductFavouriteCountAsync(request.ProductId),
+                OrderCount = await _orderItemRepository.GetProductOrderCountAsync(request.ProductId),
+
                 IsFavourited = productAndStatus.Item2,
                 IsInStock = value.Stock > 0,
 
@@ -41,7 +57,19 @@ namespace NutriHub.Application.Features.Products.Handlers
                 SubcategoryId = value.Subcategory.Id,
                 SubcategoryName = value.Subcategory.Name,
 
-                Comments = value.Comments
+                Comments = value.Comments is not null
+                ? value.Comments.Select(x => new GetCommentsByProductDto
+                {
+                    Id = x.Id,
+                    CreatedDate = x.CreatedDate,
+                    UserName = string.Concat(values: x.User.FirstName + " " + x.User.LastName),
+                    Description = x.Description,
+                    Like = x.Like,
+                    Dislike = x.Dislike,
+                    ModifiedDate = x.ModifiedDate,
+                    Rating = x.Rating
+                })
+                : []
             };
         }
     }

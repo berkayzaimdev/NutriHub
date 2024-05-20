@@ -28,8 +28,22 @@ namespace NutriHub.Persistence.Repositories
         public async Task<IEnumerable<Comment>> GetAllCommentsByProductIdAsync(int productId)
         {
             var values = await _repository.GetAllAsync();
-            values = values.Where(x => x.ProductId == productId);
+            values = values.Where(x => x.ProductId == productId).Include(x => x.User);
             return values;
+        }
+
+        public async Task LikeCommentAsync(int commentId)
+        {
+            var value = await _repository.GetAsync(commentId);
+            value.Like++;
+            await _repository.UpdateAsync(value);
+        }
+
+        public async Task DislikeCommentAsync(int commentId)
+        {
+            var value = await _repository.GetAsync(commentId);
+            value.Dislike++;
+            await _repository.UpdateAsync(value);
         }
     }
 }

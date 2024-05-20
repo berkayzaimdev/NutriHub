@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
+using NutriHub.Application.Features.Comments.Commands;
 using NutriHub.Application.Features.Comments.Queries;
 
 namespace NutriHub.WebAPI.Controllers
@@ -17,13 +18,19 @@ namespace NutriHub.WebAPI.Controllers
             _mediator = mediator;
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> CreateCommentAsync(int productId, string description, decimal rating)
+        {
+            await _mediator.Send(new CreateCommentCommand(UserId,productId, description, rating));
+            return Ok();
+        }
 
         [Authorize]
         [HttpGet("get-comments-by-user-id")]
         public async Task<IActionResult> GetCommentsByUserIdAsync()
         {
-            var userId = UserId;
-            var values = await _mediator.Send(new GetCommentsByUserIdQuery(userId));
+            var values = await _mediator.Send(new GetCommentsByUserIdQuery(UserId));
             return Ok(values);
         }
 
@@ -32,6 +39,22 @@ namespace NutriHub.WebAPI.Controllers
         {
             var values = await _mediator.Send(new GetCommentsByProductIdQuery(id));
             return Ok(values);
+        }
+
+        [Authorize]
+        [HttpPost("like-comment")]
+        public async Task<IActionResult> LikeCommentAsync(LikeCommentCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPost("dislike-comment")]
+        public async Task<IActionResult> DislikeCommentAsync(DislikeCommentCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
         }
     }
 }

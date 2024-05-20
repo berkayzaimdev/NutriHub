@@ -11,7 +11,7 @@ namespace NutriHub.Application.Abstractions.Interfaces
     public interface IProductRepository : IRepository<Product>
     {
         Task<IEnumerable<Product>> GetProductsByIdsAsync(int[] ids);
-        Task<(Product, bool)> GetProductDetailByIdAsync(int productId, string? userId);
+        Task<(Product, bool)> GetProductDetailAsync(int productId, string? userId);
         Task<IEnumerable<ProductCardViewModel>> GetProductCardsAsync(string? userId);
         Task DecreaseStockByCartItemsAsync(Dictionary<int, int> productIdAndQuantities);
     }

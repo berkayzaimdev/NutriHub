@@ -35,7 +35,7 @@ namespace NutriHub.Application.Features.Categories.Handlers
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    ImageUrl = p.ImageUrl,
+                    ImageUrl = p.CardImageUrl,
                     BrandId = p.BrandId,
                     BrandName = p.Brand.Name
                 }).ToList(),

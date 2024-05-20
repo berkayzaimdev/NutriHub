@@ -9,6 +9,7 @@ namespace NutriHub.Domain.Entities
     public class Order
     {
         public int Id { get; set; }
+        public string OrderCode { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
         public string Note { get; set; }
         public decimal Amount { get; set; }
@@ -16,6 +17,7 @@ namespace NutriHub.Domain.Entities
         public decimal MembershipDiscount { get; set; } = 0;
         public decimal ProductDiscount { get; set; } = 0;
         public decimal PaymentMethodDiscount { get; set; } = 0;
+        public int EarnedPoints { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime DeliveredDate { get; set; }
 

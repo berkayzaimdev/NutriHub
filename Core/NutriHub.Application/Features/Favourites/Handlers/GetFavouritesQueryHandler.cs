@@ -28,7 +28,7 @@ namespace NutriHub.Application.Features.Favourites.Handlers
                 ProductId = x.ProductId,
                 Name = x.Product.Name,
                 Price = x.Product.Price,
-                ImageUrl = x.Product.ImageUrl,
+                CardImageUrl = x.Product.CardImageUrl,
                 IsInStock = x.Product.Stock > 0
             });
         }

@@ -11,6 +11,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using System.Net.Mail;
+using System.Net;
+using NutriHub.WebAPI.Configurations;
 
 namespace NutriHub.WebAPI.Extensions
 {
@@ -47,10 +52,14 @@ namespace NutriHub.WebAPI.Extensions
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<ICouponRepository, CouponRepository>();
             services.AddScoped<IAppliedCouponRepository, AppliedCouponRepository>();
+            services.AddScoped<IPointRepository, PointRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IEmailSender<User>, EmailSender>();
+            services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IDiscountService, DiscountService>();
         }
 
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
@@ -104,6 +113,20 @@ namespace NutriHub.WebAPI.Extensions
                         new List<string>()
                     }
                 });
+            });
+        }
+
+        public static void ConfigureSMTP(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
+            services.AddSingleton(sp =>
+            {
+                var smtpSettings = sp.GetRequiredService<IOptions<SmtpSettings>>().Value;
+                return new SmtpClient(smtpSettings.Host, smtpSettings.Port)
+                {
+                    Credentials = new NetworkCredential(smtpSettings.Username, smtpSettings.Password),
+                    EnableSsl = smtpSettings.EnableSsl
+                };
             });
         }
     }

@@ -12,5 +12,6 @@ namespace NutriHub.Application.Abstractions.Interfaces
         Task<bool> IsFavouritedAsync(int productId, string? userId);
         Task DeleteFromFavouriteAsync(int productId, string userId);
         Task<IEnumerable<Favourite>> GetFavouritesByUserIdAsync(string userId);
+        Task<int> GetProductFavouriteCountAsync(int productId);
     }
 }

@@ -79,7 +79,8 @@ namespace NutriHub.Persistence.Repositories
 
         public async Task RemoveCartItemsIfOutOfStockAsync(IEnumerable<int> productIds)
         {
-            var values = await GetAllAsync(x => x.Product);
+            var values = await GetAllAsync();
+            values = values.Include(x => x.Product);
 
             var valuesWithProducts = values
                 .Where(x => productIds.Contains(x.ProductId))

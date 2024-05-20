@@ -26,9 +26,6 @@ namespace NutriHub.Application.Features.Comments.Handlers
             {
                 CommentId = x.Id,
 
-                UserId = x.User.Id,
-                UserName = x.User.UserName,
-
                 CreatedDate = x.CreatedDate,
                 Description = x.Description,
                 Like = x.Like,

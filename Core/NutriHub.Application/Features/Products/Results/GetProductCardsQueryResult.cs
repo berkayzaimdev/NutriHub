@@ -11,7 +11,7 @@ namespace NutriHub.Application.Features.Products.Results
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public string ImageUrl { get; set; }
+        public string CardImageUrl { get; set; }
 
         public decimal Rating { get; set; } = 0;
         public bool IsFavourited { get; set; } = false;

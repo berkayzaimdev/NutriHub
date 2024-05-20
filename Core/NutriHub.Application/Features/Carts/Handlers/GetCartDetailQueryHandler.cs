@@ -36,7 +36,7 @@ namespace NutriHub.Application.Features.Carts.Handlers
                     Id = x.Id,
                     ProductId = x.Product.Id,
                     ProductName = x.Product.Name,
-                    ProductImageUrl = x.Product.ImageUrl,
+                    ProductImageUrl = x.Product.CardImageUrl,
 
                     BrandId = x.Product.Brand.Id,
                     BrandName = x.Product.Brand.Name,

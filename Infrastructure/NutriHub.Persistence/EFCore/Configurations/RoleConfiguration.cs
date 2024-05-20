@@ -14,12 +14,12 @@ namespace NutriHub.Persistence.EFCore.Configurations
         public void Configure(EntityTypeBuilder<IdentityRole> builder)
         {
             builder.HasData(
-                new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
-                new IdentityRole { Name = "Bronze Üye", NormalizedName = "BRONZE" },
-                new IdentityRole { Name = "Silver Üye", NormalizedName = "SILVER" },
-                new IdentityRole { Name = "Gold Üye", NormalizedName = "GOLD" },
-                new IdentityRole { Name = "Platin Üye", NormalizedName = "PLATIN" },
-                new IdentityRole { Name = "Yıldız Üye", NormalizedName = "STAR" }
+                new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Id = "2", Name = "Bronze Üye", NormalizedName = "BRONZE" },
+                new IdentityRole { Id = "3", Name = "Silver Üye", NormalizedName = "SILVER" },
+                new IdentityRole { Id = "4", Name = "Gold Üye", NormalizedName = "GOLD" },
+                new IdentityRole { Id = "5", Name = "Platin Üye", NormalizedName = "PLATIN" },
+                new IdentityRole { Id = "6", Name = "Yıldız Üye", NormalizedName = "STAR" }
             );
         }
     }

@@ -18,6 +18,6 @@ namespace NutriHub.Application.Abstractions.Interfaces
         Task DeleteAllAsync(object[] ids);
         Task DeleteAllAsync(IEnumerable<T> entities);
         Task<IQueryable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes);
-        Task<T> GetAsync(object id);
+        Task<T>? GetAsync(object id);
     }
 }

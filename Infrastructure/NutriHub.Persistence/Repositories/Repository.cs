@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NutriHub.Application.Abstractions.Interfaces;
+using NutriHub.Application.Exceptions;
 using NutriHub.Application.Extensions;
 using NutriHub.Persistence.EFCore.Context;
 using System;
@@ -83,6 +84,6 @@ namespace NutriHub.Persistence.Repositories
         }
 
 
-        public async Task<T> GetAsync(object id) => await _context.Set<T>().FindAsync(id) ?? throw new NullReferenceException();
+        public async Task<T>? GetAsync(object id) => await _context.Set<T>().FindAsync(id);
     }
 }

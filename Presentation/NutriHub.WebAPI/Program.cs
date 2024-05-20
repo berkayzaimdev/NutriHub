@@ -1,6 +1,7 @@
 using MediatR;
 using NutriHub.Application.Features;
 using NutriHub.WebAPI.Extensions;
+using NutriHub.WebAPI.Middlewares;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,11 @@ builder.Services.AddPersistenceServices();
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.ConfigureSwagger();
+
+builder.Services.ConfigureSMTP(builder.Configuration);
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddCors(options =>
 {
@@ -50,7 +56,7 @@ app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthentication(); // önce oturum açma
 app.UseAuthorization();  // sonra yetkilendirme
-
+app.UseStaticFiles();
 app.MapControllers();
 
 app.Run();

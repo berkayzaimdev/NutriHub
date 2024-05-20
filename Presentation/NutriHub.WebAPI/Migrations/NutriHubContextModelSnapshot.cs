@@ -51,37 +51,37 @@ namespace NutriHub.WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "84c2efd3-b2dd-4865-9a17-617bf55c70e6",
+                            Id = "1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "13691335-0dc0-4e57-9d66-e1f43ab50580",
+                            Id = "2",
                             Name = "Bronze Üye",
                             NormalizedName = "BRONZE"
                         },
                         new
                         {
-                            Id = "96b3c806-38a3-4936-98f2-513a3fbcbaa2",
+                            Id = "3",
                             Name = "Silver Üye",
                             NormalizedName = "SILVER"
                         },
                         new
                         {
-                            Id = "37e427c5-723f-41e8-a241-2d831ebf93b7",
+                            Id = "4",
                             Name = "Gold Üye",
                             NormalizedName = "GOLD"
                         },
                         new
                         {
-                            Id = "7e4d7496-4f70-471a-93af-bef1d0c75008",
+                            Id = "5",
                             Name = "Platin Üye",
                             NormalizedName = "PLATIN"
                         },
                         new
                         {
-                            Id = "e106509d-c5db-4a77-948b-b17b7cd207f4",
+                            Id = "6",
                             Name = "Yıldız Üye",
                             NormalizedName = "STAR"
                         });
@@ -172,6 +172,18 @@ namespace NutriHub.WebAPI.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "2",
+                            RoleId = "2"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -523,10 +535,17 @@ namespace NutriHub.WebAPI.Migrations
                     b.Property<DateTime>("DeliveredDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("EarnedPoints")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("MembershipDiscount")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -580,6 +599,19 @@ namespace NutriHub.WebAPI.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("NutriHub.Domain.Entities.Point", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Point");
+                });
+
             modelBuilder.Entity("NutriHub.Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -591,6 +623,10 @@ namespace NutriHub.WebAPI.Migrations
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CardImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -598,7 +634,7 @@ namespace NutriHub.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("LargeImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -630,9 +666,10 @@ namespace NutriHub.WebAPI.Migrations
                         {
                             Id = 1,
                             BrandId = 1,
+                            CardImageUrl = "...",
                             CategoryId = 1,
                             Description = "Whey Protein kana hızlı karışan proteindir",
-                            ImageUrl = "...",
+                            LargeImageUrl = "...",
                             Name = "1000 gr",
                             Price = 178m,
                             Stock = 0,
@@ -642,9 +679,10 @@ namespace NutriHub.WebAPI.Migrations
                         {
                             Id = 2,
                             BrandId = 2,
+                            CardImageUrl = "...",
                             CategoryId = 1,
                             Description = "Kazein protein gece sindirilen proteindir",
-                            ImageUrl = "...",
+                            LargeImageUrl = "...",
                             Name = "3000 gr",
                             Price = 300m,
                             Stock = 0,
@@ -654,9 +692,10 @@ namespace NutriHub.WebAPI.Migrations
                         {
                             Id = 3,
                             BrandId = 3,
+                            CardImageUrl = "...",
                             CategoryId = 2,
                             Description = "Kreatin antrenmanda yüksek güç artışı sağlar",
-                            ImageUrl = "...",
+                            LargeImageUrl = "...",
                             Name = "500 gr",
                             Price = 55m,
                             Stock = 0,
@@ -811,6 +850,46 @@ namespace NutriHub.WebAPI.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3590443b-a81a-422d-bfbf-119f744fc294",
+                            Email = "admin@nutrihub.com",
+                            EmailConfirmed = true,
+                            FirstName = "Admin",
+                            Gender = "Male",
+                            LastName = "Admin",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@NUTRIHUB.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAECh+HiWSgxrclkuoFuN+cm7sJMF0GskNEfBhg9Da50ZegRYhFj72EiiGbstyOQZGcQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6871b837-987b-4fc5-85dd-cec92dc6fec8",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "017a649a-47e8-481f-9c33-58b4ceadeacd",
+                            Email = "user@nutrihub.com",
+                            EmailConfirmed = true,
+                            FirstName = "Regular",
+                            Gender = "Male",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "REGULARUSER@NUTRIHUB.COM",
+                            NormalizedUserName = "REGULARUSER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHqxWFTnHzv9qEdVQzZ1u5MCGNBBKBIiu0wpcvtxg4RRHCcbD+/vEaKzTcl37OUt8g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "1073ffce-9a99-4aab-837a-6d3900d30921",
+                            TwoFactorEnabled = false,
+                            UserName = "regularuser"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1006,6 +1085,15 @@ namespace NutriHub.WebAPI.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("NutriHub.Domain.Entities.Point", b =>
+                {
+                    b.HasOne("NutriHub.Domain.Entities.User", null)
+                        .WithOne("Point")
+                        .HasForeignKey("NutriHub.Domain.Entities.Point", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("NutriHub.Domain.Entities.Product", b =>
                 {
                     b.HasOne("NutriHub.Domain.Entities.Brand", "Brand")
@@ -1084,6 +1172,9 @@ namespace NutriHub.WebAPI.Migrations
                     b.Navigation("Favourites");
 
                     b.Navigation("Orders");
+
+                    b.Navigation("Point")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -32,7 +32,7 @@ namespace NutriHub.Persistence.Repositories
         public async Task DeleteFromFavouriteAsync(int productId, string userId)
         {
             var values = await GetAllAsync();
-            var value = await values.SingleOrDefaultAsync(x => x.ProductId == productId && x.UserId == userId);
+            var value = await values.SingleAsync(x => x.ProductId == productId && x.UserId == userId);
             await DeleteAsync(value.Id);
         }
 
@@ -40,6 +40,12 @@ namespace NutriHub.Persistence.Repositories
         {
             var values = await GetAllAsync();
             return values.Include(x => x.Product).Where(x => x.UserId == userId);
+        }
+
+        public async Task<int> GetProductFavouriteCountAsync(int productId)
+        {
+            var values = await GetAllAsync();
+            return values.Count(x => x.ProductId == productId);
         }
     }
 }

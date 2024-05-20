@@ -14,5 +14,10 @@ namespace NutriHub.Persistence.Repositories
         public OrderItemRepository(NutriHubContext context) : base(context)
         {
         }
+        public async Task<int> GetProductOrderCountAsync(int productId)
+        {
+            var values = await GetAllAsync();
+            return values.Count(x => x.ProductId == productId);
+        }
     }
 }

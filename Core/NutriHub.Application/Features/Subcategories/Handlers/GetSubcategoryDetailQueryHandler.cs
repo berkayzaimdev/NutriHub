@@ -33,7 +33,7 @@ namespace NutriHub.Application.Features.Handlers.SubcategoryHandlers
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    ImageUrl = p.ImageUrl,
+                    ImageUrl = p.LargeImageUrl,
                     BrandId = p.BrandId,
                     BrandName = p.Brand.Name
                 }).ToList()

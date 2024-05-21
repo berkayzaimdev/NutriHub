@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
-using NutriHub.Application.Models;
+using NutriHub.Application.Models.Base;
 
 namespace NutriHub.WebAPI.Controllers
 {

@@ -17,11 +17,12 @@ namespace NutriHub.Persistence.EFCore.Configurations
                 new Product
                 {
                     Id = 1,
-                    Name = "1000 gr",
+                    Name = "Çilekli Protein Tozu",
                     Description = "Whey Protein kana hızlı karışan proteindir",
-                    LargeImageUrl = "...",
-                    CardImageUrl = "...",
-                    Price = 178,
+                    LargeImageUrl = "/productImages/largeImages/2454dbce12390ac24cc24a7d0a5886346b0b3b6e8d04ad9ee504233c62d67810_large.png",
+                    CardImageUrl = "/productImages/cardImages/2454dbce12390ac24cc24a7d0a5886346b0b3b6e8d04ad9ee504233c62d67810_card.png",
+                    Price = 1,
+                    Stock = 999,
                     BrandId = 1,
                     CategoryId = 1,
                     SubcategoryId = 1
@@ -29,11 +30,12 @@ namespace NutriHub.Persistence.EFCore.Configurations
                 new Product
                 {
                     Id = 2,
-                    Name = "3000 gr",
+                    Name = "Kazein Protein",
                     Description = "Kazein protein gece sindirilen proteindir",
-                    LargeImageUrl = "...",
-                    CardImageUrl = "...",
-                    Price = 300,
+                    LargeImageUrl = "/productImages/largeImages/2454dbce12390ac24cc24a7d0a5886346b0b3b6e8d04ad9ee504233c62d67810_large.png",
+                    CardImageUrl = "/productImages/cardImages/2454dbce12390ac24cc24a7d0a5886346b0b3b6e8d04ad9ee504233c62d67810_card.png",
+                    Price = 9999,
+                    Stock = 999,
                     BrandId = 2,
                     CategoryId = 1,
                     SubcategoryId = 3
@@ -41,11 +43,12 @@ namespace NutriHub.Persistence.EFCore.Configurations
                 new Product
                 {
                     Id = 3,
-                    Name = "500 gr",
+                    Name = "Kreatin",
                     Description = "Kreatin antrenmanda yüksek güç artışı sağlar",
-                    LargeImageUrl = "...",
-                    CardImageUrl = "...",
+                    LargeImageUrl = "/productImages/largeImages/2454dbce12390ac24cc24a7d0a5886346b0b3b6e8d04ad9ee504233c62d67810_large.png",
+                    CardImageUrl = "/productImages/cardImages/2454dbce12390ac24cc24a7d0a5886346b0b3b6e8d04ad9ee504233c62d67810_card.png",
                     Price = 55,
+                    Stock = 999,
                     BrandId = 3,
                     CategoryId = 2,
                     SubcategoryId = 2

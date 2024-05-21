@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using NutriHub.Application.Features.Products.Results;
-using NutriHub.Application.Models;
+using NutriHub.Application.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +13,11 @@ namespace NutriHub.Application.Features.Products.Queries
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public int OrderBy { get; set; }
 
-        public GetProductsQuery(int pageNumber, int pageSize, int orderBy)
+        public GetProductsQuery(int pageNumber, int pageSize)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;
-            OrderBy = orderBy;
         }
     }
 }

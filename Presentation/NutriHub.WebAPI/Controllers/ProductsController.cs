@@ -19,9 +19,9 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductsAsync([FromQuery] int pageNumber = 1, int pageSize = 10, int orderBy = 1)
+        public async Task<IActionResult> GetProductsAsync([FromQuery] int pageNumber = 1, int pageSize = 10)
         {
-            var query = new GetProductsQuery(pageNumber, pageSize, orderBy);
+            var query = new GetProductsQuery(pageNumber, pageSize);
             var values = await _mediator.Send(query);
             return Ok(values);
         }
@@ -57,7 +57,6 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("get-product-cards")]
         public async Task<IActionResult> GetProductCardsAsync([FromQuery] int pageNumber = 1, int pageSize = 10)
         {
-            var userId = UserId;
             var value = await _mediator.Send(new GetProductCardsQuery(UserId, pageNumber, pageSize));
             return Ok(value);
         }

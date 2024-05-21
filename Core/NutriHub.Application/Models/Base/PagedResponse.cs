@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NutriHub.Application.Models
+namespace NutriHub.Application.Models.Base
 {
     public class PagedResponse<T> where T : class
     {

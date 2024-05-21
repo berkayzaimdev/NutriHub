@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Net;
 
-namespace NutriHub.Application.Models
+namespace NutriHub.Application.Models.Base
 {
     public class ResponseBuilder
     {
@@ -12,7 +12,7 @@ namespace NutriHub.Application.Models
         public int Status { get; private set; } = 200;
 
         [JsonProperty(PropertyName = "data")]
-        public Object Data { get; set; } = new Object();
+        public object Data { get; set; } = new object();
 
         public void SetStatus(HttpStatusCode statusCode)
         {
@@ -25,9 +25,9 @@ namespace NutriHub.Application.Models
             Errors.Add(error);
         }
 
-        public void AddData(Object obj, string key = "list")
+        public void AddData(object obj, string key = "list")
         {
-            Data = new Dictionary<String, Object>()
+            Data = new Dictionary<string, object>()
             {
                 {key,obj }
             };

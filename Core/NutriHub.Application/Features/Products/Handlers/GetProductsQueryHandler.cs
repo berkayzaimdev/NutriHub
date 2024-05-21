@@ -4,7 +4,7 @@ using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Products.Queries;
 using NutriHub.Application.Features.Products.Results;
-using NutriHub.Application.Models;
+using NutriHub.Application.Models.Base;
 using NutriHub.Domain.Entities;
 using System;
 using System.Collections.Generic;

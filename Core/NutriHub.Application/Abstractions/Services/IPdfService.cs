@@ -9,6 +9,6 @@ namespace NutriHub.Application.Abstractions.Services
 {
     public interface IPdfService
     {
-        byte[] GenerateOrderReceipt(Order order, List<OrderItem> orderItems, User user);
+        byte[] GenerateOrderReceipt(Order order);
     }
 }

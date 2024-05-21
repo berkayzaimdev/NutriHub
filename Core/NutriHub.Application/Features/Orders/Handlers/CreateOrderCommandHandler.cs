@@ -18,9 +18,13 @@ namespace NutriHub.Application.Features.Orders.Handlers
         private readonly IPointRepository _pointRepository;
         private readonly IDiscountService _discountService;
         private readonly IEmailService _emailService;
+        private readonly IPdfService _pdfService;
+        private readonly IAddressRepository _addressRepository;
+        private readonly IRoleService _roleService;
         private readonly UserManager<User> _userManager;
+        private User _user;
 
-        public CreateOrderCommandHandler(IProductRepository productRepository, ICartItemRepository cartItemRepository, IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IAppliedCouponRepository appliedCouponRepository, IDiscountService discountService, UserManager<User> userManager, IPointRepository pointRepository, IEmailService emailService)
+        public CreateOrderCommandHandler(IProductRepository productRepository, ICartItemRepository cartItemRepository, IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IAppliedCouponRepository appliedCouponRepository, IDiscountService discountService, UserManager<User> userManager, IPointRepository pointRepository, IEmailService emailService, IPdfService pdfService, IAddressRepository addressRepository, IRoleService roleService)
         {
             _productRepository = productRepository;
             _cartItemRepository = cartItemRepository;
@@ -31,6 +35,9 @@ namespace NutriHub.Application.Features.Orders.Handlers
             _userManager = userManager;
             _pointRepository = pointRepository;
             _emailService = emailService;
+            _pdfService = pdfService;
+            _addressRepository = addressRepository;
+            _roleService = roleService;
         }
 
         public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -50,12 +57,19 @@ namespace NutriHub.Application.Features.Orders.Handlers
                 MembershipDiscount = discounts.MembershipDiscount,
                 ProductDiscount = discounts.ProductDiscount,
                 PaymentMethodDiscount = discounts.PaymentMethodDiscount,
-                EarnedPoints = (int)Math.Ceiling(amount*3),
+                EarnedPoints = (int)Math.Ceiling(amount * 3),
                 DeliveredDate = DateTime.Now.AddDays(GetAddedDeliveredDay()),
                 AddressId = request.AddressId,
                 CouponId = coupon is not null ? coupon.CouponId : null,
                 UserId = request.UserId,
             };
+
+            _user = await _userManager.FindByIdAsync(request.UserId);
+
+            if(_user is null)
+            {
+                throw new NullReferenceException();
+            }
 
             await CreateOrderAsync(newOrder, request.UserId);
 
@@ -64,7 +78,6 @@ namespace NutriHub.Application.Features.Orders.Handlers
             if (coupon is not null)
             {
                 await _appliedCouponRepository.DeleteAsync(coupon);
-
             }
         }
 
@@ -84,8 +97,13 @@ namespace NutriHub.Application.Features.Orders.Handlers
             });
 
             await _orderItemRepository.CreateAllAsync(orderItems);
-            var cartItemProductIds = cartItems.Select(x => x.ProductId);
 
+            var orderWithDetails = await _orderRepository.GetDetailsAsync(order.Id);
+
+            var pdfReceipt = _pdfService.GenerateOrderReceipt(orderWithDetails);
+            await _emailService.SendOrderReceiptEmailAsync(string.Concat(_user.FirstName," ",_user.LastName), _user.Email, pdfReceipt);
+
+            var cartItemProductIds = cartItems.Select(x => x.ProductId);
             await _cartItemRepository.DeleteAllAsync(cartItems);
             await _cartItemRepository.RemoveCartItemsIfOutOfStockAsync(cartItemProductIds);
         }
@@ -100,7 +118,7 @@ namespace NutriHub.Application.Features.Orders.Handlers
             return $"S-{randomString}";
         }
 
-        private int GetAddedDeliveredDay() 
+        private int GetAddedDeliveredDay()
         {
             return DateTime.Now.DayOfWeek switch // 2 gün gecikmeli teslimden dolayı, gün aralığını kontrol ettik
             {
@@ -112,19 +130,15 @@ namespace NutriHub.Application.Features.Orders.Handlers
 
         private async Task UpdateUserPointsAndRankAsync(string userId, int earnedPoints)
         {
-            var user = await _userManager.FindByIdAsync(userId);
-
-            if (user == null) return;
-
             // Admin kontrolü
-            var roles = await _userManager.GetRolesAsync(user);
+            var roles = await _userManager.GetRolesAsync(_user);
             if (roles.Contains("Admin")) return;
 
             var point = await _pointRepository.GetAsync(userId);
 
             int totalPoints;
 
-            if(point is null)
+            if (point is null)
             {
                 await _pointRepository.CreateAsync(new Point
                 {
@@ -134,7 +148,6 @@ namespace NutriHub.Application.Features.Orders.Handlers
 
                 totalPoints = earnedPoints;
             }
-
             else
             {
                 point.Points += earnedPoints;
@@ -142,49 +155,12 @@ namespace NutriHub.Application.Features.Orders.Handlers
                 totalPoints = point.Points;
             }
 
-
-            string newRole = string.Empty;
-
-            if (totalPoints >= 50000 && !await _userManager.IsInRoleAsync(user, RoleType.Star))
-            {
-                newRole = RoleType.Star;
-            }
-
-            else if (totalPoints >= 30000 && !await _userManager.IsInRoleAsync(user, RoleType.Platin))
-            {
-                newRole = RoleType.Platin;
-            }
-
-            else if (totalPoints >= 15000 && !await _userManager.IsInRoleAsync(user, RoleType.Gold))
-            {
-                newRole = RoleType.Gold;
-            }
-
-            else if (totalPoints >= 10000 && !await _userManager.IsInRoleAsync(user, RoleType.Silver))
-            {
-                newRole = RoleType.Silver;
-            }
+            string newRole = _roleService.DetermineNewRole(totalPoints, _user, _userManager);
 
             if (!string.IsNullOrEmpty(newRole))
             {
-                await UpdateUserRoleAsync(user, newRole);
-                await _emailService.SendRankUpEmailAsync(user.Email, newRole); // Rütbe atladığında e-posta gönder
-            }
-        }
-
-        private async Task UpdateUserRoleAsync(User user, string newRole)
-        {
-            var currentRoles = await _userManager.GetRolesAsync(user);
-            var rolesToRemove = currentRoles.Where(role => role != newRole);
-
-            if (rolesToRemove.Any())
-            {
-                await _userManager.RemoveFromRolesAsync(user, rolesToRemove);
-            }
-
-            if (!await _userManager.IsInRoleAsync(user, newRole))
-            {
-                await _userManager.AddToRoleAsync(user, newRole);
+                await _roleService.UpdateUserRoleAsync(_user, newRole);
+                await _emailService.SendRankUpEmailAsync(_user.Email, newRole); // Rütbe atladığında e-posta gönder
             }
         }
     }

@@ -1,11 +1,9 @@
 ﻿using NutriHub.Application.Abstractions.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using NutriHub.Application.Helpers;
+using System.Globalization;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace NutriHub.Persistence.Services
 {
@@ -20,11 +18,14 @@ namespace NutriHub.Persistence.Services
 
         public async Task SendConfirmationMailAsync(string to, string verificationLink)
         {
-            var mailMessage = new MailMessage("no-reply@yourdomain.com", to)
+            var content = $"Lütfen email adresinizi doğrulamak için aşağıdaki bağlantıya tıklayın:\n\n{verificationLink}";
+            var body = EmailHelper.GetBody(content);
+
+            var mailMessage = new MailMessage(EmailHelper.Sender, "nutrihubuser@outlook.com.tr")
             {
                 Subject = "NutriHub - Email Doğrulama",
-                Body = $"Lütfen email adresinizi doğrulamak için aşağıdaki bağlantıya tıklayın:\n\n{verificationLink}",
-                IsBodyHtml = false
+                Body = body,
+                IsBodyHtml = true
             };
 
             await _smtpClient.SendMailAsync(mailMessage);
@@ -32,24 +33,33 @@ namespace NutriHub.Persistence.Services
 
         public async Task SendRankUpEmailAsync(string to, string newRank)
         {
-            var mailMessage = new MailMessage("no-reply@yourdomain.com", to)
+            var content = $"Tebrikler! Son alışverişiniz ile birlikte rütbe atladınız.\nYeni rütbeniz: <b>{newRank}</b>";
+            var body = EmailHelper.GetBody(content);
+
+            var mailMessage = new MailMessage(EmailHelper.Sender, to)
             {
                 Subject = "NutriHub - Rütbe Atlama",
-                Body = $"Tebrikler! Yeni rütbeniz: {newRank}"
+                Body = body,
+                IsBodyHtml = true
             };
 
             await _smtpClient.SendMailAsync(mailMessage);
         }
 
-        public async Task SendOrderReceiptEmailAsync(string to, byte[] pdfReceipt)
+        public async Task SendOrderReceiptEmailAsync(string fullName, string to, byte[] pdfReceipt)
         {
-            var mailMessage = new MailMessage("no-reply@yourdomain.com", to)
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("tr-TR");
+            var content = $"<b>Sayın {fullName},\n{DateTime.Now.ToShortDateString}</b> tarihinde oluşturulan e-faturanıza ekteki dosyadan ulaşabilirsiniz.";
+            var body = EmailHelper.GetBody(content);
+
+            var mailMessage = new MailMessage(EmailHelper.Sender, to)
             {
-                Subject = "NutriHub - {orderCode} kodlu siparişiniz",
-                Body = "Siparişinizin makbuzu ektedir."
+                Subject = "NutriHub e-Arşiv Faturası",
+                Body = body,
+                IsBodyHtml = true
             };
 
-            var attachment = new Attachment(new MemoryStream(pdfReceipt), "OrderReceipt.pdf", MediaTypeNames.Application.Pdf);
+            var attachment = new Attachment(new MemoryStream(pdfReceipt), "e-fatura.pdf", MediaTypeNames.Application.Pdf);
             mailMessage.Attachments.Add(attachment);
 
             await _smtpClient.SendMailAsync(mailMessage);

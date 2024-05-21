@@ -10,12 +10,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Net.Mail;
 using System.Net;
-using NutriHub.WebAPI.Configurations;
+using NutriHub.Persistence.Configurations;
 
 namespace NutriHub.WebAPI.Extensions
 {
@@ -60,6 +58,8 @@ namespace NutriHub.WebAPI.Extensions
             services.AddScoped<IEmailSender<User>, EmailSender>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IDiscountService, DiscountService>();
+            services.AddScoped<IPdfService, PdfService>();
+            services.AddScoped<IRoleService, RoleService>();
         }
 
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)

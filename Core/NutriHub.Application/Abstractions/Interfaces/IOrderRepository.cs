@@ -9,5 +9,6 @@ namespace NutriHub.Application.Abstractions.Interfaces
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        Task<Order> GetDetailsAsync(int orderId);
     }
 }

@@ -11,6 +11,6 @@ namespace NutriHub.Application.Abstractions.Services
     {
         Task SendConfirmationMailAsync(string to, string verificationLink);
         Task SendRankUpEmailAsync(string to, string newRank);
-        Task SendOrderReceiptEmailAsync(string to, byte[] pdfReceipt);
+        Task SendOrderReceiptEmailAsync(string fullName, string to, byte[] pdfReceipt);
     }
 }

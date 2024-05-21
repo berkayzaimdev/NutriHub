@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Abstractions.Interfaces
 {
-    public interface IAddressRepository
+    public interface IAddressRepository : IRepository<Address>
     {
         Task<IEnumerable<Address>> GetAddressesByUserIdAsync(string userId);
     }

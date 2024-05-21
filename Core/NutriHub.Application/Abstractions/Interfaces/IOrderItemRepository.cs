@@ -11,5 +11,6 @@ namespace NutriHub.Application.Abstractions.Interfaces
     public interface IOrderItemRepository : IRepository<OrderItem>
     {
         Task<int> GetProductOrderCountAsync(int productId);
+        Task<IEnumerable<OrderItem>> GetWithProductsAsync(int orderId);
     }
 }

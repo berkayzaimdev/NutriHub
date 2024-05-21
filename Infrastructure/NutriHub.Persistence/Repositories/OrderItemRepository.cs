@@ -19,5 +19,10 @@ namespace NutriHub.Persistence.Repositories
             var values = await GetAllAsync();
             return values.Count(x => x.ProductId == productId);
         }
+
+        public Task<IEnumerable<OrderItem>> GetWithProductsAsync(int orderId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

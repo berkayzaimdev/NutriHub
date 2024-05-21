@@ -19,13 +19,13 @@ namespace NutriHub.Application.Features.Users.Handlers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        private readonly IEmailSender<User> _emailSender;
+        private readonly IEmailService _emailService;
 
-        public RegisterCommandHandler(IUserService userService, IMapper mapper, IEmailSender<User> emailSender)
+        public RegisterCommandHandler(IUserService userService, IMapper mapper, IEmailService emailService)
         {
             _userService = userService;
             _mapper = mapper;
-            _emailSender = emailSender;
+            _emailService = emailService;
         }
 
         public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
@@ -33,10 +33,7 @@ namespace NutriHub.Application.Features.Users.Handlers
             var userDto = _mapper.Map<CreateUserDto>(request);
             var user = await _userService.CreateAsync(userDto);
 
-
-            //await _emailService.SendConfirmationMail(user.Email, "TEST");
-            //await _emailSender.SendConfirmationLinkAsync(user, user.Email, "test");
-            // await _emailSender.SendConfirmationLinkAsync(null, "nutrihubuser@outlook.com.tr", "test");
+            await _emailService.SendConfirmationMailAsync(user.Email,"test");
         }
     }
 }

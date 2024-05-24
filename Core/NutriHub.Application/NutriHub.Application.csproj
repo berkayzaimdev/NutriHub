@@ -34,8 +34,6 @@
     <Folder Include="Features\Blogs\Queries\" />
     <Folder Include="Features\Roles\Queries\" />
     <Folder Include="Features\Roles\Results\" />
-    <Folder Include="Features\Users\Queries\" />
-    <Folder Include="Features\Users\Results\" />
   </ItemGroup>
 
 </Project>

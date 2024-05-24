@@ -24,8 +24,8 @@ namespace NutriHub.Application.Features.Favourites.Handlers
             var values = await _repository.GetFavouritesByUserIdAsync(request.UserId);
             return values.Select(x => new GetFavouritesQueryResult 
             {
-                Id = x.Id,
-                ProductId = x.ProductId,
+                FavouriteId = x.Id,
+                Id = x.ProductId,
                 Name = x.Product.Name,
                 Price = x.Product.Price,
                 CardImageUrl = x.Product.CardImageUrl,

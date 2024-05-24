@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Features.Addresses.Commands;
 using NutriHub.Domain.Entities;
@@ -25,7 +26,19 @@ namespace NutriHub.Application.Features.Addresses.Handlers
         public async Task Handle(CreateAddressCommand request, CancellationToken cancellationToken)
         {
             var value = _mapper.Map<Address>(request);
-            await _repository.CreateAsync(value);
+
+            var allAddresses = await _repository.GetAllAsync();
+            var address = allAddresses.Where(x => x.UserId == request.UserId).AsNoTracking().FirstOrDefault();
+            if(address == null)
+            {
+                
+                await _repository.CreateAsync(value);
+            }
+            else 
+            {
+                value.Id = address.Id;
+                await _repository.UpdateAsync(value);
+            }
         }
     }
 }

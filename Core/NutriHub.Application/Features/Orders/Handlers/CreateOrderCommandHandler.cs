@@ -42,6 +42,9 @@ namespace NutriHub.Application.Features.Orders.Handlers
 
         public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
+            var addresses = await _addressRepository.GetAllAsync();
+            request.AddressId = addresses.FirstOrDefault().Id;
+
             var coupon = await _appliedCouponRepository.GetWithCouponAsync(request.UserId);
             var amount = await _cartItemRepository.GetCartAmountByUserIdAsync(request.UserId);
 
@@ -101,7 +104,7 @@ namespace NutriHub.Application.Features.Orders.Handlers
             var orderWithDetails = await _orderRepository.GetDetailsAsync(order.Id);
 
             var pdfReceipt = _pdfService.GenerateOrderReceipt(orderWithDetails);
-            await _emailService.SendOrderReceiptEmailAsync(string.Concat(_user.FirstName," ",_user.LastName), _user.Email, pdfReceipt);
+            // await _emailService.SendOrderReceiptEmailAsync(string.Concat(_user.FirstName," ",_user.LastName), _user.Email, pdfReceipt);
 
             var cartItemProductIds = cartItems.Select(x => x.ProductId);
             await _cartItemRepository.DeleteAllAsync(cartItems);
@@ -160,7 +163,7 @@ namespace NutriHub.Application.Features.Orders.Handlers
             if (!string.IsNullOrEmpty(newRole))
             {
                 await _roleService.UpdateUserRoleAsync(_user, newRole);
-                await _emailService.SendRankUpEmailAsync(_user.Email, newRole); // Rütbe atladığında e-posta gönder
+                // await _emailService.SendRankUpEmailAsync(_user.Email, newRole); // Rütbe atladığında e-posta gönder
             }
         }
     }

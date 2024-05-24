@@ -33,7 +33,7 @@ namespace NutriHub.Application.Features.Users.Handlers
             var userDto = _mapper.Map<CreateUserDto>(request);
             var user = await _userService.CreateAsync(userDto);
 
-            await _emailService.SendConfirmationMailAsync(user.Email,"test");
+            // await _emailService.SendConfirmationMailAsync(user.Email,"test");
         }
     }
 }

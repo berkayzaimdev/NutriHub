@@ -6,6 +6,7 @@ using NutriHub.Application.Features.Coupons.Queries;
 using NutriHub.Application.Extensions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NutriHub.WebAPI.Controllers
 {
@@ -48,20 +49,29 @@ namespace NutriHub.WebAPI.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpGet("applied-coupon")]
         public async Task<IActionResult> GetAppliedCouponAsync()
         {
-            var value = await _mediator.Send(new GetAppliedCouponQuery(UserId));
-            return Ok(value);
+            try 
+            {
+                var value = await _mediator.Send(new GetAppliedCouponQuery(UserId));
+                return Ok(value);
+            }
+            catch(Exception ex)
+            {
+                return NotFound();
+            }
         }
 
-        [HttpPost("apply-coupon")]
+        [Authorize]
+        [HttpPost("apply-coupon/{code}")]
         public async Task<IActionResult> ApplyCouponAsync(string code)
         {
             try 
             {
                 await _mediator.Send(new ApplyCouponCommand(code, UserId));
-                _Response.SetStatus(HttpStatusCode.NoContent);
+                _Response.SetStatus(HttpStatusCode.OK);
             }
             catch (Exception ex) 
             {

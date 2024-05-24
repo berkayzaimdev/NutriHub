@@ -68,5 +68,12 @@ namespace NutriHub.WebAPI.Controllers
             var value = await _mediator.Send(new GetProductDetailQuery(productId, userId));
             return Ok(value);
         }
+
+        [HttpGet("get-top6-products")]
+        public async Task<IActionResult> GetTop10ProductsAsync()
+        {
+            var values = await _mediator.Send(new GetTop6ProductsQuery());
+            return Ok(values);
+        }
     }
 }

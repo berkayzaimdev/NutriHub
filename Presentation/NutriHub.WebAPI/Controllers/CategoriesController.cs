@@ -51,10 +51,21 @@ namespace NutriHub.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpGet("GetCategoryDetail/{id}")]
-        public async Task<IActionResult> GetCategoryDetailAsync(int id)
+        [HttpGet("get-category-detail/{id}")]
+        public async Task<IActionResult> GetCategoryDetailAsync
+        (
+            [FromRoute] int id,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 9,
+            [FromQuery] int orderBy = 1,
+            [FromQuery] int minPrice = 0,
+            [FromQuery] int maxPrice = 0
+        )
         {
-            var values = await _mediator.Send(new GetCategoryDetailQuery(id));
+            //int pageNumber = 1;
+            //int pageSize = 10;
+            //int orderBy = 1;
+            var values = await _mediator.Send(new GetCategoryDetailQuery(id, pageNumber, pageSize, orderBy, minPrice, maxPrice));
             return Ok(values);
         }
 

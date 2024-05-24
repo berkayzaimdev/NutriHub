@@ -14,12 +14,12 @@ namespace NutriHub.Application.Models.Base
         public int TotalCount { get; set; }
         public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
 
-        public PagedResponse(List<T> items, int pageNumber, int pageSize, int totalCount)
+        public PagedResponse(IEnumerable<T> items, int pageNumber, int pageSize)
         {
-            Items = items;
+            TotalCount = items.Count();
+            Items = items.Skip(pageSize*(pageNumber-1)).Take(pageSize).ToList();
             PageNumber = pageNumber;
             PageSize = pageSize;
-            TotalCount = totalCount;
         }
     }
 }

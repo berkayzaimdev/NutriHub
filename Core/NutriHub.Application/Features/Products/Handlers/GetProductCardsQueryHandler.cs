@@ -23,27 +23,28 @@ namespace NutriHub.Application.Features.Products.Handlers
 
         public async Task<PagedResponse<GetProductCardsQueryResult>> Handle(GetProductCardsQuery request, CancellationToken cancellationToken)
         {
-            var values = await _repository.GetProductCardsAsync(request.UserId);
-            var items = values.ApplyPagination(request.PageNumber, request.PageSize);
+            //var values = await _repository.GetProductCardsAsync(request.UserId);
+            //var items = values.ApplyPagination(request.PageNumber, request.PageSize);
 
-            return new PagedResponse<GetProductCardsQueryResult>
-            (
-                items.Select(x => new GetProductCardsQueryResult 
-                {
-                    Id = x.Product.Id,
-                    Name = x.Product.Name,
-                    Price = x.Product.Price,
-                    CardImageUrl = x.Product.CardImageUrl,
-                    BrandId = x.Product.Brand.Id,
-                    BrandName = x.Product.Brand.Name,
-                    IsFavourited = x.IsFavourited,
-                    IsInStock = x.Product.Stock > 0,
-                    Rating = x.Product.Comments.Any() ? x.Product.Comments.Average(x => x.Rating) : 0
-                }).ToList(),
-                request.PageSize,
-                request.PageNumber,
-                items.Count()
-            );
+            //return new PagedResponse<GetProductCardsQueryResult>
+            //(
+            //    items.Select(x => new GetProductCardsQueryResult 
+            //    {
+            //        Id = x.Product.Id,
+            //        Name = x.Product.Name,
+            //        Price = x.Product.Price,
+            //        CardImageUrl = x.Product.CardImageUrl,
+            //        BrandId = x.Product.Brand.Id,
+            //        BrandName = x.Product.Brand.Name,
+            //        IsFavourited = x.IsFavourited,
+            //        IsInStock = x.Product.Stock > 0,
+            //        Rating = x.Product.Comments.Any() ? x.Product.Comments.Average(x => x.Rating) : 0
+            //    }).ToList(),
+            //    request.PageSize,
+            //    request.PageNumber,
+            //    items.Count()
+            //);
+            throw new NotImplementedException();
         }
     }
 }

@@ -8,10 +8,12 @@ namespace NutriHub.Persistence.Services
     public class RoleService : IRoleService
     {
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public RoleService(UserManager<User> userManager)
+        public RoleService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public string DetermineNewRole(int totalPoints, User user, UserManager<User> userManager)
@@ -50,6 +52,14 @@ namespace NutriHub.Persistence.Services
             {
                 await _userManager.AddToRoleAsync(user, newRole);
             }
+        }
+
+        public async Task<string> GetRoleIdAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            var roles = await _userManager.GetRolesAsync(user);
+            var role = await _roleManager.FindByNameAsync(roles.FirstOrDefault());
+            return role.Id;
         }
     }
 }

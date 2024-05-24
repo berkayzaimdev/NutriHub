@@ -23,6 +23,7 @@ namespace NutriHub.Application.Features.Coupons.Handlers
         public async Task<GetAppliedCouponQueryResult> Handle(GetAppliedCouponQuery request, CancellationToken cancellationToken)
         {
             var value = await _repository.GetWithCouponAsync(request.UserId);
+            if(value is null) throw new Exception();
             return new GetAppliedCouponQueryResult 
             {
                 Code = value.Coupon.Code,

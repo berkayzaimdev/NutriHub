@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Addresses.Commands;
 using NutriHub.Application.Features.Addresses.Queries;
+using NutriHub.Application.Models.Requests;
 
 namespace NutriHub.WebAPI.Controllers
 {
@@ -20,9 +21,20 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAddressAsync(CreateAddressCommand command)
+        public async Task<IActionResult> CreateAddressAsync(CreateAddressRequest request)
         {
-            command.UserId = UserId;
+            var command = new CreateAddressCommand
+            {
+                Name = request.Name,
+                Surname = request.Surname,
+                Title =request.Title,
+                Description = request.Description,
+                Province = request.Province,
+                District = request.District,
+                Email = request.Email,
+                Phone = request.Phone,
+                UserId = UserId
+            };
             await _mediator.Send(command);
             return Ok("Address başarılı bir şekilde oluşturuldu.");
         }

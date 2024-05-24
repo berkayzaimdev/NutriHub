@@ -1,15 +1,12 @@
 ﻿using MediatR;
 using NutriHub.Application.Abstractions.Interfaces;
+using NutriHub.Application.DTOs.ProductDtos;
+using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Categories.Queries;
 using NutriHub.Application.Features.Categories.Results;
-using NutriHub.Application.ViewModels.ProductViewModels;
+using NutriHub.Application.Models.Base;
 using NutriHub.Application.ViewModels.SubcategoryViewModels;
 using NutriHub.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Categories.Handlers
 {
@@ -30,15 +27,20 @@ namespace NutriHub.Application.Features.Categories.Handlers
                 Id = value.Id,
                 Description = value.Description,
                 Name = value.Name,
-                Products = value.Products.Select(p => new ProductWithBrandVM
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    ImageUrl = p.CardImageUrl,
-                    BrandId = p.BrandId,
-                    BrandName = p.Brand.Name
-                }).ToList(),
+                Products = new FilteredResponse<ProductCardDto>(
+                    value.Products.LimitByQuery(request.MinPrice, request.MaxPrice).OrderByQuery(request.OrderBy).Select(x => new ProductCardDto
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        Price = x.Price,
+                        CardImageUrl = x.CardImageUrl,
+                        BrandName = x.Brand.Name,
+                        Rating = x.Comments.Any() ? x.Comments.Average(x => x.Rating) : 0
+                    }),
+                    request.PageNumber,
+                    request.PageSize,
+                    request.OrderBy
+                ),
                 Subcategories = value.Subcategories.Select(s => new SubcategoryVM
                 {
                     Id = s.Id,

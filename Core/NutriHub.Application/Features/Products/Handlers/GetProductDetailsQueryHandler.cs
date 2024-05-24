@@ -39,10 +39,11 @@ namespace NutriHub.Application.Features.Products.Handlers
                 Id = value.Id,
                 Name = value.Name,
                 Description = value.Description,
+                Price = value.Price,
                 LargeImageUrl = value.LargeImageUrl,
                 Stock = value.Stock,
 
-                Rating = value.Comments is not null ? value.Comments.Average(x => x.Rating) : 0,
+                Rating = value.Comments is not null ? value.Comments.Any() ? value.Comments.Average(x => x.Rating) : 0 : 0,
 
                 FavouriteCount = await _favouriteRepository.GetProductFavouriteCountAsync(request.ProductId),
                 OrderCount = await _orderItemRepository.GetProductOrderCountAsync(request.ProductId),
@@ -52,8 +53,10 @@ namespace NutriHub.Application.Features.Products.Handlers
 
                 BrandId = value.Brand.Id,
                 BrandName = value.Brand.Name,
+
                 CategoryId = value.Category.Id,
                 CategoryName = value.Category.Name,
+
                 SubcategoryId = value.Subcategory.Id,
                 SubcategoryName = value.Subcategory.Name,
 
@@ -69,7 +72,9 @@ namespace NutriHub.Application.Features.Products.Handlers
                     ModifiedDate = x.ModifiedDate,
                     Rating = x.Rating
                 })
-                : []
+                : [],
+
+                CommentsCount = value.Comments is null || !value.Comments.Any() ? 0 : value.Comments.Count()
             };
         }
     }

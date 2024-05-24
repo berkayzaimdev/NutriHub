@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Users.Commands;
+using NutriHub.Application.Features.Users.Queries;
 
 namespace NutriHub.WebAPI.Controllers
 {
@@ -29,6 +30,22 @@ namespace NutriHub.WebAPI.Controllers
         {
             var token = await _mediator.Send(command);
             return Ok(token);
+        }
+
+        [HttpGet("get-current-user")]
+        public async Task<IActionResult> GetCurrentUserAsync()
+        {
+            var query = new GetCurrentUserQuery(UserId);
+            var value = await _mediator.Send(query);
+            return Ok(value);
+        }
+
+        [HttpGet("get-user-rank")]
+        public async Task<IActionResult> GetUserRankAsync()
+        {
+            var query = new GetUserRankQuery(UserId);
+            var value = await _mediator.Send(query);
+            return Ok(value);
         }
 
         [HttpDelete("{id}")]

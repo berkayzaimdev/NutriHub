@@ -1,14 +1,12 @@
-﻿using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace NutriHub.Application.Features.Addresses.Commands
+namespace NutriHub.Application.Models.Requests
 {
-    public class CreateAddressCommand : IRequest
+    public class CreateAddressRequest
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -18,6 +16,5 @@ namespace NutriHub.Application.Features.Addresses.Commands
         public string District { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string UserId { get; set; }
     }
 }

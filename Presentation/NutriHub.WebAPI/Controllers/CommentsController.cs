@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Comments.Commands;
 using NutriHub.Application.Features.Comments.Queries;
+using NutriHub.Application.Models.Requests;
 
 namespace NutriHub.WebAPI.Controllers
 {
@@ -19,10 +20,10 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> CreateCommentAsync(int productId, string description, decimal rating)
+        [HttpPost("create-comment")]
+        public async Task<IActionResult> CreateCommentAsync(CreateCommentRequest request)
         {
-            await _mediator.Send(new CreateCommentCommand(UserId,productId, description, rating));
+            await _mediator.Send(new CreateCommentCommand(UserId,request.ProductId, request.Description, request.Rating));
             return Ok();
         }
 

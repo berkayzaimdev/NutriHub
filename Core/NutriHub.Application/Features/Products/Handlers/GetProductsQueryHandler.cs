@@ -26,7 +26,6 @@ namespace NutriHub.Application.Features.Products.Handlers
         public async Task<PagedResponse<GetProductsQueryResult>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
             var values = await _repository.GetAllAsync();
-            var totalCount = await values.CountAsync(cancellationToken);
 
             var items = values.ApplyPagination(request.PageNumber,request.PageSize);
 
@@ -37,7 +36,7 @@ namespace NutriHub.Application.Features.Products.Handlers
                 Description = x.Description,
                 Price = x.Price,
                 Stock = x.Stock
-            }).ToList(), request.PageNumber, request.PageSize, totalCount);
+            }), request.PageNumber, request.PageSize);
         }
     }
 }

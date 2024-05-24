@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace NutriHub.Application.DTOs.User
 {
     public record CreateUserDto
-    (string FirstName, string LastName, string Username, string Email, string Password, string PasswordConfirm, string Gender)
+    (string FirstName, string LastName, string Email, string Password)
     { }
 }

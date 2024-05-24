@@ -12,17 +12,22 @@ namespace NutriHub.Persistence.Repositories
 {
     public class SubcategoryRepository : ISubcategoryRepository
     {
-        private readonly NutriHubContext _context;
+        private readonly IRepository<Subcategory> _repository;
 
-        public SubcategoryRepository(NutriHubContext context)
+        public SubcategoryRepository(IRepository<Subcategory> repository)
         {
-            _context = context;
+            _repository = repository;
         }
+
         public async Task<Subcategory> GetSubcategoryWithProductsByIdAsync(int id)
         {
-            return await _context.Subcategories
+            var values = await _repository.GetAllAsync();
+            return await values
+                .Include(x => x.Category)
                 .Include(x => x.Products)
-                .ThenInclude(x => x.Brand)
+                    .ThenInclude(p => p.Comments)
+                .Include(x => x.Products)
+                    .ThenInclude(p => p.Brand)
                 .SingleOrDefaultAsync(s => s.Id == id);
         }
     }

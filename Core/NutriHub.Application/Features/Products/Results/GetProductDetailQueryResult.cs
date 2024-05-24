@@ -8,6 +8,7 @@ namespace NutriHub.Application.Features.Products.Results
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public decimal Price { get; set; }
         public string LargeImageUrl { get; set; }
         public int Stock { get; set; }
 
@@ -28,5 +29,6 @@ namespace NutriHub.Application.Features.Products.Results
         public string SubcategoryName { get; set; }
 
         public IEnumerable<GetCommentsByProductDto> Comments { get; set; }
+        public int CommentsCount { get; set; }
     }
 }

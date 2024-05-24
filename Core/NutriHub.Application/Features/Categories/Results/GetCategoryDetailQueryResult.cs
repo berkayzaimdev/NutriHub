@@ -1,4 +1,6 @@
-﻿using NutriHub.Application.ViewModels.ProductViewModels;
+﻿using NutriHub.Application.DTOs.ProductDtos;
+using NutriHub.Application.Models.Base;
+using NutriHub.Application.ViewModels.ProductViewModels;
 using NutriHub.Application.ViewModels.SubcategoryViewModels;
 using NutriHub.Domain.Entities;
 using System;
@@ -14,7 +16,7 @@ namespace NutriHub.Application.Features.Categories.Results
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public IEnumerable<ProductWithBrandVM> Products { get; set; }
+        public FilteredResponse<ProductCardDto> Products { get; set; }
         public IEnumerable<SubcategoryVM> Subcategories { get; set; }
     }
 }

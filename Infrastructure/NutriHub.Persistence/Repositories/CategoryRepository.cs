@@ -24,6 +24,8 @@ namespace NutriHub.Persistence.Repositories
             return await _context.Categories
                 .Include(x => x.Products)
                 .ThenInclude(x => x.Brand)
+                .Include(x => x.Products)
+                .ThenInclude(x => x.Comments)
                 .Include(x => x.Subcategories)
                 .SingleOrDefaultAsync(s => s.Id == id);
         }

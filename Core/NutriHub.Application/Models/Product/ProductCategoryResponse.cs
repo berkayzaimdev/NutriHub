@@ -11,7 +11,7 @@ namespace NutriHub.Application.Models.Product
 {
     public class ProductCategoryResponse : FilteredResponse<SubcategoryOfMenuDto>
     {
-        public ProductCategoryResponse(List<SubcategoryOfMenuDto> items, int pageNumber, int pageSize, int totalCount, int orderBy) : base(items, pageNumber, pageSize, totalCount, orderBy)
+        public ProductCategoryResponse(IEnumerable<SubcategoryOfMenuDto> items, int pageNumber, int pageSize, int orderBy) : base(items, pageNumber, pageSize, orderBy)
         {
         }
     }

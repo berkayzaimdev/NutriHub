@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Carts.Commands;
 using NutriHub.Application.Features.Carts.Queries;
+using NutriHub.Application.Models.Requests;
 using System.Net;
 
 namespace NutriHub.WebAPI.Controllers
@@ -40,9 +41,9 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCartItemAsync(int productId, int quantity)
+        public async Task<IActionResult> AddCartItemAsync(AddCartItemRequest request)
         {
-            await _mediator.Send(new AddCartItemCommand(productId, quantity, UserId));
+            await _mediator.Send(new AddCartItemCommand(request.ProductId, request.Quantity, UserId));
             return Ok();
         }
 

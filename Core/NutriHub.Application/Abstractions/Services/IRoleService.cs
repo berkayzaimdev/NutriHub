@@ -12,5 +12,6 @@ namespace NutriHub.Application.Abstractions.Services
     {
         string DetermineNewRole(int totalPoints, User user, UserManager<User> userManager);
         Task UpdateUserRoleAsync(User user, string newRole);
+        Task<string> GetRoleIdAsync(string userId);
     }
 }

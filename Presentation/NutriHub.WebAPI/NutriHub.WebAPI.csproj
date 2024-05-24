@@ -36,7 +36,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\NutriHub.Application\NutriHub.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\NutriHub.Persistence\NutriHub.Persistence.csproj" />
-    <ProjectReference Include="..\..\Service\NutriHub.Business\NutriHub.Business.csproj" />
   </ItemGroup>
 
   <ItemGroup>

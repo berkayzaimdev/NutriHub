@@ -6,7 +6,7 @@ namespace NutriHub.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubcategoriesController : ControllerBase
+    public class SubcategoriesController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -22,11 +22,21 @@ namespace NutriHub.WebAPI.Controllers
             return Ok(values);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSubcategoryDetailAsync(int id)
+        [HttpGet("get-subcategory-detail/{id}")]
+        public async Task<IActionResult> GetSubcategoryDetailAsync
+        (
+            [FromRoute] int id,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 9,
+            [FromQuery] int orderBy = 1,
+            [FromQuery] int minPrice = 0,
+            [FromQuery] int maxPrice = 0
+        )
         {
-            var values = await _mediator.Send(new GetSubcategoryDetailQuery(id));
-            return Ok(values);
+            var query = new GetSubcategoryDetailQuery(id, pageNumber, pageSize ,orderBy, minPrice, maxPrice);
+
+            var value = await _mediator.Send(query);
+            return Ok(value);
         }
     }
 }

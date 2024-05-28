@@ -25,6 +25,8 @@ namespace NutriHub.Application.Features.Products.Handlers
         public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var value = _mapper.Map<Product>(request);
+            value.CardImageUrl = "/productImages/cardImages/355c9d67fa17c7ad6bea34cf4537e824322e6485dac09e1dcc383452e7b1a7f8_card.jpeg";
+            value.LargeImageUrl = "/productImages/largeImages/355c9d67fa17c7ad6bea34cf4537e824322e6485dac09e1dcc383452e7b1a7f8_large.jpeg";
             await _repository.UpdateAsync(value);
         }
     }

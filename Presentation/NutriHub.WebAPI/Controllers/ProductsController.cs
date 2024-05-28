@@ -19,7 +19,9 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductsAsync([FromQuery] int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> GetProductsAsync(
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
         {
             var query = new GetProductsQuery(pageNumber, pageSize);
             var values = await _mediator.Send(query);
@@ -27,7 +29,7 @@ namespace NutriHub.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductByIdAsync(int id)   
+        public async Task<IActionResult> GetProductByIdAsync(int id)
         {
             var value = await _mediator.Send(new GetProductByIdQuery(id));
             return Ok(value);
@@ -44,10 +46,10 @@ namespace NutriHub.WebAPI.Controllers
         public async Task<IActionResult> UpdateProductAsync(UpdateProductCommand command)
         {
             await _mediator.Send(command);
-            return NoContent();
+            return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
             await _mediator.Send(new RemoveProductCommand(id));

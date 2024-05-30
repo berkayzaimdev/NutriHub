@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap');
+
+:root {
+    --header-height : 6rem;
+
+    /*  Colors  */
+    --title-color: black;
+    --text-color:hsl(0, 1%, 32%);
+    --body-color:white;
+
+    /*  Font and typography  */
+    --body-font: "Montserrat", sans-serif;
+    --h1-font-size: 1.5rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: .938rem;
+    --small-font-size: .813rem;
+
+    /*  Font weight */
+    --font-regular:400;
+    --font-semi-bold:600;
+    --font-bold:700;
+
+    /*  z-index  */
+    --z-tooltip:10;
+    --z-fixed:100;
+
+}
+
+*{
+    font-family: "Montserrat";  
+    margin: 0;
+
+}
+
+.home{
+    margin-top: 13rem;
+}
+
+.home-presentation{
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.home-title{
+    margin-bottom: 2rem;
+}
+
+.home-sell-link{
+    cursor: pointer;
+    border: solid 1px var(--title-color);
+    padding: 8px 25px;
+    transition: color .3s;
+}
+
+.home-sell-link:hover{
+    background-color: black;
+    color: white;
+}
+
+.home-swiper{
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+.home-swiper-image{
+    width: 500px;
+
+}
+
+.home-company-presentation{
+    margin-top: 3rem;
+    padding: 1rem;
+    background-color: black;
+    color: white;
+    width: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.home-bestsellers,
+.home-blog{
+    margin: 2rem 8rem;
+    text-align: center;
+}
+
+.home-bestsellers-products{
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    row-gap: 2rem;
+    column-gap: 1.15rem;
+}
+
+.home-total-customer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 3rem 0rem;
+}
+
+.home-total-customer-description{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    padding: 3rem 0rem;
+    margin: 0 ;
+}
+
+.home-swiper i{
+    font-size: 30px;
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 50%;
+    padding: .5rem;
+    transition: color .3s;
+    margin: 0 1rem;
+    height: 20%;
+    align-self: flex-end;
+}
+
+.home-swiper i:hover{
+   color: white;
+   background-color: black;
+}
+
+@media screen and (max-width: 1000px){
+    .home-bestsellers{
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .home-bestsellers-products{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+  
+}
+
+.home-blog{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+}

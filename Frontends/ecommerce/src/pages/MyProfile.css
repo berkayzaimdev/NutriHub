@@ -1,0 +1,123 @@
+.myProfile{
+    padding:1rem 8rem;
+    padding: 13rem;
+    padding-bottom: 10rem;
+    background-color: black;
+    background-image: url("../images/myProfile-background3.jpg");
+    background-size:cover;
+    
+}
+
+.myProfile-welcome-text{
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: black;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.myProfile-detail{
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 12px;
+    background-color: rgb(247, 247, 247);
+}
+
+.myProfile-detail-options{
+    border-right: 1px solid gray;
+    display: block;
+
+}
+
+.myProfile-detail-options i, .myProfile-detail-options p{
+    width: 100%;
+    text-align: center;
+}
+
+.myProfile-detail-options-list{
+    width: 100%;
+}
+
+.myProfile-detail-options-username{
+    font-size: 20px;
+    font-weight: 800;
+    padding: 2rem 0;
+}
+
+.myProfile-detail-options-list p{  
+    width: 20rem;
+    padding: .6rem 0;
+    border-top: 1px solid gray;
+    cursor: pointer;
+}
+
+.myProfile-detail-options-list p:hover{
+    background-color: rgb(227, 227, 227);
+}
+
+.myProfile-detail-options-list-logout:hover{
+    color: red;
+}
+
+.myProfile-detail-settings{
+    padding: 2rem;
+}
+
+.myProfile-detail-settings-account-input{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+}
+
+.myProfile-detail-settings-account-input #myProfile-settings-address{
+    width: 203%;
+    height: 3rem;
+}
+
+.myProfile-detail-settings-account input{
+    margin-top: .5rem;
+    width: 24rem;
+    padding: .5rem;
+
+}
+
+.myProfile-detail-settings-account button{
+    margin-top: .5rem;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: .7rem;
+    border-radius: 12px;
+}
+
+.myProfile-detail-settings-package{
+    display: flex;
+    column-gap: 1rem;
+    text-align: center;
+}
+
+.myProfile-detail-settings-package-item {
+    color: white;
+    padding: 1rem;
+    border-radius: 12px;    
+    cursor:no-drop;
+    background-color: black;
+    opacity: 0.2;
+  }
+  
+  .myProfile-detail-settings-package-item p {
+    font-size: 13px;
+  }
+  
+  .myProfile-detail-settings-package-item.active {
+    opacity: 1;
+    cursor: pointer;
+  }
+  
+  .myProfile-detail-settings-package-radio-button input {
+    display: flex;
+    bottom: 0;
+  }

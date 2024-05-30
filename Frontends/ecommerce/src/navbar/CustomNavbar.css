@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap');
+
+:root {
+    --header-height: 6rem;
+
+    /*  Colors  */
+    --title-color: black;
+    --text-color: hsl(0, 1%, 32%);
+    --body-color: white;
+
+    /*  Font and typography  */
+    --body-font: "Montserrat", sans-serif;
+    --h1-font-size: 1.5rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: .938rem;
+    --small-font-size: .813rem;
+
+    /*  Font weight */
+    --font-regular: 400;
+    --font-semi-bold: 600;
+    --font-bold: 700;
+
+    /*  z-index  */
+    --z-tooltip: 10;
+    --z-fixed: 100;
+
+}
+
+* {
+    font-family: "Montserrat";
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--title-color);
+
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--body-color);
+    border-bottom: 1px solid var(--text-color);
+    z-index: var(--z-fixed);
+}
+
+
+.navbar {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr 1fr;
+    height: var(--header-height);
+    padding: .5rem 4rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo-text {
+    font-size: var(--h1-font-size);
+    letter-spacing: 6px;
+    font-weight: 900;
+}
+
+.navbar-link-list {
+    display: flex;
+    column-gap: 50px;
+}
+
+.navbar-link {
+    font-size: var(--h3a-font-size);
+    transition: color 0.3s;
+}
+
+.navbar-link:hover {
+    color: var(--text-color);
+}
+
+
+
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 1.0rem;
+}
+
+.navbar-profile-link {
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: color .3s;
+}
+
+.navbar-profile-link:hover {
+    color: var(--text-color);
+}
+
+.navbar-categories {
+    position: relative;
+    /* z indexine çıktı ama yeri duruyor. */
+    margin-top: var(--header-height)+1rem;
+    padding: 1rem 0;
+    grid-column: 1/-1;
+    /* ilk sütundan son sütuna kadar genişlediğini ifade eder */
+    top: -500%;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.navbar-categories-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+#active-categories-menu {
+    top: 10px;
+}
+
+.navbar-category-item {
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.navbar-category-item:hover {
+    text-decoration: underline;
+}
+
+.navbar-search-bar {
+    display: flex;
+    grid-column: 1/-1;
+    border: 1px solid var(--text-color);
+    padding: 15px 10px;
+    position: relative;
+    top: -1000%;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.navbar-search-bar .ri-search-line {
+    margin-right: 10px;
+}
+
+.navbar-search-bar .ri-close-line {
+    cursor: pointer;
+    transition: color .3s;
+}
+
+.navbar-search-bar-input {
+    width: 100%;
+    border: none;
+}
+
+.navbar-search-bar-input:focus {
+    outline: none;
+}
+
+.navbar-search-bar .ri-close-line:hover {
+    color: var(--text-color);
+}
+
+#active-search-bar {
+    top: -70%;
+}
+
+@media screen and (max-width: 860px) {
+
+    .navbar {
+        padding: 0;
+    }
+
+    .navbar-link-list {
+        position: absolute;
+        top: -1000%;
+        /* Görünürlüğü gizlemek için ekrandan dışarı taşır */
+    }
+
+    .navbar-categories {
+        background-color: white;
+    }
+
+    .navbar-categories-list {
+        display: block;
+
+    }
+
+    .navbar-category-item {
+        display: block;
+        margin-bottom: .75rem;
+    }
+
+    #active-search-bar {
+        top: -400%;
+    }
+
+}

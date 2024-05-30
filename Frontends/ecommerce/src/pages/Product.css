@@ -1,0 +1,224 @@
+.product{
+    margin-top: 10.5rem;
+    margin-left: 12rem;
+    margin-right: 12rem;
+    margin-bottom: 2rem;
+}
+
+.product-category{
+    padding-bottom: .7rem;
+    border-bottom: 1px solid rgb(198, 198, 198);
+}
+.product-category i{
+    color: dimgray;
+}
+
+.product-category-item{
+    color: black;
+    cursor: pointer;
+}
+
+.product-category-item:hover{
+    color: dimgray;
+}
+
+.product-information{
+    margin-top: 3rem;
+    display: flex;
+      /*  flex-wrap: wrap;*/
+    column-gap: 4rem;
+}
+
+
+.product-information-image-item{
+    width: 450px;
+    padding: 1rem 2rem;
+    border: 1px solid rgb(198, 198, 198);
+    cursor: pointer;
+}
+
+.product-information-name p{
+    padding-bottom: .4rem;
+    font-size: larger;
+    font-weight: 600;
+    border-bottom:  1px solid rgb(198, 198, 198) ;
+}
+.product-stars i{
+    color: orange;
+}
+
+.product-information-user-interaction{
+    display: flex;
+    align-items: center;
+    column-gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-information-favourites i{
+    color: red;
+}
+.product-information-favourites{
+    cursor: pointer;
+}
+.product-information-price{
+    font-size:x-large;
+    font-weight:bolder;
+    padding-bottom: 1rem;
+    display: block;
+    border-bottom:  1px solid rgb(198, 198, 198) ;
+}
+
+.product-piece{
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 1rem 1rem;
+    background-color: rgb(244, 244, 244);
+    border-radius: 12px;
+    align-items: center;
+}
+
+.product-piece-adding{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: large;
+}
+
+.product-piece-adding i{
+    cursor: pointer;
+}
+
+.product-add-cart{
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.product-add-cart-button{
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all .4s ease;
+    width: 100%;
+}
+
+.product-add-cart-button:hover{
+    background-color: black;
+    color: white;
+
+}
+
+.product-add-cart .ri-heart-line{
+    color: red;
+    font-size: 30px;
+    border: 2px solid red;
+    padding: .5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.product-add-cart .ri-heart-line:hover{
+   background-color: red;
+   color: white;
+}
+
+.product-information-share{
+    display: flex;
+    background-color: rgb(244, 244, 244);
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem .5rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.product-information-share p{
+    margin-right: 2rem;
+}
+
+.product-information-share i{
+    font-size: 28px;
+    cursor: pointer;
+    border: 1px solid rgb(198, 198, 198);
+    padding: 3px;
+    transition: all .5s ;
+}
+.product-information-share-icon{
+    display: flex;
+    column-gap: 1rem;
+}
+
+.product-information-share-icon i:hover{
+    color: white;
+    background-color: black;
+}
+
+.product_similar-products{
+    margin-top: 3rem;
+    padding: 2rem 7rem;
+    text-align: center;
+    border: 1px solid rgb(198, 198, 198);
+    border-radius: 8px;
+}
+
+.product_similar-products p{
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.product_similar-products-product{
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    column-gap: 1.5rem;
+}
+
+.product_comments{
+    margin: 2rem 0;
+    border: 1px solid rgb(198, 198, 198);
+    border-radius: 8px;
+    padding: 2rem 7rem;
+    
+}
+.product_comments-title{
+    margin: 1.5rem 0;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;   
+}
+
+.product_user-comment-text{
+    display: flex;
+}
+
+.product_user-comment-text i{
+    color: orange;
+}
+
+.product_user-comment-information{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.product_user-comment-username{
+    display: flex;
+    column-gap: 1rem;
+    color: rgb(130, 130, 130);
+}
+
+.product_user-comment-information-like{
+    color: rgb(130, 130, 130);
+    cursor: pointer;
+}
+.product_user-comment-information-like:hover{
+    color: black;
+    text-decoration: underline;
+}
+

@@ -31,7 +31,7 @@ namespace NutriHub.WebAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveBrandAsync(int id)
         {
             await _mediator.Send(new RemoveBrandCommand(id));

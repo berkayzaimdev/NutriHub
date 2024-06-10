@@ -1,0 +1,7 @@
+.striped .list-group-item:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.striped .list-group-item:nth-of-type(even) {
+  background-color: #ffffff;
+}

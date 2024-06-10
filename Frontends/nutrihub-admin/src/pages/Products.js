@@ -1,87 +1,48 @@
 import React, { useState } from "react";
-import ProductCard from "../component/ProductCard";
-import { Button, Form, Modal } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
+import ProductModal from "../components/Product/ProductModal";
+import ProductsTable from "../components/Product/ProductsTable";
 
 function Products() {
-  const [show, setShow] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showProductModal, setShowProductModal] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShowProductModal = (product) => {
+    setSelectedProduct(product);
+    setShowProductModal(true);
+  };
+
+  const handleHideProductModal = () => {
+    setSelectedProduct(null);
+    setShowProductModal(false);
+  };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        rowGap: "2rem",
-        columnGap: "1rem",
-        padding: "2rem 6rem",
-      }}
-    >
-      <Button
-        variant="primary"
-        onClick={handleShow}
-        style={{ backgroundColor: "gray", border: "none", width: "15rem" }}
+    <div style={{ padding: "2rem 6rem" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start", // Butonu sola hizalayacak
+          marginBottom: "1rem",
+        }}
       >
-        Ürün Ekle
-      </Button>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Ürün ekle</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group controlId="formFileMultiple" className="mb-3">
-            <Form.Label>Ürün Fotoğrafları</Form.Label>
-            <Form.Control type="file" multiple />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Ürün Adı</Form.Label>
-            <Form.Control type="text" placeholder="" />
-          </Form.Group>
-          <div
-            style={{ display: "flex", columnGap: "1rem", marginBottom: "1rem" }}
-          >
-            <Form.Select aria-label="Default select example">
-              <option>Kategori</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </Form.Select>
-            <Form.Select aria-label="Default select example">
-              <option>Alt Kategori</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </Form.Select>
-          </div>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Ürün Açıklaması</Form.Label>
-            <Form.Control as="textarea" rows={3} />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Ürün Stoğu</Form.Label>
-            <Form.Control type="text" placeholder="" />
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
+        <Button
+          variant="primary"
+          onClick={() => handleShowProductModal(null)}
+          style={{ backgroundColor: "green", border: "none", width: "15rem" }}
+        >
+          Ürün Ekle
+        </Button>
+      </div>
+
+      {showProductModal && (
+        <ProductModal
+          product={selectedProduct}
+          onClose={handleHideProductModal}
+        />
+      )}
+
+      <ProductsTable onEdit={handleShowProductModal} />
     </div>
   );
 }

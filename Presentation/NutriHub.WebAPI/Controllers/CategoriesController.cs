@@ -34,21 +34,21 @@ namespace NutriHub.WebAPI.Controllers
         public async Task<IActionResult> CreateCategoryAsync(CreateCategoryCommand command)
         {
             await _mediator.Send(command);
-            return Ok();
+            return Ok("Kategori başarıyla eklendi!");
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateCategoryAsync(UpdateCategoryCommand command)
         {
             await _mediator.Send(command);
-            return Ok();
+            return Ok("Kategori başarıyla güncellendi!");
         }
 
         [HttpDelete]
         public async Task<IActionResult> RemoveCategoryAsync(RemoveCategoryCommand command)
         {
             await _mediator.Send(command);
-            return Ok();
+            return Ok("Kategori başarıyla silindi!");
         }
 
         [HttpGet("get-category-detail/{id}")]
@@ -73,6 +73,13 @@ namespace NutriHub.WebAPI.Controllers
         public async Task<IActionResult> GetCategoriesMenuAsync()
         {
             var values = await _mediator.Send(new GetCategoriesMenuQuery());
+            return Ok(values);
+        }
+
+        [HttpGet("GetCategoriesWithSubcategories")]
+        public async Task<IActionResult> GetCategoriesWithSubcategoriesAsync()
+        {
+            var values = await _mediator.Send(new GetCategoriesWithSubcategoriesQuery());
             return Ok(values);
         }
     }

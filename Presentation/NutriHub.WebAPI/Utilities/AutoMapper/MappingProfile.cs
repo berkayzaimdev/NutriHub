@@ -53,6 +53,7 @@ namespace NutriHub.WebAPI.Utilities.AutoMapper
 
             // Subcategory Mappings
             CreateMap<Subcategory, SubcategoryOfMenuDto>();
+            CreateMap<Subcategory, SubcategoryWithDetailsDto>();
             CreateMap<UpdateSubcategoryCommand, Subcategory>();
             CreateMap<CreateSubcategoryCommand, Subcategory>();
         }

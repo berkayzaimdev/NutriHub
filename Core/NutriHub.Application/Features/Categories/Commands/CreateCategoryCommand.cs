@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Application.Features.Categories.Commands
 {
-    public class CreateCategoryCommand : IRequest<bool>
+    public class CreateCategoryCommand : IRequest
     {
         public string Name { get; set; }
         public string Description { get; set; }

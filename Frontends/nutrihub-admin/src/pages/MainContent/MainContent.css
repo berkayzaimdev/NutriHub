@@ -1,0 +1,7 @@
+/* Örneğin, App.css dosyasında */
+.main-content {
+  margin-left: 250px; /* Sidebar genişliği kadar sol tarafa boşluk bırak */
+  padding: 20px; /* İçerik etrafında boşluk bırak */
+  min-height: 100vh; /* Ekranın tamamını kapla */
+  box-sizing: border-box; /* Padding hesaplamalarında kutu modelini kullan */
+}

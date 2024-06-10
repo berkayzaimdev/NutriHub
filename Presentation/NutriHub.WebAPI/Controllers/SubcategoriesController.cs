@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Features.Subcategories.Commands;
 using NutriHub.Application.Features.Subcategories.Queries;
 
 namespace NutriHub.WebAPI.Controllers
@@ -13,6 +14,27 @@ namespace NutriHub.WebAPI.Controllers
         public SubcategoriesController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSubcategoryAsync(CreateSubcategoryCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateSubcategoryAsync(UpdateSubcategoryCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveSubcategoryAsync(RemoveSubcategoryCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
         }
 
         [HttpGet]

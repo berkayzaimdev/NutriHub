@@ -7,7 +7,7 @@ const ProductsTable = ({ onEdit }) => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [pageSize] = useState(2);
+  const [pageSize] = useState(5);
 
   const navigate = useNavigate();
   const location = useLocation();

@@ -27,7 +27,6 @@ function Coupons() {
             <th>Başlangıç Tarihi</th>
             <th>Bitiş Tarihi</th>
             <th>Toplam Kullanım Sayısı</th>
-            <th>Kalan Kullanım Sayısı</th>
             <th>Aktif Uygulanma Sayısı</th>
             <th>İşlemler</th>
           </tr>

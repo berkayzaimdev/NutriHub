@@ -22,6 +22,12 @@ namespace NutriHub.Application.Features.Subcategories.Handlers
         public async Task Handle(UpdateSubcategoryCommand request, CancellationToken cancellationToken)
         {
             var value = await _repository.GetAsync(request.Id);
+
+            if(value is null)
+            {
+                throw new Exception();
+            }
+
             value.Name = request.Name;
             value.Description = request.Description;
             value.ImageUrl = request.ImageUrl;

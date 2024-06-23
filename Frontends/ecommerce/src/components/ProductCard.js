@@ -2,17 +2,22 @@ import React from "react";
 import image1 from "../images/image1.png";
 import image2 from "../images/image2.png";
 
-function ProductCard() {
+function ProductCard({ product }) {
+  const imageUrl = "/images/cardImages/";
+  console.log(product);
   return (
     <div
       className="home-product-card"
       style={{ padding: "10px", border: ".1rem solid black" }}
       onClick={() => {
-        window.location.href = "/urun"; // URL stringini doğru şekilde atama
+        window.location.href = `/urun/${product.id}`; // URL stringini doğru şekilde atama
       }}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <img src={image2} style={{ width: "175px", cursor: "pointer" }}></img>
+        <img
+          src="http://localhost:3000/images/cardImages/img.jpg"
+          style={{ width: "175px", cursor: "pointer" }}
+        ></img>
         <i
           className="ri-add-circle-line"
           style={{
@@ -33,7 +38,7 @@ function ProductCard() {
           fontSize: "15px",
         }}
       >
-        Progainer Çikolata 5000 Gr
+        <b>{product.brandName}</b> {product.name}
       </p>
       <div
         style={{
@@ -42,7 +47,7 @@ function ProductCard() {
         }}
       >
         <p style={{ cursor: "pointer", fontSize: "14px" }}>
-          <strong>599,00 TL</strong>
+          <strong>{product.price} TL</strong>
         </p>
         <p style={{ color: "orange", fontSize: "12px" }}>
           <i className="ri-star-fill"></i>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Exceptions;
 using NutriHub.Application.Extensions;
@@ -48,6 +49,12 @@ namespace NutriHub.Persistence.Repositories
         public async Task DeleteAsync(object id)
         {
             var entity = await _context.Set<T>().FindAsync(id);
+
+            if(entity is null)
+            {
+                return;
+            }
+
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
@@ -60,7 +67,13 @@ namespace NutriHub.Persistence.Repositories
 
         public async Task DeleteAllAsync(object[] ids)
         {
-            var entities = ids.Select(x =>  _context.Set<T>().Find(x));
+            var entities = ids.Select(x =>  _context.Set<T>().Find(x)!);
+
+            if(entities.IsNullOrEmpty())
+            {
+                return;
+            }
+
             _context.Set<T>().RemoveRange(entities);
             await _context.SaveChangesAsync();
         }
@@ -84,6 +97,6 @@ namespace NutriHub.Persistence.Repositories
         }
 
 
-        public async Task<T>? GetAsync(object id) => await _context.Set<T>().FindAsync(id);
+        public async Task<T?> GetAsync(object id) => await _context.Set<T>().FindAsync(id);
     }
 }

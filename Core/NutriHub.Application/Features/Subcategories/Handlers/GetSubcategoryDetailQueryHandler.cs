@@ -43,7 +43,7 @@ namespace NutriHub.Application.Features.Handlers.SubcategoryHandlers
                         Price = x.Price,
                         CardImageUrl = x.CardImageUrl,
                         BrandName = x.Brand.Name,
-                        Rating = x.Comments is null ? x.Comments.Any() ? x.Comments.Average(x => x.Rating) : 0 : 0
+                        Rating = x.Comments.Any() ? x.Comments.Average(x => x.Rating) : 0
                     }),
                     request.PageNumber,
                     request.PageSize,

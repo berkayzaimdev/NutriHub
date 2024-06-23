@@ -1,10 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+
 import "../navbar/CustomNavbar.css";
 import logo from "../images/nutrihub_logo2.jpg";
+import { API_BASE_URL } from "../config";
 
 function CustomNavbar() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          `${API_BASE_URL}/Categories/GetCategoriesMenu`
+        ); // Buraya kendi API endpoint'inizi yazın
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   const [showMenu, setShowMenu] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const token = localStorage.getItem("token");
+
   return (
     <div>
       <header className="header">
@@ -29,19 +52,31 @@ function CustomNavbar() {
                   Anasayfa
                 </a>
               </li>
-              <li className="navbar-item">
-                <a className="navbar-link" href="/urunler">
-                  Ürünler
-                </a>
-              </li>
+              {categories.map((category) => (
+                <li className="navbar-item" key={category.id}>
+                  <Link className="navbar-link" to={`/c/${category.id}`}>
+                    {category.name}
+                  </Link>
+                  {category.subcategories &&
+                    category.subcategories.length > 0 && (
+                      <ul className="sub-navbar">
+                        {category.subcategories.map((subCategory) => (
+                          <li className="sub-navbar-item" key={subCategory.id}>
+                            <Link
+                              className="sub-navbar-link"
+                              to={`/sc/${subCategory.id}`}
+                            >
+                              {subCategory.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                </li>
+              ))}
               <li className="navbar-item">
                 <a className="navbar-link" href="/blog">
                   Blog
-                </a>
-              </li>
-              <li className="navbar-item">
-                <a className="navbar-link" href="/satis" target="_blank">
-                  Satış
                 </a>
               </li>
             </ul>
@@ -57,16 +92,22 @@ function CustomNavbar() {
               <i class="ri-search-line"></i>
             </a>
 
-            <a className="navbar-profile-link" href="/profilim">
+            <a
+              className="navbar-profile-link"
+              href={token ? "/profilim" : "/giris-yap"}
+            >
               <i className="ri-user-line"></i>
             </a>
-
-            <a className="navbar-profile-link" href="/sepetim">
-              <i className="ri-shopping-cart-2-line"></i>
-            </a>
-            <a className="navbar-profile-link" href="/favorilerim">
-              <i className="ri-heart-2-line"></i>
-            </a>
+            {token && (
+              <>
+                <a className="navbar-profile-link" href="/sepetim">
+                  <i className="ri-shopping-cart-2-line"></i>
+                </a>
+                <a className="navbar-profile-link" href="/favorilerim">
+                  <i className="ri-heart-2-line"></i>
+                </a>
+              </>
+            )}
 
             <a
               className="navbar-profile-link"

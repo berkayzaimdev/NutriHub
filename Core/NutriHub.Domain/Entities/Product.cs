@@ -25,6 +25,6 @@ namespace NutriHub.Domain.Entities
         public int SubcategoryId { get; set; }
         public Subcategory Subcategory { get; set; }
 
-        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

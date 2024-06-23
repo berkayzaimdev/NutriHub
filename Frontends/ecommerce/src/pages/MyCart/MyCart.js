@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./MyCart.css";
-import MyCart_ProductCard from "../components/MyCart_ProductCard";
-import ProductCard from "../components/ProductCard";
+import MyCart_ProductCard from "../../components/MyCart_ProductCard";
+import ProductCard from "../../components/ProductCard";
 import { Form, InputGroup } from "react-bootstrap";
 
 function MyCart() {
@@ -250,7 +250,53 @@ function MyCart() {
                 }}
               >
                 Nasıl İade Ederim? <br></br>
-                <br></br>1. "Hesabım" > “Siparişlerim'' > “Sipariş detay”
+                <br></br>1. "Hesabım" {">"} “Siparişlerim'' {">"} “Sipariş
+                detay” adımlarını takip edin. <br></br>2. İade Kargo Kodu
+                Oluştur butonuna tıklayın. <br></br>3. İade edilecek ürün ve
+                iade nedeni seçin. Aynı üründen birden fazla satın aldıysanız
+                iade edilecek ürün adedini de seçmeniz gerekir. <br></br>4. İade
+                etmek istediğiniz ürünlerin uygunluğuna göre size önerilen iade
+                yöntemlerinden birini seçin.
+                <br></br>5. Birden fazla kargo seçeneği çıktığı durumda kargo
+                seçiminizi yapın. <br></br>6. Ekranda çıkan iade kargo kodunu
+                not alın. İade kargo kodunuza siparişlerim sayfasından da
+                ulaşabilirsiniz. <br></br>7. İade kodu aynı olan ürünleri
+                faturasıyla beraber aynı pakete koyun ve paketin sağlam
+                olduğundan emin olun. <br></br>8. İade kodu farklı olan ürünler
+                aynı kargoya verilse bile farklı paketler halinde verilmelidir.{" "}
+                <br></br>9. Seçtiğiniz iade yöntemine göre 7 gün içinde
+                paketinizi seçeceğiniz gel al noktası veya kargo şubesine teslim
+                edin veya randevu gününde adresinize gelecek görevliye teslim
+                edin. <br></br>10. 7 günü geçirdiğiniz durumda yeniden iade
+                kargo kodu almanız gerekir. <br></br>
+                <br></br>İade Koşulları: <br></br>1. Ürünün paketi hasar
+                görmemiş ve kullanılmamış olması gerekmektedir.<br></br>2-
+                Ürünün tüm aksesuarları ve orijinal kutusu ile beraber iade
+                edilmesi gerekmektedir. <br></br>3- Aşağıdaki ürün gruplarının
+                ambalajı açılmamış, denenmemiş, bozulmamış ve kullanılmamış
+                olmaları halinde iadesi kabul edilir. • Sağlık ve hijyen
+                açısından uygun olmayan ürünlerin (Kozmetik ve kişisel bakım
+                ürünleri,parfüm, epilatör, tıraş makinesi, kulaklık, iç giyim
+                ürünleri, mayo, bikini vb.) • Kopyalanabilir yazılım ve
+                programlar (DVD, VCD, CD, kasetler vb.) • Kitap ve kırtasiye
+                sarf malzemeleri (toner, kartuş, şerit vb.) <br></br>4- Tek
+                kullanımlık ürünlerin ve hızlı bozulan veya son kullanma tarihi
+                geçme ihtimali olan ürünlerin iadesi kabul edilmemektedir.
+              </p>
+              <h5 style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+                Ön Bilgilendirme Formu
+              </h5>
+              <p
+                style={{
+                  padding: "2rem",
+                  overflowY: "scroll",
+                  height: "30px",
+                  fontSize: "13px",
+                  border: "1px solid gray",
+                  borderRadius: "12px",
+                }}
+              >
+                1. "Hesabım" {">"} “Siparişlerim'' {">"} “Sipariş detay”
                 adımlarını takip edin. <br></br>2. İade Kargo Kodu Oluştur
                 butonuna tıklayın. <br></br>3. İade edilecek ürün ve iade nedeni
                 seçin. Aynı üründen birden fazla satın aldıysanız iade edilecek
@@ -296,59 +342,13 @@ function MyCart() {
                   borderRadius: "12px",
                 }}
               >
-                1. "Hesabım" > “Siparişlerim'' > “Sipariş detay” adımlarını
-                takip edin. <br></br>2. İade Kargo Kodu Oluştur butonuna
-                tıklayın. <br></br>3. İade edilecek ürün ve iade nedeni seçin.
-                Aynı üründen birden fazla satın aldıysanız iade edilecek ürün
-                adedini de seçmeniz gerekir. <br></br>4. İade etmek istediğiniz
-                ürünlerin uygunluğuna göre size önerilen iade yöntemlerinden
-                birini seçin.
-                <br></br>5. Birden fazla kargo seçeneği çıktığı durumda kargo
-                seçiminizi yapın. <br></br>6. Ekranda çıkan iade kargo kodunu
-                not alın. İade kargo kodunuza siparişlerim sayfasından da
-                ulaşabilirsiniz. <br></br>7. İade kodu aynı olan ürünleri
-                faturasıyla beraber aynı pakete koyun ve paketin sağlam
-                olduğundan emin olun. <br></br>8. İade kodu farklı olan ürünler
-                aynı kargoya verilse bile farklı paketler halinde verilmelidir.{" "}
-                <br></br>9. Seçtiğiniz iade yöntemine göre 7 gün içinde
-                paketinizi seçeceğiniz gel al noktası veya kargo şubesine teslim
-                edin veya randevu gününde adresinize gelecek görevliye teslim
-                edin. <br></br>10. 7 günü geçirdiğiniz durumda yeniden iade
-                kargo kodu almanız gerekir. <br></br>
-                <br></br>İade Koşulları: <br></br>1. Ürünün paketi hasar
-                görmemiş ve kullanılmamış olması gerekmektedir.<br></br>2-
-                Ürünün tüm aksesuarları ve orijinal kutusu ile beraber iade
-                edilmesi gerekmektedir. <br></br>3- Aşağıdaki ürün gruplarının
-                ambalajı açılmamış, denenmemiş, bozulmamış ve kullanılmamış
-                olmaları halinde iadesi kabul edilir. • Sağlık ve hijyen
-                açısından uygun olmayan ürünlerin (Kozmetik ve kişisel bakım
-                ürünleri,parfüm, epilatör, tıraş makinesi, kulaklık, iç giyim
-                ürünleri, mayo, bikini vb.) • Kopyalanabilir yazılım ve
-                programlar (DVD, VCD, CD, kasetler vb.) • Kitap ve kırtasiye
-                sarf malzemeleri (toner, kartuş, şerit vb.) <br></br>4- Tek
-                kullanımlık ürünlerin ve hızlı bozulan veya son kullanma tarihi
-                geçme ihtimali olan ürünlerin iadesi kabul edilmemektedir.
-              </p>
-              <h5 style={{ marginTop: "2rem", marginBottom: "1rem" }}>
-                Ön Bilgilendirme Formu
-              </h5>
-              <p
-                style={{
-                  padding: "2rem",
-                  overflowY: "scroll",
-                  height: "30px",
-                  fontSize: "13px",
-                  border: "1px solid gray",
-                  borderRadius: "12px",
-                }}
-              >
                 Nasıl İade Ederim? <br></br>
-                <br></br>1. "Hesabım" > “Siparişlerim'' > “Sipariş detay”
-                adımlarını takip edin. <br></br>2. İade Kargo Kodu Oluştur
-                butonuna tıklayın. <br></br>3. İade edilecek ürün ve iade nedeni
-                seçin. Aynı üründen birden fazla satın aldıysanız iade edilecek
-                ürün adedini de seçmeniz gerekir. <br></br>4. İade etmek
-                istediğiniz ürünlerin uygunluğuna göre size önerilen iade
+                <br></br>1. "Hesabım" {">"} “Siparişlerim'' {">"} “Sipariş
+                detay” adımlarını takip edin. <br></br>2. İade Kargo Kodu
+                Oluştur butonuna tıklayın. <br></br>3. İade edilecek ürün ve
+                iade nedeni seçin. Aynı üründen birden fazla satın aldıysanız
+                iade edilecek ürün adedini de seçmeniz gerekir. <br></br>4. İade
+                etmek istediğiniz ürünlerin uygunluğuna göre size önerilen iade
                 yöntemlerinden birini seçin.
                 <br></br>5. Birden fazla kargo seçeneği çıktığı durumda kargo
                 seçiminizi yapın. <br></br>6. Ekranda çıkan iade kargo kodunu

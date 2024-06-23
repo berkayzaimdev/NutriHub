@@ -5,6 +5,7 @@ using NutriHub.Application.Abstractions.Services;
 using NutriHub.Application.Enums;
 using NutriHub.Application.Features.Orders.Commands;
 using NutriHub.Domain.Entities;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace NutriHub.Application.Features.Orders.Handlers
 {
@@ -42,6 +43,15 @@ namespace NutriHub.Application.Features.Orders.Handlers
 
         public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
+            var user = await _userManager.FindByIdAsync(request.UserId);
+
+            if (user is null)
+            {
+                throw new Exception("null");
+            }
+
+            _user = user;
+
             var addresses = await _addressRepository.GetAllAsync();
             request.AddressId = addresses.FirstOrDefault().Id;
 
@@ -66,13 +76,6 @@ namespace NutriHub.Application.Features.Orders.Handlers
                 CouponId = coupon is not null ? coupon.CouponId : null,
                 UserId = request.UserId,
             };
-
-            _user = await _userManager.FindByIdAsync(request.UserId);
-
-            if(_user is null)
-            {
-                throw new NullReferenceException();
-            }
 
             await CreateOrderAsync(newOrder, request.UserId);
 

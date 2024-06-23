@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "../pages/Home.css";
-import image1 from "../images/image1.png";
-import image2 from "../images/image2.png";
-import image3 from "../images/image3.png";
+import "../Home/Home.css";
+import image1 from "../../images/image1.png";
+import image2 from "../../images/image2.png";
+import image3 from "../../images/image3.png";
 
-import HomeProduct from "../components/HomeProduct";
-import HomeBlogCard from "../components/HomeBlogCard";
+import HomeProduct from "../../components/HomeProduct";
+import HomeBlogCard from "../../components/HomeBlogCard";
 
 function Home() {
   const images = [image1, image2, image3];

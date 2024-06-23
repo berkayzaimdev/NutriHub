@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./Product.css";
-import image1 from "../images/image1.png";
-import HomeProduct from "../components/HomeProduct";
-import ProductCard from "../components/ProductCard";
+import "../Product/Product.css";
+import image1 from "../../images/image1.png";
+import HomeProduct from "../../components/HomeProduct";
+import ProductCard from "../../components/ProductCard";
 
 function Product() {
   const [heartName, setHeartName] = useState("ri-heart-line");

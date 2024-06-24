@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../pages/Products.css";
-import ProductCard from "../components/ProductCard";
+import "../Products/Products.css";
+import ProductCard from "../../components/ProductCard";
 
 function Products() {
   const [selectedArrangement, setSelectedArrangement] = useState("");

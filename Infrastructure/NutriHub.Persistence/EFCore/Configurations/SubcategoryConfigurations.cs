@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Persistence.EFCore.Configurations
 {
-    public class SubcategoryConfiguration : IEntityTypeConfiguration<Subcategory>
+    public class SubcategoryConfigurations : IEntityTypeConfiguration<Subcategory>
     {
         public void Configure(EntityTypeBuilder<Subcategory> builder)
         {

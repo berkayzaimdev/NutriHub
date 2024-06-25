@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Models.Base;
 
 namespace NutriHub.WebAPI.Controllers
 {
-    public class BaseController : ControllerBase
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ApiController : ControllerBase
     {
+        private IMediator? mediator;
+
+        protected IMediator _mediator
+            => mediator ??= HttpContext
+                .RequestServices
+                .GetService<IMediator>()!;
+
         protected string UserId 
         {
             get {

@@ -7,15 +7,13 @@ using NutriHub.Application.Models.Requests;
 
 namespace NutriHub.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : BaseController
+    public class ProductsController : ApiController
     {
-        private readonly IMediator _mediator;
+        private readonly ILogger<ProductsController> _logger;
 
-        public ProductsController(IMediator mediator)
+        public ProductsController(ILogger<ProductsController> logger)
         {
-            _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -25,6 +23,7 @@ namespace NutriHub.WebAPI.Controllers
         {
             var query = new GetProductsQuery(pageNumber, pageSize);
             var values = await _mediator.Send(query);
+            _logger.LogWarning("test");
             return Ok(values);
         }
 

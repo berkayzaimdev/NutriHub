@@ -7,17 +7,8 @@ using NutriHub.Application.Features.Users.Queries;
 
 namespace NutriHub.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : BaseController
+    public class UsersController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public UsersController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync(RegisterCommand command)
         {

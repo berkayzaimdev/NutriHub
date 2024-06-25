@@ -8,7 +8,7 @@ namespace NutriHub.Application.Exceptions
 {
     public class ItemNotFoundException : Exception
     {
-        public ItemNotFoundException(string message) : base("testnotfound")
+        public ItemNotFoundException(string message) : base(message)
         {
         }
     }

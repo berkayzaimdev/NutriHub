@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using System.Net.Mail;
 using System.Net;
 using NutriHub.Persistence.Configurations;
+using NutriHub.Persistence.Logging;
 
 namespace NutriHub.WebAPI.Extensions
 {

@@ -8,17 +8,8 @@ using NutriHub.Application.Models.Requests;
 
 namespace NutriHub.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CommentsController : BaseController
+    public class CommentsController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public CommentsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [Authorize]
         [HttpPost("create-comment")]
         public async Task<IActionResult> CreateCommentAsync(CreateCommentRequest request)

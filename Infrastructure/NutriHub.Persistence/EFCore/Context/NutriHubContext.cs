@@ -26,6 +26,7 @@ namespace NutriHub.Persistence.EFCore.Context
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<AppliedCoupon> AppliedCoupons { get; set; }
         public DbSet<Point> Points { get; set; }
+        public DbSet<LogEntry> LogEntries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

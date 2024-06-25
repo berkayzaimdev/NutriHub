@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Abstractions.Services;
 using NutriHub.Application.Enums;
+using NutriHub.Application.Exceptions;
 using NutriHub.Application.Features.Orders.Commands;
 using NutriHub.Domain.Entities;
 using Org.BouncyCastle.Asn1.Ocsp;
@@ -47,7 +48,7 @@ namespace NutriHub.Application.Features.Orders.Handlers
 
             if (user is null)
             {
-                throw new Exception("null");
+                throw new UnauthorizedAccessException();
             }
 
             _user = user;

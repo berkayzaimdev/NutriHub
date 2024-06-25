@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./Pagination.css"; // CSS dosyasını içe aktarma
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const handleClick = (page) => {
@@ -27,21 +28,23 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   return (
     <nav>
       <ul className="pagination">
-        <li
-          className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
-          onClick={() => handleClick(currentPage - 1)}
-        >
-          <span className="page-link">Previous</span>
-        </li>
+        {currentPage > 1 && (
+          <li
+            className="page-item"
+            onClick={() => handleClick(currentPage - 1)}
+          >
+            <span className="page-link">&lt;</span>
+          </li>
+        )}
         {renderPageNumbers()}
-        <li
-          className={`page-item ${
-            currentPage === totalPages ? "disabled" : ""
-          }`}
-          onClick={() => handleClick(currentPage + 1)}
-        >
-          <span className="page-link">Next</span>
-        </li>
+        {currentPage < totalPages && (
+          <li
+            className="page-item"
+            onClick={() => handleClick(currentPage + 1)}
+          >
+            <span className="page-link">&gt;</span>
+          </li>
+        )}
       </ul>
     </nav>
   );

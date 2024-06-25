@@ -5,17 +5,8 @@ using NutriHub.Application.Features.Categories.Queries;
 
 namespace NutriHub.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CategoriesController : ControllerBase
+    public class CategoriesController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public CategoriesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetAllCategoriesAsync()
         {

@@ -8,16 +8,12 @@ using NutriHub.Application.Features.Orders.Commands;
 
 namespace NutriHub.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OrdersController : BaseController
+    public class OrdersController : ApiController
     {
-        private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public OrdersController(IMediator mediator, IMapper mapper)
+        public OrdersController(IMapper mapper)
         {
-            _mediator = mediator;
             _mapper = mapper;
         }
 

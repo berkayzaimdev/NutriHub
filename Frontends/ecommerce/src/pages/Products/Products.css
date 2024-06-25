@@ -1,77 +1,138 @@
+/* Güncellenmiş CSS */
 
-.products{
-    margin:1rem 8rem;
-    margin-top: 13rem;
-}
-.products_categories{
-    display: flex;
-    column-gap: .6rem;
-}
-
-.products_categories i{
-    color: var(--text-color);
+.products {
+  margin: 1rem 8rem;
+  margin-top: 13rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.products_categories p:hover{
-    color: var(--text-color);
-    cursor: pointer;
+.products_categories {
+  display: flex;
+  align-items: center;
+  column-gap: 0.6rem;
 }
 
-
-.products_productTrailer{
-    padding: 1.5rem;
-    background-color: black;
-    color: white;
-}
-.products_productTrailer p{
-    margin-top: 1rem ;
-    font-size: 14px;
+.products_categories i {
+  color: var(--text-color);
 }
 
-.products_allProducts{
-    display: flex;
+.products_categories p:hover {
+  color: var(--text-color);
+  cursor: pointer;
 }
 
-.products_filterRow{
-    margin: .5rem 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.products_allProducts {
+  display: flex;
+  flex-wrap: nowrap; /* Responsive için wrap kaldırıldı */
+  gap: 1rem; /* Araya boşluk eklendi */
+  width: 100%;
+  align-items: flex-start; /* Filtre ve ürünlerin üst hizalanmasını sağlar */
 }
-.products_filterRow select{
-    padding:.5rem;
-    font-size: 17px;
+
+.products_filterProducts {
+  flex: 0 0 250px; /* Minimum genişlik ayarlandı */
+  max-width: 250px; /* Maksimum genişlik ayarlandı */
+  padding: 1rem;
+  border-right: 1px solid #ccc;
+  box-sizing: border-box;
+  height: fit-content; /* İçeriğe göre yükseklik */
+}
+
+.products_productCardContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.products_productTrailer {
+  padding: 1.5rem;
+  background-color: black;
+  color: white;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.products_productTrailer p {
+  margin-top: 1rem;
+  font-size: 14px;
+}
+
+.products_filterRow {
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.products_filterRow select {
+  padding: 0.5rem;
+  font-size: 17px;
 }
 
 .products_productCards {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    column-gap: .5rem;
-    row-gap: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem; /* Satır ve sütun boşlukları */
+  justify-content: flex-start; /* Kartları sola hizala */
 }
 
-.products_filterProducts-brand, .products_filterProducts-subcategories, .products_filterProducts-price {
-    margin-bottom: 1rem;
-    width: 200px;
-    border: 1px solid gray;
-    border-radius: 12px;
-    padding: 1rem;
+.products_productCards > .product-card {
+  flex: 1 1 calc(25% - 1.5rem); /* 4 ürün yan yana dizilir */
+  box-sizing: border-box;
+  max-width: calc(25% - 1.5rem); /* 4 ürün yan yana dizilir */
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.products_filterProducts-brand label, .products_filterProducts-subcategories label{
-    display: block;
+.products_productCards .product-card img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.products_filterProducts-brand p, .products_filterProducts-price p, .products_filterProducts-subcategories p{
-    margin-bottom: 1rem;
+.products_productCards .product-card-content {
+  padding: 1rem;
+  text-align: center;
 }
 
-
-.products_productCardContainer{
-    margin-left: 1rem;
+.products_filterProducts-brand,
+.products_filterProducts-subcategories,
+.products_filterProducts-price {
+  margin-bottom: 1rem;
+  width: 85%;
+  border: 1px solid gray;
+  border-radius: 12px;
+  padding: 1rem;
 }
 
-.products_filterProducts-price input{
-    margin-bottom: .4rem;
+.products_filterProducts-brand label,
+.products_filterProducts-subcategories label {
+  display: block;
+}
+
+.products_filterProducts-brand p,
+.products_filterProducts-price p,
+.products_filterProducts-subcategories p {
+  margin-bottom: 1rem;
+}
+
+.products_filterProducts-price input {
+  margin-bottom: 0.4rem;
+  width: 100%; /* Genişlikleri tam yap */
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }

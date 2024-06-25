@@ -1,21 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Exceptions;
 using NutriHub.Application.Features.Subcategories.Commands;
 using NutriHub.Application.Features.Subcategories.Queries;
 
 namespace NutriHub.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SubcategoriesController : BaseController
+    public class SubcategoriesController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public SubcategoriesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpPost]
         public async Task<IActionResult> CreateSubcategoryAsync(CreateSubcategoryCommand command)
         {
@@ -37,11 +29,18 @@ namespace NutriHub.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetSubcategoryById([FromRoute] int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSubcategoryById(int id)
         {
-            var values = await _mediator.Send(new GetSubcategoryByIdQuery(id));
-            return Ok(values);
+            try 
+            {
+                var value = await _mediator.Send(new GetSubcategoryByIdQuery(id));
+                return Ok(value);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("get-subcategory-detail/{id}")]

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NutriHub.Persistence.EFCore.Context;
 
@@ -11,9 +12,11 @@ using NutriHub.Persistence.EFCore.Context;
 namespace NutriHub.WebAPI.Migrations
 {
     [DbContext(typeof(NutriHubContext))]
-    partial class NutriHubContextModelSnapshot : ModelSnapshot
+    [Migration("20240625073109_add_log")]
+    partial class add_log
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

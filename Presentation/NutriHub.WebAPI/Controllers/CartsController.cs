@@ -10,17 +10,8 @@ using System.Net;
 namespace NutriHub.WebAPI.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CartsController : BaseController
+    public class CartsController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public CartsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet("get-cart-detail")]
         public async Task<IActionResult> GetCartDetail()
         {

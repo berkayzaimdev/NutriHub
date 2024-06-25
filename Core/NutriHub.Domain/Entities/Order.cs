@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,13 @@ namespace NutriHub.Domain.Entities
         public PaymentMethod PaymentMethod { get; set; }
         public string Note { get; set; }
         public decimal Amount { get; set; }
+        [Precision(18, 2)]
         public decimal CouponDiscount { get; set; } = 0;
+        [Precision(18, 2)]
         public decimal MembershipDiscount { get; set; } = 0;
+        [Precision(18, 2)]
         public decimal ProductDiscount { get; set; } = 0;
+        [Precision(18, 2)]
         public decimal PaymentMethodDiscount { get; set; } = 0;
         public int EarnedPoints { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;

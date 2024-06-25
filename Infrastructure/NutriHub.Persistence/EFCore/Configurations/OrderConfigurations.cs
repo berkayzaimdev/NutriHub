@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NutriHub.Persistence.EFCore.Configurations
 {
-    public class OrderConfiguration : IEntityTypeConfiguration<Order>
+    public class OrderConfigurations : IEntityTypeConfiguration<Order>
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
@@ -17,6 +17,9 @@ namespace NutriHub.Persistence.EFCore.Configurations
                 .WithMany(u => u.Orders)
                 .HasForeignKey(o => o.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(c => c.Amount)
+                .HasPrecision(18, 2);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace NutriHub.Domain.Entities
         public string Description { get; set; }
         public string CardImageUrl { get; set; }
         public string LargeImageUrl { get; set; }
+        [Precision(18, 2)]
         public decimal Price { get; set; }
         public int Stock { get; set; }
 
@@ -25,6 +27,6 @@ namespace NutriHub.Domain.Entities
         public int SubcategoryId { get; set; }
         public Subcategory Subcategory { get; set; }
 
-        public IEnumerable<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

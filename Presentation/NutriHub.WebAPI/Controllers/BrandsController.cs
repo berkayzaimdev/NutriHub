@@ -6,17 +6,8 @@ using NutriHub.Application.Features.Queries.BrandQueries;
 
 namespace NutriHub.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BrandsController : ControllerBase
+    public class BrandsController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public BrandsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpPost]
         public async Task<IActionResult> CreateBrandAsync(CreateBrandCommand command)
         {

@@ -1,5 +1,6 @@
 using MediatR;
 using NutriHub.Application.Features;
+using NutriHub.Persistence.Logging;
 using NutriHub.WebAPI.Extensions;
 using NutriHub.WebAPI.Middlewares;
 using System.Reflection;
@@ -30,6 +31,14 @@ builder.Services.ConfigureSMTP(builder.Configuration);
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
+
+builder.Services.AddLogging(config =>
+{
+    config.ClearProviders();
+    config.AddConsole();
+});
+
+builder.Services.AddSingleton<ILoggerProvider, DatabaseLoggerProvider>();
 
 builder.Services.AddCors(options =>
 {

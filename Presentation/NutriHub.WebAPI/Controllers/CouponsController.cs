@@ -10,17 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NutriHub.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CouponsController : BaseController
+    public class CouponsController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public CouponsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetCouponsAsync()
         {

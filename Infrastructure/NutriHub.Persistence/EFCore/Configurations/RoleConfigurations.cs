@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace NutriHub.Persistence.EFCore.Configurations
 {
-    public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
+    public class RoleConfigurations : IEntityTypeConfiguration<IdentityRole>
     {
         public void Configure(EntityTypeBuilder<IdentityRole> builder)
         {

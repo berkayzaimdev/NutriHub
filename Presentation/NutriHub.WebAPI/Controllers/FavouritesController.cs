@@ -10,17 +10,8 @@ using NutriHub.Domain.Entities;
 
 namespace NutriHub.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class FavouritesController : BaseController
+    public class FavouritesController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public FavouritesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [Authorize]
         [HttpGet("get-favourites-by-user-id")]
         public async Task<IActionResult> GetFavouritesByUserIdAsync()

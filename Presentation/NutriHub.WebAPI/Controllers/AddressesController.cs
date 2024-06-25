@@ -11,15 +11,8 @@ namespace NutriHub.WebAPI.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class AddressesController : BaseController
+    public class AddressesController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public AddressesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpPost]
         public async Task<IActionResult> CreateAddressAsync(CreateAddressRequest request)
         {

@@ -20,7 +20,7 @@ namespace NutriHub.WebAPI.Controllers
             {
                 Name = request.Name,
                 Surname = request.Surname,
-                Title =request.Title,
+                Title = request.Title,
                 Description = request.Description,
                 Province = request.Province,
                 District = request.District,

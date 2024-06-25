@@ -14,7 +14,7 @@ namespace NutriHub.WebAPI.Controllers
             return Ok(values);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet(Id)]
         public async Task<IActionResult> GetByCategoryIdAsync(int id)
         {
             var values = await _mediator.Send(new GetCategoryByIdQuery(id));

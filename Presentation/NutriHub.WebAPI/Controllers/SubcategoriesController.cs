@@ -29,7 +29,7 @@ namespace NutriHub.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet(Id)]
         public async Task<IActionResult> GetSubcategoryById(int id)
         {
             try 

@@ -10,6 +10,8 @@ namespace NutriHub.WebAPI.Controllers
     [Route("api/[controller]")]
     public class ApiController : ControllerBase
     {
+        protected const string Id = "{id}";
+
         private IMediator? mediator;
 
         protected IMediator _mediator

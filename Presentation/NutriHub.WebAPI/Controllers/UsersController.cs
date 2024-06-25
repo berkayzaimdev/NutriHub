@@ -39,7 +39,7 @@ namespace NutriHub.WebAPI.Controllers
             return Ok(value);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete(Id)]
         public async Task<IActionResult> Delete()
         {
             await _mediator.Send(new RemoveUserCommand(UserId));

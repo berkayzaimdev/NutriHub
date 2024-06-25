@@ -27,7 +27,7 @@ namespace NutriHub.WebAPI.Controllers
             return Ok(values);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet(Id)]
         public async Task<IActionResult> GetProductByIdAsync(int id)
         {
             var value = await _mediator.Send(new GetProductByIdQuery(id));
@@ -48,7 +48,7 @@ namespace NutriHub.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete(Id)]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
             await _mediator.Send(new RemoveProductCommand(id));

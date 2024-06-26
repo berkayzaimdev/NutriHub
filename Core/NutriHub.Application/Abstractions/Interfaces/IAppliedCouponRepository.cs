@@ -9,6 +9,6 @@ namespace NutriHub.Application.Abstractions.Interfaces
 {
     public interface IAppliedCouponRepository : IRepository<AppliedCoupon>
     {
-        Task<AppliedCoupon> GetWithCouponAsync(string userId);
+        Task<AppliedCoupon?> GetWithCouponAsync(string userId);
     }
 }

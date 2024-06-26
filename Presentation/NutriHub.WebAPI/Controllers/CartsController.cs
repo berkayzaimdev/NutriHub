@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Abstractions.Services;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Carts.Commands;
 using NutriHub.Application.Features.Carts.Queries;
@@ -12,12 +13,20 @@ namespace NutriHub.WebAPI.Controllers
     [Authorize]
     public class CartsController : ApiController
     {
+        private readonly ICurrentUserService _currentUserService;
+
+        public CartsController(ICurrentUserService currentUserService)
+        {
+            _currentUserService = currentUserService;
+        }
+
         [HttpGet("get-cart-detail")]
         public async Task<IActionResult> GetCartDetail()
         {
             try 
             {
-                var values = await _mediator.Send(new GetCartDetailQuery(UserId));
+                var userId = _currentUserService.UserId;
+                var values = await _mediator.Send(new GetCartDetailQuery(userId));
                 _Response.SetStatus(HttpStatusCode.OK);
                 _Response.AddData(values);
             }
@@ -34,7 +43,8 @@ namespace NutriHub.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCartItemAsync(AddCartItemRequest request)
         {
-            await _mediator.Send(new AddCartItemCommand(request.ProductId, request.Quantity, UserId));
+            var userId = _currentUserService.UserId;
+            await _mediator.Send(new AddCartItemCommand(request.ProductId, request.Quantity, userId));
             return Ok();
         }
 

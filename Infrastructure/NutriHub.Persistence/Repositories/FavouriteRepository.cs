@@ -45,7 +45,7 @@ namespace NutriHub.Persistence.Repositories
         public async Task<int> GetProductFavouriteCountAsync(int productId)
         {
             var values = await GetAllAsync();
-            return values.Count(x => x.ProductId == productId);
+            return await values.CountAsync(x => x.ProductId == productId);
         }
     }
 }

@@ -7,11 +7,19 @@ using NutriHub.Application.Extensions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using NutriHub.Application.Abstractions.Services;
 
 namespace NutriHub.WebAPI.Controllers
 {
     public class CouponsController : ApiController
     {
+        private readonly ICurrentUserService _currentUserService;
+
+        public CouponsController(ICurrentUserService currentUserService)
+        {
+            _currentUserService = currentUserService;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetCouponsAsync()
         {
@@ -46,7 +54,8 @@ namespace NutriHub.WebAPI.Controllers
         {
             try 
             {
-                var value = await _mediator.Send(new GetAppliedCouponQuery(UserId));
+                var userId = _currentUserService.UserId;
+                var value = await _mediator.Send(new GetAppliedCouponQuery(userId));
                 return Ok(value);
             }
             catch(Exception ex)
@@ -61,7 +70,8 @@ namespace NutriHub.WebAPI.Controllers
         {
             try 
             {
-                await _mediator.Send(new ApplyCouponCommand(code, UserId));
+                var userId = _currentUserService.UserId;
+                await _mediator.Send(new ApplyCouponCommand(code, userId));
                 _Response.SetStatus(HttpStatusCode.OK);
             }
             catch (Exception ex) 
@@ -75,7 +85,8 @@ namespace NutriHub.WebAPI.Controllers
         [HttpDelete("deaapply-coupon")]
         public async Task<IActionResult> DeapplyCouponAsync()
         {
-            await _mediator.Send(new DeapplyCouponCommand(UserId));
+            var userId = _currentUserService.UserId;
+            await _mediator.Send(new DeapplyCouponCommand(userId));
             return NoContent();
         }
     }

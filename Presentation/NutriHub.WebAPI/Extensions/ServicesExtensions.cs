@@ -61,6 +61,7 @@ namespace NutriHub.WebAPI.Extensions
             services.AddScoped<IDiscountService, DiscountService>();
             services.AddScoped<IPdfService, PdfService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
         }
 
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)

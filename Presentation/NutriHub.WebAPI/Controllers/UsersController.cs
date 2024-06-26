@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Abstractions.Services;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Users.Commands;
 using NutriHub.Application.Features.Users.Queries;
@@ -9,6 +10,13 @@ namespace NutriHub.WebAPI.Controllers
 {
     public class UsersController : ApiController
     {
+        private readonly ICurrentUserService _currentUserService;
+
+        public UsersController(ICurrentUserService currentUserService)
+        {
+            _currentUserService = currentUserService;
+        }
+
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync(RegisterCommand command)
         {
@@ -26,7 +34,8 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("get-current-user")]
         public async Task<IActionResult> GetCurrentUserAsync()
         {
-            var query = new GetCurrentUserQuery(UserId);
+            var userId = _currentUserService.UserId;
+            var query = new GetCurrentUserQuery(userId);
             var value = await _mediator.Send(query);
             return Ok(value);
         }
@@ -34,7 +43,8 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("get-user-rank")]
         public async Task<IActionResult> GetUserRankAsync()
         {
-            var query = new GetUserRankQuery(UserId);
+            var userId = _currentUserService.UserId;
+            var query = new GetUserRankQuery(userId);
             var value = await _mediator.Send(query);
             return Ok(value);
         }
@@ -42,7 +52,7 @@ namespace NutriHub.WebAPI.Controllers
         [HttpDelete(Id)]
         public async Task<IActionResult> Delete()
         {
-            await _mediator.Send(new RemoveUserCommand(UserId));
+            await _mediator.Send(new RemoveUserCommand(Id));
             return NoContent();
         }
     }

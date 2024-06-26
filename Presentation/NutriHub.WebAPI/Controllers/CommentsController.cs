@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Abstractions.Services;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Comments.Commands;
 using NutriHub.Application.Features.Comments.Queries;
@@ -10,11 +11,19 @@ namespace NutriHub.WebAPI.Controllers
 {
     public class CommentsController : ApiController
     {
+        private readonly ICurrentUserService _currentUserService;
+
+        public CommentsController(ICurrentUserService currentUserService)
+        {
+            _currentUserService = currentUserService;
+        }
+
         [Authorize]
         [HttpPost("create-comment")]
         public async Task<IActionResult> CreateCommentAsync(CreateCommentRequest request)
         {
-            await _mediator.Send(new CreateCommentCommand(UserId,request.ProductId, request.Description, request.Rating));
+            var userId = _currentUserService.UserId;
+            await _mediator.Send(new CreateCommentCommand(userId, request.ProductId, request.Description, request.Rating));
             return Ok();
         }
 
@@ -22,7 +31,8 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("get-comments-by-user-id")]
         public async Task<IActionResult> GetCommentsByUserIdAsync()
         {
-            var values = await _mediator.Send(new GetCommentsByUserIdQuery(UserId));
+            var userId = _currentUserService.UserId;
+            var values = await _mediator.Send(new GetCommentsByUserIdQuery(userId));
             return Ok(values);
         }
 

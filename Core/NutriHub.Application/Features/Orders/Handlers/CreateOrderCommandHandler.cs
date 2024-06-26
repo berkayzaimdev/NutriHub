@@ -2,11 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Abstractions.Services;
-using NutriHub.Application.Enums;
-using NutriHub.Application.Exceptions;
 using NutriHub.Application.Features.Orders.Commands;
 using NutriHub.Domain.Entities;
-using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace NutriHub.Application.Features.Orders.Handlers
 {
@@ -26,20 +23,20 @@ namespace NutriHub.Application.Features.Orders.Handlers
         private readonly UserManager<User> _userManager;
         private User _user;
 
-        public CreateOrderCommandHandler(IProductRepository productRepository, ICartItemRepository cartItemRepository, IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IAppliedCouponRepository appliedCouponRepository, IDiscountService discountService, UserManager<User> userManager, IPointRepository pointRepository, IEmailService emailService, IPdfService pdfService, IAddressRepository addressRepository, IRoleService roleService)
+        public CreateOrderCommandHandler(IProductRepository productRepository, ICartItemRepository cartItemRepository, IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IAppliedCouponRepository appliedCouponRepository, IPointRepository pointRepository, IDiscountService discountService, IEmailService emailService, IPdfService pdfService, IAddressRepository addressRepository, IRoleService roleService, UserManager<User> userManager)
         {
             _productRepository = productRepository;
             _cartItemRepository = cartItemRepository;
             _orderRepository = orderRepository;
             _orderItemRepository = orderItemRepository;
             _appliedCouponRepository = appliedCouponRepository;
-            _discountService = discountService;
-            _userManager = userManager;
             _pointRepository = pointRepository;
+            _discountService = discountService;
             _emailService = emailService;
             _pdfService = pdfService;
             _addressRepository = addressRepository;
             _roleService = roleService;
+            _userManager = userManager;
         }
 
         public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -54,7 +51,7 @@ namespace NutriHub.Application.Features.Orders.Handlers
             _user = user;
 
             var addresses = await _addressRepository.GetAllAsync();
-            request.AddressId = addresses.FirstOrDefault().Id;
+            request.AddressId = addresses.First().Id; // TODO: will be fixed
 
             var coupon = await _appliedCouponRepository.GetWithCouponAsync(request.UserId);
             var amount = await _cartItemRepository.GetCartAmountByUserIdAsync(request.UserId);
@@ -127,7 +124,7 @@ namespace NutriHub.Application.Features.Orders.Handlers
 
         private int GetAddedDeliveredDay()
         {
-            return DateTime.Now.DayOfWeek switch // 2 gün gecikmeli teslimden dolayı, gün aralığını kontrol ettik
+            return DateTime.Now.DayOfWeek switch
             {
                 DayOfWeek.Thursday => 4,
                 DayOfWeek.Friday => 3,

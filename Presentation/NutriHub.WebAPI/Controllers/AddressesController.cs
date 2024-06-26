@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Abstractions.Services;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Addresses.Commands;
 using NutriHub.Application.Features.Addresses.Queries;
@@ -13,6 +14,12 @@ namespace NutriHub.WebAPI.Controllers
     [ApiController]
     public class AddressesController : ApiController
     {
+        private readonly ICurrentUserService _currentUserService;
+        public AddressesController(ICurrentUserService currentUserService)
+        {
+            _currentUserService = currentUserService;
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateAddressAsync(CreateAddressRequest request)
         {
@@ -49,7 +56,8 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAddressesByUserIdAsync()
         {
-            var values = await _mediator.Send(new GetAddressesByUserIdQuery(UserId));
+            var userId = _currentUserService.UserId;
+            var values = await _mediator.Send(new GetAddressesByUserIdQuery(userId));
             return Ok(values);
         }
     }

@@ -16,10 +16,10 @@ namespace NutriHub.Persistence.Repositories
         {
         }
 
-        public async Task<AppliedCoupon> GetWithCouponAsync(string userId)
+        public async Task<AppliedCoupon?> GetWithCouponAsync(string userId)
         {
             var values = await GetAllAsync();
-            var value = await values.Where(x => x.UserId == userId).Include(x => x.Coupon).SingleOrDefaultAsync();
+            var value = await values.Include(x => x.Coupon).SingleOrDefaultAsync(x => x.UserId == userId);
             return value;
         }
     }

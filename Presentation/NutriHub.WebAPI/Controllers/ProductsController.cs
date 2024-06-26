@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NutriHub.Application.Abstractions.Services;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Products.Commands;
 using NutriHub.Application.Features.Products.Queries;
@@ -10,10 +11,12 @@ namespace NutriHub.WebAPI.Controllers
     public class ProductsController : ApiController
     {
         private readonly ILogger<ProductsController> _logger;
+        private readonly ICurrentUserService _currentUserService;
 
-        public ProductsController(ILogger<ProductsController> logger)
+        public ProductsController(ILogger<ProductsController> logger, ICurrentUserService currentUserService)
         {
             _logger = logger;
+            _currentUserService = currentUserService;
         }
 
         [HttpGet]
@@ -58,14 +61,15 @@ namespace NutriHub.WebAPI.Controllers
         [HttpGet("get-product-cards")]
         public async Task<IActionResult> GetProductCardsAsync([FromQuery] int pageNumber = 1, int pageSize = 10)
         {
-            var value = await _mediator.Send(new GetProductCardsQuery(UserId, pageNumber, pageSize));
+            var userId = _currentUserService.UserId;
+            var value = await _mediator.Send(new GetProductCardsQuery(userId, pageNumber, pageSize));
             return Ok(value);
         }
 
         [HttpGet("get-product-detail/{productId}")]
         public async Task<IActionResult> GetProductDetailAsync(int productId)
         {
-            var userId = UserId;
+            var userId = _currentUserService.UserId;
             var value = await _mediator.Send(new GetProductDetailQuery(productId, userId));
             return Ok(value);
         }

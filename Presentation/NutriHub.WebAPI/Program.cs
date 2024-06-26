@@ -24,6 +24,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly: As
 
 builder.Services.ConfigureJWT(builder.Configuration);
 
+builder.Services.AddPersistenceInterfaces();
+
 builder.Services.AddPersistenceServices();
 
 builder.Services.AddAutoMapper(typeof(Program));
@@ -31,6 +33,10 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.ConfigureSwagger();
 
 builder.Services.ConfigureSMTP(builder.Configuration);
+
+builder.Services.ConfigureRedis(builder.Configuration);
+
+builder.Services.ConfigurElasticSearch(builder.Configuration);
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
@@ -40,16 +46,6 @@ builder.Services.AddLogging(config =>
     config.ClearProviders();
     config.AddConsole();
 });
-
-builder.Services.AddSingleton<ILoggerProvider, DatabaseLoggerProvider>();
-
-builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
-{
-    var configuration = ConfigurationOptions.Parse(builder.Configuration["Redis:ConnectionString"], true);
-    return ConnectionMultiplexer.Connect(configuration);
-});
-
-builder.Services.AddScoped<RedisCacheService>();
 
 builder.Services.AddCors(options =>
 {

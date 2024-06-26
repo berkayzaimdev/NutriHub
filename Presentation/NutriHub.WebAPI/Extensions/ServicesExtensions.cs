@@ -15,6 +15,9 @@ using System.Net.Mail;
 using System.Net;
 using NutriHub.Persistence.Configurations;
 using NutriHub.Persistence.Logging;
+using Nest;
+using Elasticsearch.Net;
+using StackExchange.Redis;
 
 namespace NutriHub.WebAPI.Extensions
 {
@@ -37,9 +40,9 @@ namespace NutriHub.WebAPI.Extensions
                 .AddDefaultTokenProviders();
         }
 
-        public static void AddPersistenceServices(this IServiceCollection services)
+        public static void AddPersistenceInterfaces(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(Application.Abstractions.Interfaces.IRepository<>), typeof(Repository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
@@ -52,7 +55,10 @@ namespace NutriHub.WebAPI.Extensions
             services.AddScoped<ICouponRepository, CouponRepository>();
             services.AddScoped<IAppliedCouponRepository, AppliedCouponRepository>();
             services.AddScoped<IPointRepository, PointRepository>();
+        }
 
+        public static void AddPersistenceServices(this IServiceCollection services)
+        {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IEmailService, EmailService>();
@@ -63,6 +69,9 @@ namespace NutriHub.WebAPI.Extensions
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddSingleton<SearchService>();
+
+            services.AddSingleton<ILoggerProvider, DatabaseLoggerProvider>();
         }
 
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
@@ -130,6 +139,29 @@ namespace NutriHub.WebAPI.Extensions
                     Credentials = new NetworkCredential(smtpSettings.Username, smtpSettings.Password),
                     EnableSsl = smtpSettings.EnableSsl
                 };
+            });
+        }
+
+        public static void ConfigureRedis(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton<IConnectionMultiplexer>(sp =>
+            {
+                var redisConfiguration = ConfigurationOptions.Parse(configuration["Redis:ConnectionString"]!, true);
+                return ConnectionMultiplexer.Connect(redisConfiguration);
+            });
+
+            services.AddScoped<RedisCacheService>();
+        }
+
+        public static void ConfigurElasticSearch(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton<IElasticClient>(sp =>
+            {
+                var configuration = sp.GetRequiredService<IConfiguration>();
+                var settings = new ConnectionSettings(new Uri(configuration["ElasticSearch:Uri"]!))
+                    .ServerCertificateValidationCallback(CertificateValidations.AllowAll)
+                    .BasicAuthentication(configuration["ElasticSearch:Username"], configuration["ElasticSearch:Password"]);
+                return new ElasticClient(settings);
             });
         }
     }

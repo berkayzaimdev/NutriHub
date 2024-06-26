@@ -60,7 +60,7 @@ namespace NutriHub.WebAPI.Controllers
             }
             catch(Exception ex)
             {
-                return NotFound();
+                return NotFound(ex.Message);
             }
         }
 

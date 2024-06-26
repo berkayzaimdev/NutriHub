@@ -1,13 +1,16 @@
 using MediatR;
 using NutriHub.Application.Features;
 using NutriHub.Persistence.Logging;
+using NutriHub.Persistence.Services;
 using NutriHub.WebAPI.Extensions;
 using NutriHub.WebAPI.Middlewares;
+using StackExchange.Redis;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -17,7 +20,7 @@ builder.Services.ConfigureIdentity();
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetAssembly(typeof(MediatorAssembly))));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly: Assembly.GetAssembly(typeof(MediatorAssembly))));
 
 builder.Services.ConfigureJWT(builder.Configuration);
 
@@ -39,6 +42,14 @@ builder.Services.AddLogging(config =>
 });
 
 builder.Services.AddSingleton<ILoggerProvider, DatabaseLoggerProvider>();
+
+builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
+{
+    var configuration = ConfigurationOptions.Parse(builder.Configuration["Redis:ConnectionString"], true);
+    return ConnectionMultiplexer.Connect(configuration);
+});
+
+builder.Services.AddScoped<RedisCacheService>();
 
 builder.Services.AddCors(options =>
 {

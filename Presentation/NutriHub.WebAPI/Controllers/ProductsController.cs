@@ -4,6 +4,7 @@ using NutriHub.Application.Abstractions.Services;
 using NutriHub.Application.Extensions;
 using NutriHub.Application.Features.Products.Commands;
 using NutriHub.Application.Features.Products.Queries;
+using NutriHub.Application.Features.Products.Queries.GetById;
 using NutriHub.Application.Models.Requests;
 
 namespace NutriHub.WebAPI.Controllers

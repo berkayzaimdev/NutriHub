@@ -16,6 +16,27 @@ namespace NutriHub.Persistence.Repositories
             _favouriteRepository = favouriteRepository;
         }
 
+        public async Task<Product> GetProductByIdAsync(int productId)
+        {
+            var product = await GetAsync(productId);
+
+            if (product is null)
+            {
+                throw new ItemNotFoundException("");
+            }
+
+            var allProducts = await GetAllAsync();
+
+            product = await allProducts
+                .Include(x => x.Brand)
+                .Include(x => x.Category)
+                .Include(x => x.Subcategory)
+                .Include(x => x.Comments).ThenInclude(x => x.User)
+                .SingleAsync(x => x.Id == productId)!;
+
+            return product;
+        }
+
         public async Task<IEnumerable<Product>> GetProductsByIdsAsync(int[] ids)
         {
             var values = await GetAllAsync();

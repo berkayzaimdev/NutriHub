@@ -97,6 +97,12 @@ namespace NutriHub.Persistence.Repositories
         }
 
 
-        public async Task<T?> GetAsync(object id) => await _context.Set<T>().FindAsync(id);
+        public async Task<T> GetAsync(object id)
+        {
+            var value = await _context.Set<T>().FindAsync(id);
+            if (value is null) throw new ItemNotFoundException($"Entity {nameof(T)} with ID {id} not found.");
+
+            return value;
+        }
     }
 }

@@ -15,8 +15,13 @@ namespace NutriHub.Application.Helpers
             {
                 var principal = Thread.CurrentPrincipal as ClaimsPrincipal;
 
+                if(principal is null)
+                {
+                    throw new Exception();
+                }
+
                 var userId = principal.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
-                    .Select(c => c.Value).SingleOrDefault();
+                    .Select(c => c.Value).Single();
 
                 return userId;
             }

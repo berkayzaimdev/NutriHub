@@ -91,7 +91,6 @@ namespace NutriHub.Application.Features.Orders.Handlers
             var productQuantities = cartItems.ToDictionary(x => x.ProductId, x => x.Quantity);
 
             await _productRepository.DecreaseStockByCartItemsAsync(productQuantities);
-            await _orderRepository.CreateAsync(order);
 
             var orderItems = cartItems.Select(ci => new OrderItem
             {
@@ -100,7 +99,11 @@ namespace NutriHub.Application.Features.Orders.Handlers
                 Quantity = ci.Quantity,
             });
 
-            await _orderItemRepository.CreateAllAsync(orderItems);
+            foreach (var item in orderItems) {
+                order.OrderItems.Add(item);
+            }
+
+            await _orderRepository.CreateAsync(order);
 
             var orderWithDetails = await _orderRepository.GetDetailsAsync(order.Id);
 

@@ -35,7 +35,7 @@ namespace NutriHub.Domain.Entities
         public string UserId { get; set; }
         public User User { get; set; }
 
-        public IEnumerable<OrderItem> OrderItems { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 
     public enum PaymentMethod

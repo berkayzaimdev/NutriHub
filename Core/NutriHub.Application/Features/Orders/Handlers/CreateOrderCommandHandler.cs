@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using NutriHub.Application.Abstractions.Interfaces;
 using NutriHub.Application.Abstractions.Services;
 using NutriHub.Application.Features.Orders.Commands;
+using NutriHub.Application.Helpers;
 using NutriHub.Domain.Entities;
 
 namespace NutriHub.Application.Features.Orders.Handlers
@@ -61,7 +62,7 @@ namespace NutriHub.Application.Features.Orders.Handlers
             var newOrder = new Order
             {
                 Note = request.Note,
-                OrderCode = GenerateRandomOrderCode(),
+                OrderCode = OrderHelper.GenerateRandomOrderCode(),
                 PaymentMethod = request.PaymentMethod,
                 Amount = amount,
                 CouponDiscount = discounts.CouponDiscount,
@@ -69,7 +70,7 @@ namespace NutriHub.Application.Features.Orders.Handlers
                 ProductDiscount = discounts.ProductDiscount,
                 PaymentMethodDiscount = discounts.PaymentMethodDiscount,
                 EarnedPoints = (int)Math.Ceiling(amount * 3),
-                DeliveredDate = DateTime.Now.AddDays(GetAddedDeliveredDay()),
+                DeliveredDate = OrderHelper.GetDeliveredDate(),
                 AddressId = request.AddressId,
                 CouponId = coupon is not null ? coupon.CouponId : null,
                 UserId = request.UserId,
@@ -113,26 +114,6 @@ namespace NutriHub.Application.Features.Orders.Handlers
             var cartItemProductIds = cartItems.Select(x => x.ProductId);
             await _cartItemRepository.DeleteAllAsync(cartItems);
             await _cartItemRepository.RemoveCartItemsIfOutOfStockAsync(cartItemProductIds);
-        }
-
-        private static string GenerateRandomOrderCode()
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var random = new Random();
-            var randomString = new string(Enumerable.Repeat(chars, 6)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
-
-            return $"S-{randomString}";
-        }
-
-        private int GetAddedDeliveredDay()
-        {
-            return DateTime.Now.DayOfWeek switch
-            {
-                DayOfWeek.Thursday => 4,
-                DayOfWeek.Friday => 3,
-                _ => 2,
-            };
         }
 
         private async Task UpdateUserPointsAndRankAsync(string userId, int earnedPoints)
